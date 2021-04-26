@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Collage Board 3D</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <link rel="stylesheet" type="text/css" href="boardStyles.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"
+      type="text/javascript"
+    ></script>
+    <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+    <script src="three.js/js/three.min.js"></script>
+    <script src="three.js/js/OBJLoader.js"></script>
+    <script src="three.js/js/MTLLoader.js"></script>
+  </head>
+  <body>
+    <div class="dropdown">
+      <button onclick="myFunction()" class="dropbtn">+</button>
+      <div id="myDropdown" class="dropdown-content">
+        <a id="addTextBtn" onclick="requestAddText()">Text</a>
+        <a id="addImgBtn" onclick="requestAddImg()">Image</a>
+        <a id="addModelBtn" onclick="requestAddModel()">3D Model</a>
+      </div>
+    </div>
+
+    <div>
+      <button id="helpBtn" onclick="openInfo()">?</button>
+    </div>
+
+    <!-- The Model Modal -->
+    <div class="modal" id="initModal" onclick="closeInitModal()">
+      <!-- Modal content -->
+        <h1>Welcome to CollageBoard-3D!</h1>
+        <p>This is a place for online group collaboration. Add texts, images, and 3D models to your collage by clicking on the plus icon on the upper left corner.</p>
+        <p>All elements are added to the board as "element cards", and all elements on the board are shared among the group members in real time.</p>
+        <h2>How to use?</h2>
+        <div>
+        <p><b>Add text/annotation:</b> Add a "text" element and type in the textarea.</p>
+        <p><b>Add an image:</b> Add an "image" element, then clicking on the small "+" button at the upper-left corner of the card to open the interface for file upload.</p>
+        <p><b>Upload an Image File:</b> Upload your images from local device, URLs, Web search, or pulling from other mainstream media platform.</p>
+        <p><b>Add a 3D Model:</b> Add a "3D Model" element, then clicking on the small "+" button to search for and choose a 3D model to be loaded.</p>
+        <p><b>Start/Stop rotating a 3D Model:</b> Click on anywhere inside the "3D Model" element card.</p>
+        
+        <br/>
+        <p><b>Move the Card to a different position:</b> drag the card around.</p>
+        <p><b>Bring current selection to the top:</b> double click on the card.</p>
+        <p><b>Delete a card:</b> click on the "x" icon at the upper-left corner of the card.</p>
+      </div>
+        <br/>
+        <h2>Click anywhere to resume your work!</h2>
+      </div>
+    </div>
+
+    <!-- The Model Modal -->
+    <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <form id="search">
+			<input id="query" placeholder="Search Models"></input>
+			<button id="button">search</button>
+		</form>
+        <div id="myLoader"></div>
+        <span id="results"></span>
+        <span class="close">&times;</span>
+      </div>
+    </div>
+
+    <script src="collageBoard.js"></script>
+  </body>
+</html>
