@@ -168,7 +168,7 @@ function updateImgLayer(data) {
       let divImgBtn = document.createElement("div");
       let divDelBtn = document.createElement("div");
       let instruction = document.createElement("p");
-      instruction.className = "instruction";
+      instruction.className = "imgInstruction";
       instruction.textContent = "Click the top-left '+' sign to embed an image."
 
       divImgBtn.textContent = "+";
@@ -209,7 +209,7 @@ function updateImgLayer(data) {
       let imgArea = document.getElementById(img["id"]);
       if (img["url"]) {
         imgArea.children[0].src = img["url"];
-        if (imgArea.children[3] && imgArea.children[3].className === "instruction") imgArea.children[3].textContent = '';
+        if (imgArea.children[3] && imgArea.children[3].className === "Instruction") imgArea.children[3].textContent = '';
       }
     }
   }
@@ -258,10 +258,6 @@ function updateModelLayer(data) {
       divDelBtn.className = "divBtn";
       divDelBtn.id = "del" + model["id"];
 
-      let instruction = document.createElement("p");
-      instruction.className = "instruction";
-      instruction.textContent = "Click the top-left '+' sign to add a 3D model."
-
       newDiv.ondblclick = () => bringToFront(newDiv);
       body.appendChild(newDiv);
 
@@ -297,7 +293,6 @@ function updateModelLayer(data) {
       newDiv.appendChild(renderer.domElement);
       newDiv.appendChild(divDelBtn);
       newDiv.appendChild(divModelBtn);
-      newDiv.appendChild(instruction);
 
       newDiv.addEventListener("click", () => (rotateMdl = !rotateMdl));
 
@@ -330,7 +325,6 @@ function addModel(elmnt) {
 
   // When the user clicks on the add button, open the modal
   addIcon.onclick = function () {
-    if (elmnt.children[3] && elmnt.children[3].className === "instruction") elmnt.children[3].textContent = '';
     searchPoly("", onResults);
     modal.style.zIndex = curZ + 1;
     modal.style.display = "block";
