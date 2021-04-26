@@ -66,7 +66,7 @@ let mdlIdx = 0;
 let currentModelLayer;
 let ModelLayers = {};
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
@@ -141,7 +141,11 @@ function newConnection(socket) {
   function deleteTextLayer(data) {
     Texts = Texts.filter((i) => i["id"] !== data);
     io.sockets.emit("TextLayerDeleted", data);
-    io.sockets.emit("resetPos", Texts);
+    for (let sk in io.sockets) {
+      if (sk.id !== data.skt) {
+        sk.emit("resetPos", Texts);
+      }
+    }
   }
 
   // Img
@@ -166,13 +170,21 @@ function newConnection(socket) {
         img["left"] = data["left"];
       }
     });
-    io.sockets.emit("imgUpdated", Imgs);
+    for (let sk in io.sockets) {
+      if (sk.id !== data.skt) {
+        sk.emit("imgUpdated", Imgs);
+      }
+    }
   }
 
   function deleteImgLayer(data) {
     Imgs = Imgs.filter((i) => i["id"] !== data);
     io.sockets.emit("imgLayerDeleted", data);
-    io.sockets.emit("resetPos", Imgs);
+    for (let sk in io.sockets) {
+      if (sk.id !== data.skt) {
+        sk.emit("resetPos", Imgs);
+      }
+    }
   }
 
   // 3D model
@@ -244,7 +256,7 @@ function newConnection(socket) {
         mdlIdx = 0;
         ModelLayers = {};
         currentModelLayer = "";
-        io.sockets.emit("reloaded");
+        sk.emit("reloaded");
       }
     }
   }

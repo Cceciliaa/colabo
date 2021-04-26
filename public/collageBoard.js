@@ -143,6 +143,7 @@ function updateTextLayer(data) {
 
 function updateTextContent(data) {
   let textData = {
+    skt: socket.id,
     id: data.id,
     content: data.children[0].value,
     top: data.style.top,
@@ -213,6 +214,7 @@ function addImgUrl(elmnt) {
 
 function sendImgUrl(url, elmnt) {
   let imgData = {
+    skt: socket.id,
     id: elmnt.id,
     top: elmnt.style.top,
     left: elmnt.style.left,
@@ -366,6 +368,7 @@ function createImage(asset) {
   if (format !== undefined) {
     image.onclick = function () {
       let modelSelected = {
+        skt: socket.id,
         ...format,
       };
       socket.emit("modelSelected", modelSelected);
@@ -465,6 +468,7 @@ function dragElement(elmnt) {
     pos4 = e.clientY;
     // set the element's new position:
     let itmData = {
+      skt: socket.id,
       id: elmnt.id,
       top: (elmnt.offsetTop - pos2).toString() + "px",
       left: (elmnt.offsetLeft - pos1).toString() + "px",
