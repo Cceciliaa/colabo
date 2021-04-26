@@ -130,7 +130,7 @@ function updateTextLayer(data) {
 
       newTextArea.onclick = () => newText.focus();
       newTextArea.ondblclick = () => bringToFront(newTextArea);
-      newText.oninput = () => updateTextContent(newTextArea);
+      newText.change = () => updateTextContent(newTextArea);
 
       body.appendChild(newTextArea);
       dragElement(newTextArea);
