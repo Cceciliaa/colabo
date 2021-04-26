@@ -71,7 +71,7 @@ server.listen(port, hostname, () => {
 });
 
 app.get("/", (request, response) => {
-  response.sendFile(directory_name + "index.html");
+  response.sendFile("../public/collageBoard.html", {root: __dirname});
 });
 //--------------------------------------------------------------
 
