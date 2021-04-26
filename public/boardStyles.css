@@ -139,6 +139,7 @@ body {
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
+  overflow: auto;
   z-index: 1; /* Sit on top */
   left: 0;
   top: 0;
@@ -181,7 +182,7 @@ body {
 #initModal {
   display: block;
   padding: 30px;
-  font-size: 20px;
+  font-size: 16px;
   overflow: auto;
 }
 
