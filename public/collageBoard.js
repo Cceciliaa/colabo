@@ -170,8 +170,6 @@ function updateImgLayer(data) {
       let instruction = document.createElement("p");
       instruction.textContent = "Click the top-left '+' sign to embed an image."
 
-      newImg.alt = img["alt"];
-
       divImgBtn.textContent = "+";
       divImgBtn.className = "divBtn";
       divImgBtn.id = "add" + img["id"];
@@ -181,13 +179,13 @@ function updateImgLayer(data) {
       divDelBtn.id = "del" + img["id"];
 
       newImgArea.appendChild(newImg);
-      newImgArea.appendChild(instruction);
       newImgArea.appendChild(divDelBtn);
       newImgArea.appendChild(divImgBtn);
+      newImgArea.appendChild(instruction);
 
       if (img["url"]) {
         newImg.src = img["url"];
-        instruction.display = "none";
+        newImgArea.removeChild(instruction);
       }
 
       divDelBtn.onclick = function () {
@@ -209,7 +207,6 @@ function updateImgLayer(data) {
     } else {
       let imgArea = document.getElementById(img["id"]);
       if (img["url"]) imgArea.children[0].src = img["url"];
-      imgArea.children[0].alt = img["alt"];
     }
   }
   resetPosition(data);

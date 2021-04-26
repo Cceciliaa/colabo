@@ -151,7 +151,6 @@ function newConnection(socket) {
     let imgData = {
       id: "img" + imgIdx.toString(),
       url: "",
-      alt: "Click the top-left '+' sign to embed an image.",
       top: "80px",
       left: "80px",
     };
