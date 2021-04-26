@@ -42,6 +42,7 @@ let modelContainers = {};
 
 const API_KEY = "AIzaSyBWcHRmY5cc3mQJb62eN0JsfioiMvYAGLg";
 
+// modal
 function closeInitModal() {
   document.getElementById("initModal").style.display = "none";
 }
@@ -522,3 +523,65 @@ function reloadPage() {
 }
 
 socket.on("reloaded", reloadPage);
+
+// draw board
+// let isDrawing = false;
+// let paths = [];
+// let x = 0;
+// let y = 0;
+
+// const myPics = document.getElementById('drawBoard');
+// const context = myPics.getContext('2d');
+
+// initialize();
+
+// function initialize() {
+//     window.addEventListener('resize', resizeCanvas, false);
+//     resizeCanvas();
+//  }
+
+// // event.offsetX, event.offsetY gives the (x,y) offset from the edge of the canvas
+// // Add the event listeners for mousedown, mousemove, and mouseup
+// myPics.addEventListener('mousedown', e => {
+//   x = e.offsetX;
+//   y = e.offsetY;
+//   isDrawing = true;
+// });
+
+// myPics.addEventListener('mousemove', e => {
+//   if (isDrawing === true) {
+//     drawLine(context, x, y, e.offsetX, e.offsetY);
+//     x = e.offsetX;
+//     y = e.offsetY;
+//   }
+// });
+
+// window.addEventListener('mouseup', e => {
+//   if (isDrawing === true) {
+//     drawLine(context, x, y, e.offsetX, e.offsetY);
+//     x = 0;
+//     y = 0;
+//     isDrawing = false;
+//   }
+// });
+
+// function drawLine(ctx, x1, y1, x2, y2) {
+//   ctx.beginPath();
+//   ctx.strokeStyle = 'black';
+//   ctx.lineWidth = 1;
+//   ctx.moveTo(x1, y1);
+//   ctx.lineTo(x2, y2);
+//   ctx.stroke();
+//   ctx.closePath();
+//   paths.push([x1, y1, x2, y2]);
+// }
+
+// function resizeCanvas() {
+//   console.log(paths)
+//   myPics.width = window.innerWidth;
+//   myPics.height = window.innerHeight;
+//   // for (let line of paths) {
+//   //   console.log(...line)
+//   //   drawLine(context, ...line);
+//   // }
+// }
