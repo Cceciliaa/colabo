@@ -66,7 +66,7 @@ let mdlIdx = 0;
 let currentModelLayer;
 let ModelLayers = {};
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public/collageBoard.html")));
 server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
