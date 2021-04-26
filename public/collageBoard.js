@@ -48,6 +48,7 @@ function closeInitModal() {
 }
 
 function openInfo() {
+  document.getElementById("initModal").style.zIndex = curZ + 1;
   document.getElementById("initModal").style.display = "block";
 }
 

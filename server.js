@@ -52,7 +52,7 @@ function recognizePic(imageUrl, method) {
 //Setup the server ---------------------------------------------
 const app = express();
 const http = require("http");
-const hostname = "localhost"; //localhost
+const hostname = "0.0.0.0"; //localhost
 const port = process.env.PORT || 5000;
 const server = http.createServer(app);
 
