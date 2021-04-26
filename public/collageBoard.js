@@ -137,8 +137,8 @@ function updateTextLayer(data) {
     } else {
       let textArea = document.getElementById(txt.id);
       if (txt["content"]) textArea.children[0].value = txt["content"];
-      resetPosition(data);
     }
+    resetPosition(data);
   }
 }
 
@@ -203,8 +203,8 @@ function updateImgLayer(data) {
       let imgArea = document.getElementById(img["id"]);
       if (img["url"]) imgArea.children[0].src = img["url"];
       imgArea.children[0].alt = img["alt"];
-      resetPosition(data);
     }
+    resetPosition(data);
   }
 }
 
@@ -305,9 +305,8 @@ function updateModelLayer(data) {
       requestAnimationFrame(animate);
       addModel(newDiv);
       dragElement(newDiv);
-    } else {
-      resetPosition(data);
     }
+    resetPosition(data);
   }
 }
 
@@ -477,7 +476,7 @@ function dragElement(elmnt) {
     // stop moving when mouse button is released:
     document.onmouseup = null;
     document.onmousemove = null;
-    
+
     // set the element's new position:
     let itmData = {
       skt: socket.id,
@@ -501,7 +500,6 @@ function resetPosition(data) {
   for (let itm of data) {
     document.getElementById(itm["id"]).style.top = itm["top"];
     document.getElementById(itm["id"]).style.left = itm["left"];
-    dragElement(document.getElementById(itm["id"]));
   }
 }
 
