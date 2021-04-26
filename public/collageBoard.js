@@ -501,6 +501,7 @@ function resetPosition(data) {
   for (let itm of data) {
     document.getElementById(itm["id"]).style.top = itm["top"];
     document.getElementById(itm["id"]).style.left = itm["left"];
+    dragElement(newTextArea);
   }
 }
 
