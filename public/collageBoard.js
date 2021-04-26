@@ -138,8 +138,8 @@ function updateTextLayer(data) {
       let textArea = document.getElementById(txt.id);
       if (txt["content"]) textArea.children[0].value = txt["content"];
     }
-    resetPosition(data);
   }
+  resetPosition(data);
 }
 
 function updateTextContent(data) {
@@ -204,8 +204,8 @@ function updateImgLayer(data) {
       if (img["url"]) imgArea.children[0].src = img["url"];
       imgArea.children[0].alt = img["alt"];
     }
-    resetPosition(data);
   }
+  resetPosition(data);
 }
 
 function addImgUrl(elmnt) {
@@ -306,8 +306,8 @@ function updateModelLayer(data) {
       addModel(newDiv);
       dragElement(newDiv);
     }
-    resetPosition(data);
   }
+  resetPosition(data);
 }
 
 function addModel(elmnt) {
