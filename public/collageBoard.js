@@ -1,4 +1,5 @@
 let socket;
+// socket = io.connect('http://localhost:5000');
 socket = io.connect(location.origin.replace(/^http/, 'ws'));
 const client = filestack.init("AV9sVjeWPToiHvAgHFopUz");
 
@@ -495,7 +496,7 @@ function resetPosition(data) {
   for (let itm of data) {
     document.getElementById(itm["id"]).style.top = itm["top"];
     document.getElementById(itm["id"]).style.left = itm["left"];
-    dragElement(document.getElementById(itm["id"]));
+    // dragElement(document.getElementById(itm["id"]));
   }
 }
 
@@ -505,7 +506,6 @@ function bringToFront(itm) {
 
 function frontItem(itmID) {
   curZ++;
-  console.log(itmID);
   document.getElementById(itmID).style.zIndex = curZ;
 }
 
