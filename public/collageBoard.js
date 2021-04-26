@@ -167,9 +167,10 @@ function updateImgLayer(data) {
       let newImg = document.createElement("img");
       let divImgBtn = document.createElement("div");
       let divDelBtn = document.createElement("div");
+      let instruction = document.createElement("p");
+      instruction.textContent = "Click the top-left '+' sign to embed an image."
 
       newImg.alt = img["alt"];
-      if (img["url"]) newImg.src = img["url"];
 
       divImgBtn.textContent = "+";
       divImgBtn.className = "divBtn";
@@ -180,8 +181,14 @@ function updateImgLayer(data) {
       divDelBtn.id = "del" + img["id"];
 
       newImgArea.appendChild(newImg);
+      newImgArea.appendChild(instruction);
       newImgArea.appendChild(divDelBtn);
       newImgArea.appendChild(divImgBtn);
+
+      if (img["url"]) {
+        newImg.src = img["url"];
+        instruction.display = "none";
+      }
 
       divDelBtn.onclick = function () {
         socket.emit("ImgLayerDelete", img["id"]);
