@@ -523,6 +523,8 @@ function frontItem(itmID) {
 
 socket.on("frontItm", frontItem);
 
+window.addEventListener("onload", () => { document.getElementById("initModal").style.zIndex = curZ + 1; })
+
 window.addEventListener("unload", function (e) {
   e.preventDefault();
   modelContainers = {};
