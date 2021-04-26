@@ -189,13 +189,12 @@ body {
 
 #initModal-content {
   position: absolute;
-  width: 60%;
-  margin-left: 20%;
+  width: 70%;
+  margin-left: 15%;
 }
 
 #info-content {
   text-align: left;
-  line-height: 15px;
 }
 
 #helpBtn {
