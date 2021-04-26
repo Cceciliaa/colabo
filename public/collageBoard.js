@@ -168,7 +168,7 @@ function updateImgLayer(data) {
       let divImgBtn = document.createElement("div");
       let divDelBtn = document.createElement("div");
       let instruction = document.createElement("p");
-      instruction.className = "imgInstruction";
+      instruction.className = "instruction";
       instruction.textContent = "Click the top-left '+' sign to embed an image."
 
       divImgBtn.textContent = "+";
