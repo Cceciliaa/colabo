@@ -1,5 +1,6 @@
 const got = require("got");
 const fs = require("fs");
+const path = require("path");
 const FormData = require("form-data");
 const express = require("express");
 const mySocket = require("socket.io");
@@ -65,13 +66,9 @@ let mdlIdx = 0;
 let currentModelLayer;
 let ModelLayers = {};
 
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, 'public')));
 server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
-});
-
-app.get("/", (request, response) => {
-  response.sendFile("../public/collageBoard.html", {root: __dirname});
 });
 //--------------------------------------------------------------
 
