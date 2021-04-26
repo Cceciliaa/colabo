@@ -196,57 +196,56 @@ function newConnection(socket) {
     Models = Models.filter((i) => i["id"] !== data);
     io.sockets.emit("modelDeleted", data);
     io.sockets.emit("resetPos", Models);
+  }
+}
+
+function updateModels(data) {
+  Models.forEach((model) => {
+    if (model["id"] === data["id"]) {
+      model["top"] = data["top"].toString();
+      model["left"] = data["left"].toString();
     }
-  }
+  });
+  io.sockets.emit("resetMdlPos", Models);
+}
 
-  function updateModels(data) {
-    Models.forEach((model) => {
-      if (model["id"] === data["id"]) {
-        model["top"] = data["top"].toString();
-        model["left"] = data["left"].toString();
-      }
-    });
-    io.sockets.emit("resetMdlPos", Models);
-  }
+function pathEventMessage(data) {
+  recognizePic(data, "path");
+}
 
-  function pathEventMessage(data) {
-    recognizePic(data, "path");
-  }
+function urlEventMessage(data) {
+  // socket.broadcast.emit('eventFromServer', data);
+  //Following line refers to sending data to all clients
+  //io.sockets.emit('mouse', data);
+  recognizePic(data, "url");
+}
 
-  function urlEventMessage(data) {
-    // socket.broadcast.emit('eventFromServer', data);
-    //Following line refers to sending data to all clients
-    //io.sockets.emit('mouse', data);
-    recognizePic(data, "url");
+function sendModel(data) {
+  if (data.root && data.resources && currentModelLayer) {
+    data["modelLayer"] = currentModelLayer;
+    ModelLayers[currentModelLayer] = data;
+    io.sockets.emit("modelData", data);
+  } else {
+    io.sockets.emit("error", "Error with loading selected model");
   }
+}
 
-  function sendModel(data) {
-    if (data.root && data.resources && currentModelLayer) {
-      data["modelLayer"] = currentModelLayer;
-      ModelLayers[currentModelLayer] = data;
-      io.sockets.emit("modelData", data);
-    } else {
-      io.sockets.emit("error", "Error with loading selected model");
-    }
-  }
+function bringToFront(itmID) {
+  io.sockets.emit("frontItm", itmID);
+}
 
-  function bringToFront(itmID) {
-    io.sockets.emit("frontItm", itmID);
-  }
-
-  function reloadServer(data) {
-    for (let sk in io.sockets) {
-      if (sk.id !== data) {
-        Texts = [];
-        Imgs = [];
-        Models = [];
-        txtIdx = 0;
-        imgIdx = 0;
-        mdlIdx = 0;
-        ModelLayers = {};
-        currentModelLayer = "";
-        io.sockets.emit("reloaded");
-      }
+function reloadServer(data) {
+  for (let sk in io.sockets) {
+    if (sk.id !== data) {
+      Texts = [];
+      Imgs = [];
+      Models = [];
+      txtIdx = 0;
+      imgIdx = 0;
+      mdlIdx = 0;
+      ModelLayers = {};
+      currentModelLayer = "";
+      io.sockets.emit("reloaded");
     }
   }
 }
