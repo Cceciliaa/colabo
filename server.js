@@ -141,11 +141,7 @@ function newConnection(socket) {
   function deleteTextLayer(data) {
     Texts = Texts.filter((i) => i["id"] !== data);
     io.sockets.emit("TextLayerDeleted", data);
-    for (let sk in io.sockets) {
-      if (sk.id !== data.skt) {
-        io.sockets.emit("resetPos", Texts);
-      }
-    }
+    io.sockets.emit("resetPos", Texts);
   }
 
   // Img
@@ -170,21 +166,13 @@ function newConnection(socket) {
         img["left"] = data["left"];
       }
     });
-    for (let sk in io.sockets) {
-      if (sk.id !== data.skt) {
-        io.sockets.emit("imgUpdated", Imgs);
-      }
-    }
+    io.sockets.emit("imgUpdated", Imgs);
   }
 
   function deleteImgLayer(data) {
     Imgs = Imgs.filter((i) => i["id"] !== data);
     io.sockets.emit("imgLayerDeleted", data);
-    for (let sk in io.sockets) {
-      if (sk.id !== data.skt) {
-        io.sockets.emit("resetPos", Imgs);
-      }
-    }
+    io.sockets.emit("resetPos", Imgs);
   }
 
   // 3D model
@@ -207,10 +195,7 @@ function newConnection(socket) {
     if (ModelLayers[data]) delete ModelLayers[data];
     Models = Models.filter((i) => i["id"] !== data);
     io.sockets.emit("modelDeleted", data);
-    for (let sk in io.sockets) {
-      if (sk.id !== data.skt) {
-        io.sockets.emit("resetPos", Models);
-      }
+    io.sockets.emit("resetPos", Models);
     }
   }
 
@@ -221,11 +206,7 @@ function newConnection(socket) {
         model["left"] = data["left"].toString();
       }
     });
-    for (let sk in io.sockets) {
-      if (sk.id !== data.skt) {
-        io.sockets.emit("resetMdlPos", Models);
-      }
-    }
+    io.sockets.emit("resetMdlPos", Models);
   }
 
   function pathEventMessage(data) {

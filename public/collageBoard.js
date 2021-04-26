@@ -1,6 +1,6 @@
 let socket;
-// socket = io.connect('http://localhost:5000');
-socket = io.connect(location.origin.replace(/^http/, 'ws'));
+socket = io.connect('http://localhost:5000');
+// socket = io.connect(location.origin.replace(/^http/, 'ws'));
 const client = filestack.init("AV9sVjeWPToiHvAgHFopUz");
 
 let resUrl = "";
@@ -137,9 +137,9 @@ function updateTextLayer(data) {
     } else {
       let textArea = document.getElementById(txt.id);
       if (txt["content"]) textArea.children[0].value = txt["content"];
+      resetPosition(data);
     }
   }
-  resetPosition(data);
 }
 
 function updateTextContent(data) {
@@ -203,9 +203,9 @@ function updateImgLayer(data) {
       let imgArea = document.getElementById(img["id"]);
       if (img["url"]) imgArea.children[0].src = img["url"];
       imgArea.children[0].alt = img["alt"];
+      resetPosition(data);
     }
   }
-  resetPosition(data);
 }
 
 function addImgUrl(elmnt) {
@@ -305,9 +305,10 @@ function updateModelLayer(data) {
       requestAnimationFrame(animate);
       addModel(newDiv);
       dragElement(newDiv);
+    } else {
+      resetPosition(data);
     }
   }
-  resetPosition(data);
 }
 
 function addModel(elmnt) {
@@ -496,7 +497,6 @@ function resetPosition(data) {
   for (let itm of data) {
     document.getElementById(itm["id"]).style.top = itm["top"];
     document.getElementById(itm["id"]).style.left = itm["left"];
-    // dragElement(document.getElementById(itm["id"]));
   }
 }
 
