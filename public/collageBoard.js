@@ -1,6 +1,6 @@
 let socket;
 // socket = io.connect('http://localhost:5000');
-socket = io.connect(location.origin.replace(/^http/, 'ws'));
+socket = io.connect(location.origin.replace(/^http/, "ws"));
 const client = filestack.init("AV9sVjeWPToiHvAgHFopUz");
 
 let resUrl = "";
@@ -286,7 +286,7 @@ function updateModelLayer(data) {
       newDiv.appendChild(divDelBtn);
       newDiv.appendChild(divModelBtn);
 
-      newDiv.addEventListener("click", () => rotateMdl = !rotateMdl);
+      newDiv.addEventListener("click", () => (rotateMdl = !rotateMdl));
 
       function animate() {
         let time = performance.now() / 5000;
@@ -468,6 +468,16 @@ function dragElement(elmnt) {
     pos2 = pos4 - e.clientY;
     pos3 = e.clientX;
     pos4 = e.clientY;
+
+    elmnt.style.top = (elmnt.offsetTop - pos2).toString() + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1).toString() + "px";
+  }
+
+  function closeDragElement() {
+    // stop moving when mouse button is released:
+    document.onmouseup = null;
+    document.onmousemove = null;
+    
     // set the element's new position:
     let itmData = {
       skt: socket.id,
@@ -484,12 +494,6 @@ function dragElement(elmnt) {
       itmData["url"] = elmnt.children[0].src ? elmnt.children[0].src : "";
       socket.emit("imgDragged", itmData);
     }
-  }
-
-  function closeDragElement() {
-    // stop moving when mouse button is released:
-    document.onmouseup = null;
-    document.onmousemove = null;
   }
 }
 
