@@ -184,15 +184,18 @@ body {
   display: block;
   padding: 30px;
   font-size: 16px;
-  line-height: 10px;
   overflow: auto;
 }
 
-#info-content {
+#initModal-content {
   position: absolute;
   width: 60%;
   margin-left: 20%;
+}
+
+#info-content {
   text-align: left;
+  line-height: 15px;
 }
 
 #helpBtn {
