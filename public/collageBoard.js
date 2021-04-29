@@ -241,6 +241,7 @@ function sendImgUrl(url, elmnt) {
     url: url,
   };
   socket.emit("updateImg", imgData);
+  document.getElementById(elmnt.id).childNodes[3].textContent = "";
 }
 
 function deleteImgLayer(data) {
