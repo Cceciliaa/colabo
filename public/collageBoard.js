@@ -42,7 +42,7 @@ let curZ = 0;
 
 let modelContainers = {};
 
-const API_KEY = "AIzaSyBWcHRmY5cc3mQJb62eN0JsfioiMvYAGLg";
+// const API_KEY = "AIzaSyBWcHRmY5cc3mQJb62eN0JsfioiMvYAGLg";
 const ECHO_KEY = "billowing-paper-1356";
 
 // modal
@@ -611,7 +611,7 @@ function frontItem(itmID) {
 
 socket.on("frontItm", frontItem);
 
-window.addEventListener("onload", () => {
+window.addEventListener("load", () => {
   document.getElementById("initModal").style.zIndex = curZ + 1;
 });
 
