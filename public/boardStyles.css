@@ -1,26 +1,30 @@
 html {
-  width: 1024px;
-  height: 1024px;
+  width: 100%;
+  height: auto;
+  overflow: auto;
 }
 
 body {
   width: 100%;
-  height: 100%;
   font-family: sans-serif;
   font-size: 14px;
   line-height: 24px;
-  overflow: hidden;
+  overflow: auto;
 }
 
 h1, h2, h3 {
   color: #3498db;
 }
 
+p {
+  font-size: 20px;
+}
+
 .newItem {
-  min-width: 280px;
+  min-width: 300px;
   height: auto;
-  max-width: 350px;
-  max-height: 280px;
+  max-width: 400px;
+  max-height: 300px;
   position: absolute;
   border-width: 5px;
   border-radius: 8%;
@@ -62,13 +66,6 @@ h1, h2, h3 {
   position: absolute;
   border: none;
   mix-blend-mode: normal;
-}
-
-.instruction {
-  font-size: 18px;
-  text-align: center;
-  font-weight: bold;
-  color: #2980b9;
 }
 
 .divBtn {
@@ -206,22 +203,41 @@ h1, h2, h3 {
   margin-top: 10px;
 }
 
+.demo {
+  margin: 0px 30px 0px 50px;
+  max-width: 550px;
+}
+
+.ins {
+  max-width: 550px;
+  margin: 0px 20px 20px 50px;
+  margin-left: 50px;
+  align-self: center;
+}
+
 #initModal {
   display: block;
-  padding: 30px;
+  width: 100%;
+  padding: 0px;
   font-size: 16px;
   overflow: auto;
 }
 
 #initModal-content {
-  position: absolute;
-  width: 70%;
-  margin-left: 10%;
+  padding: 10px;
+  width: 100%;
+  height: 2000px;
+  background-color: rgba(238, 226, 186, 0.253);
+  overflow: auto;
 }
 
 #info-content {
-  text-align: left;
-  margin-left: 12%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  align-items: stretch; 
+  justify-content: center;
 }
 
 #helpBtn {
@@ -238,7 +254,7 @@ h1, h2, h3 {
   align-items: center;
   justify-content: center;
   font-size: 50px;
-  opacity: 0.25;
+  opacity: 0.5;
   border: none;
   border-radius: 50%;
   cursor: pointer;
