@@ -221,7 +221,8 @@ function urlEventMessage(data) {
 }
 
 function sendModel(data) {
-  if (data.root && data.resources && currentModelLayer) {
+  console.log(data);
+  if (currentModelLayer) {
     data["modelLayer"] = currentModelLayer;
     ModelLayers[currentModelLayer] = data;
     io.sockets.emit("modelData", data);

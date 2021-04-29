@@ -1,6 +1,7 @@
 let socket;
-// socket = io.connect('http://localhost:5000');
-socket = io.connect(location.origin.replace(/^http/, "ws"));
+socket = io.connect("http://localhost:5000");
+// socket = io.connect(location.origin.replace(/^http/, "ws"));
+
 const client = filestack.init("AV9sVjeWPToiHvAgHFopUz");
 
 let resUrl = "";
@@ -42,10 +43,12 @@ let curZ = 0;
 let modelContainers = {};
 
 const API_KEY = "AIzaSyBWcHRmY5cc3mQJb62eN0JsfioiMvYAGLg";
+const ECHO_KEY = "billowing-paper-1356";
 
 // modal
 function closeInitModal() {
   document.getElementById("initModal").style.display = "none";
+  body.style.overflow = "auto";
 }
 
 function openInfo() {
@@ -96,8 +99,11 @@ socket.on("textUpdated", updateTextLayer);
 socket.on("newImg", updateImgLayer);
 socket.on("imgUpdated", updateImgLayer);
 
-socket.on("newModel", updateModelLayer);
-socket.on("resetMdlPos", updateModelLayer);
+// socket.on("newModel", updateModelLayer);
+// socket.on("resetMdlPos", updateModelLayer);
+
+socket.on("newModel", updateModelFrame);
+socket.on("resetMdlPos", updateModelFrame);
 
 // text
 function updateTextLayer(data) {
@@ -169,7 +175,8 @@ function updateImgLayer(data) {
       let divDelBtn = document.createElement("div");
       let instruction = document.createElement("p");
       instruction.className = "instruction";
-      instruction.textContent = "Click the top-left '+' sign to embed an image."
+      instruction.textContent =
+        "Click the top-left '+' sign to embed an image.";
 
       divImgBtn.textContent = "+";
       divImgBtn.className = "divBtn";
@@ -186,7 +193,7 @@ function updateImgLayer(data) {
 
       if (img["url"]) {
         newImg.src = img["url"];
-        instruction.textContent = '';
+        instruction.textContent = "";
       }
 
       divDelBtn.onclick = function () {
@@ -209,7 +216,11 @@ function updateImgLayer(data) {
       let imgArea = document.getElementById(img["id"]);
       if (img["url"]) {
         imgArea.children[0].src = img["url"];
-        if (imgArea.children[3] && imgArea.children[3].className === "Instruction") imgArea.children[3].textContent = '';
+        if (
+          imgArea.children[3] &&
+          imgArea.children[3].className === "Instruction"
+        )
+          imgArea.children[3].textContent = "";
       }
     }
   }
@@ -239,14 +250,22 @@ function deleteImgLayer(data) {
 socket.on("imgLayerDeleted", deleteImgLayer);
 
 // model
-function updateModelLayer(data) {
+function updateModelFrame(data) {
   for (let model of data) {
     if (!document.getElementById(model.id)) {
       let newDiv = document.createElement("div");
-      newDiv.className = "newItem";
+      newDiv.className = "newItem newModel";
       newDiv.id = model["id"];
       newDiv.style.top = model["top"];
       newDiv.style.left = model["left"];
+
+      let newFrame = document.createElement("iframe");
+      newFrame.className = "modelFrame";
+      newFrame.allow = "autoplay; fullscreen; vr";
+      newFrame.allowvr = "true";
+      newFrame.allowfullscreen = "true";
+      newFrame.mozallowfullscreen = "true";
+      newFrame.webkitallowfullscreen = "true";
 
       let divModelBtn = document.createElement("div");
       divModelBtn.textContent = "+";
@@ -258,65 +277,103 @@ function updateModelLayer(data) {
       divDelBtn.className = "divBtn";
       divDelBtn.id = "del" + model["id"];
 
-      newDiv.ondblclick = () => bringToFront(newDiv);
-      body.appendChild(newDiv);
-
-      let camera = new THREE.PerspectiveCamera(60, WIDTH / HEIGHT, 0.01, 100);
-      camera.position.set(5, 3, 5);
-      camera.lookAt(0, 1.5, 0);
-
-      let scene = new THREE.Scene();
-      scene.background = new THREE.Color(0xffffff);
-
-      scene.add(new THREE.GridHelper(10, 10));
-
-      let ambient = new THREE.HemisphereLight(0xbbbbff, 0x886666, 0.75);
-      ambient.position.set(-0.5, 0.75, -1);
-      scene.add(ambient);
-
-      let light = new THREE.DirectionalLight(0xffffff, 0.75);
-      light.position.set(1, 0.75, 0.5);
-      scene.add(light);
-
-      let container = new THREE.Group();
-      scene.add(container);
-      modelContainers[newDiv.id] = container;
-
-      let renderer = new THREE.WebGLRenderer();
-      renderer.setPixelRatio(window.devicePixelRatio);
-      renderer.setSize(WIDTH, HEIGHT);
-
-      renderer.domElement.style.position = "absolute";
-      renderer.domElement.style.marginLeft = "60px";
-      renderer.domElement.style.marginTop = "25px";
-
-      newDiv.appendChild(renderer.domElement);
+      newDiv.appendChild(newFrame);
       newDiv.appendChild(divDelBtn);
       newDiv.appendChild(divModelBtn);
 
-      newDiv.addEventListener("click", () => (rotateMdl = !rotateMdl));
+      newDiv.ondblclick = () => bringToFront(newDiv);
+      body.appendChild(newDiv);
 
-      function animate() {
-        let time = performance.now() / 5000;
+      searchEcho("", onResults);
+      modal.style.zIndex = curZ + 1;
+      modal.style.display = "block";
+      socket.emit("ModelLayerclicked", model["id"]);
 
-        if (rotateMdl) {
-          camera.position.x = Math.sin(time) * 5;
-          camera.position.z = Math.cos(time) * 5;
-        }
-
-        camera.lookAt(0, 1.5, 0);
-
-        renderer.render(scene, camera);
-        requestAnimationFrame(animate);
-      }
-
-      requestAnimationFrame(animate);
       addModel(newDiv);
       dragElement(newDiv);
     }
   }
   resetPosition(data);
 }
+
+// function updateModelLayer(data) {
+//   for (let model of data) {
+//     if (!document.getElementById(model.id)) {
+//       let newDiv = document.createElement("div");
+//       newDiv.className = "newItem";
+//       newDiv.id = model["id"];
+//       newDiv.style.top = model["top"];
+//       newDiv.style.left = model["left"];
+
+//       let divModelBtn = document.createElement("div");
+//       divModelBtn.textContent = "+";
+//       divModelBtn.className = "divBtn";
+//       divModelBtn.id = "add" + model["id"];
+
+//       let divDelBtn = document.createElement("div");
+//       divDelBtn.textContent = "x";
+//       divDelBtn.className = "divBtn";
+//       divDelBtn.id = "del" + model["id"];
+
+//       newDiv.ondblclick = () => bringToFront(newDiv);
+//       body.appendChild(newDiv);
+
+//       let camera = new THREE.PerspectiveCamera(60, WIDTH / HEIGHT, 0.01, 100);
+//       camera.position.set(5, 3, 5);
+//       camera.lookAt(0, 1.5, 0);
+
+//       let scene = new THREE.Scene();
+//       scene.background = new THREE.Color(0xffffff);
+
+//       scene.add(new THREE.GridHelper(10, 10));
+
+//       let ambient = new THREE.HemisphereLight(0xbbbbff, 0x886666, 0.75);
+//       ambient.position.set(-0.5, 0.75, -1);
+//       scene.add(ambient);
+
+//       let light = new THREE.DirectionalLight(0xffffff, 0.75);
+//       light.position.set(1, 0.75, 0.5);
+//       scene.add(light);
+
+//       let container = new THREE.Group();
+//       scene.add(container);
+//       modelContainers[newDiv.id] = container;
+
+//       let renderer = new THREE.WebGLRenderer();
+//       renderer.setPixelRatio(window.devicePixelRatio);
+//       renderer.setSize(WIDTH, HEIGHT);
+
+//       renderer.domElement.style.position = "absolute";
+//       renderer.domElement.style.marginLeft = "60px";
+//       renderer.domElement.style.marginTop = "25px";
+
+//       newDiv.appendChild(renderer.domElement);
+//       newDiv.appendChild(divDelBtn);
+//       newDiv.appendChild(divModelBtn);
+
+//       newDiv.addEventListener("click", () => (rotateMdl = !rotateMdl));
+
+//       function animate() {
+//         let time = performance.now() / 5000;
+
+//         if (rotateMdl) {
+//           camera.position.x = Math.sin(time) * 5;
+//           camera.position.z = Math.cos(time) * 5;
+//         }
+
+//         camera.lookAt(0, 1.5, 0);
+
+//         renderer.render(scene, camera);
+//         requestAnimationFrame(animate);
+//       }
+
+//       requestAnimationFrame(animate);
+//       addModel(newDiv);
+//       dragElement(newDiv);
+//     }
+//   }
+//   resetPosition(data);
+// }
 
 function addModel(elmnt) {
   let addIcon = document.getElementById("add" + elmnt.id);
@@ -325,7 +382,8 @@ function addModel(elmnt) {
 
   // When the user clicks on the add button, open the modal
   addIcon.onclick = function () {
-    searchPoly("", onResults);
+    // searchPoly("", onResults);
+    searchEcho("", onResults);
     modal.style.zIndex = curZ + 1;
     modal.style.display = "block";
     socket.emit("ModelLayerclicked", elmnt.id);
@@ -351,12 +409,23 @@ function deleteModel(elmnt) {
   if (document.getElementById(elmnt)) document.getElementById(elmnt).remove();
 }
 
-function searchPoly(keywords, onLoad) {
-  if (keywords) myLoader.style.display = "block";
-  let url = `https://poly.googleapis.com/v1/assets?keywords=${keywords}&format=OBJ&key=${API_KEY}`;
+// function searchPoly(keywords, onLoad) {
+//   if (keywords) myLoader.style.display = "block";
+//   let url = `https://poly.googleapis.com/v1/assets?keywords=${keywords}&format=OBJ&key=${API_KEY}`;
+
+//   let request = new XMLHttpRequest();
+//   request.open("GET", url, true);
+//   request.addEventListener("load", function (event) {
+//     onLoad(JSON.parse(event.target.response));
+//   });
+//   request.send(null);
+// }
+
+function searchEcho(keywords, onLoad) {
+  let echourl = `https://console.echoar.xyz/search?keywords=${keywords}&key=${ECHO_KEY}`;
 
   let request = new XMLHttpRequest();
-  request.open("GET", url, true);
+  request.open("GET", echourl, true);
   request.addEventListener("load", function (event) {
     onLoad(JSON.parse(event.target.response));
   });
@@ -366,19 +435,19 @@ function searchPoly(keywords, onLoad) {
 let image;
 function createImage(asset) {
   image = document.createElement("img");
-  image.src = asset.thumbnail.url;
+  image.src = asset.thumbnail;
   image.style.width = "100px";
   image.style.height = "75px";
 
-  let format = asset.formats.find((fmt) => {
-    return fmt.formatType === "OBJ";
-  });
+  // let format = asset.formats.find((fmt) => {
+  //   return fmt.formatType === "OBJ";
+  // });
 
-  if (format !== undefined) {
+  if (asset !== undefined) {
     image.onclick = function () {
       let modelSelected = {
         skt: socket.id,
-        ...format,
+        ...asset,
       };
       socket.emit("modelSelected", modelSelected);
     };
@@ -391,38 +460,56 @@ socket.on("modelData", function (data) {
 });
 
 function loadModel(data) {
-  let modelLayer = modelContainers[data["modelLayer"]];
-  let obj = data.root;
-  let mtl = data.resources.find((resource) => {
-    return resource.url.endsWith("mtl");
+  let iframe = document.getElementById(data.modelLayer).childNodes[0];
+  let skc = new Sketchfab(iframe);
+  let uid = data.id;
+
+  skc.init(uid, {
+    success: function onSuccess(api) {
+      api.start();
+      api.addEventListener("viewerready", function () {
+        console.log("Viewer is ready");
+      });
+    },
+    error: function onError() {
+      console.log("Viewer error");
+    },
   });
-  let path = obj.url.slice(0, obj.url.indexOf(obj.relativePath));
 
-  let loader = new THREE.MTLLoader();
-  loader.setCrossOrigin(true);
-  loader.setMaterialOptions({ ignoreZeroRGBs: true });
-  loader.setTexturePath(path);
-  loader.load(mtl.url, function (materials) {
-    loader = new THREE.OBJLoader();
-    loader.setMaterials(materials);
-    loader.load(obj.url, function (object) {
-      let box = new THREE.Box3();
-      box.setFromObject(object);
+  // let modelLayer = modelContainers[data["modelLayer"]];
+  // let path = data.url;
 
-      // re-center
+  // // let obj = data.root;
+  // // let mtl = data.resources.find((resource) => {
+  // //   return resource.url.endsWith("mtl");
+  // // });
+  // // let path = obj.url.slice(0, obj.url.indexOf(obj.relativePath));
 
-      let center = box.getCenter();
-      center.y = box.min.y;
-      object.position.sub(center);
+  // let loader = new THREE.MTLLoader();
+  // loader.setCrossOrigin(true);
+  // loader.setMaterialOptions({ ignoreZeroRGBs: true });
+  // loader.setTexturePath(path);
+  // loader.load(data.url, function (materials) {
+  //   loader = new THREE.OBJLoader();
+  //   loader.setMaterials(materials);
+  //   loader.load(data.url, function (object) {
+  //     let box = new THREE.Box3();
+  //     box.setFromObject(object);
 
-      // scale
+  //     // re-center
 
-      let scaler = new THREE.Group();
-      scaler.add(object);
-      scaler.scale.setScalar(6 / box.getSize().length());
-      if (modelLayer) modelLayer.add(scaler);
-    });
-  });
+  //     let center = box.getCenter();
+  //     center.y = box.min.y;
+  //     object.position.sub(center);
+
+  //     // scale
+
+  //     let scaler = new THREE.Group();
+  //     scaler.add(object);
+  //     scaler.scale.setScalar(6 / box.getSize().length());
+  //     if (modelLayer) modelLayer.add(scaler);
+  //   });
+  // });
   modal.style.display = "none";
 }
 
@@ -430,8 +517,7 @@ function onResults(data) {
   while (results.childNodes.length) {
     results.removeChild(results.firstChild);
   }
-  //   console.log(data);
-  let assets = data.assets;
+  let assets = data.filter((item) => item.source == "Sketchfab");
 
   if (assets) {
     for (let i = 0; i < assets.length; i++) {
@@ -448,7 +534,8 @@ function onResults(data) {
 
 search.addEventListener("submit", function (event) {
   event.preventDefault();
-  searchPoly(query.value, onResults);
+  searchEcho(query.value, onResults);
+  // searchPoly(query.value, onResults);
 });
 
 function dragElement(elmnt) {
@@ -523,7 +610,9 @@ function frontItem(itmID) {
 
 socket.on("frontItm", frontItem);
 
-window.addEventListener("onload", () => { document.getElementById("initModal").style.zIndex = curZ + 1; })
+window.addEventListener("onload", () => {
+  document.getElementById("initModal").style.zIndex = curZ + 1;
+});
 
 window.addEventListener("unload", function (e) {
   e.preventDefault();
