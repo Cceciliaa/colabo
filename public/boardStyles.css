@@ -1,11 +1,8 @@
-html {
-  width: 100%;
-  height: auto;
-  overflow: auto;
-}
-
 body {
   width: 100%;
+  min-height: 2000px;
+  height: auto;
+  overflow: auto;
   font-family: sans-serif;
   font-size: 14px;
   line-height: 24px;
@@ -31,7 +28,7 @@ p {
   box-sizing: border-box;
 }
 .newItem:hover {
-  background-color: rgba(185, 184, 184, 0.1);
+  background-color: rgba(185, 184, 184, 0.2);
 }
 
 .newModel {
@@ -40,22 +37,24 @@ p {
 }
 
 .modelFrame {
-  min-width: 400px;
-  min-height: 300px;
-  width: 85%;
-  height: 85%;
+  width: 84%;
+  height: 84%;
+  left: 8%;
+  top: 8%;
   position: absolute;
-  margin-left: 50px;
-  margin-top: 25px;
   border-width: 3px;
 }
 
-.newText {
+.newTextLayer {
   min-width: 300px;
-  width: 85%;
-  height: 85%;
-  margin-left: 30px;
-  margin-top: 25px;
+  min-height: 180px;
+}
+
+.newText {
+  width: 90%;
+  height: 90%;
+  left: 5%;
+  top: 5%;
   resize: none;
   overflow: auto;
   position: absolute;
@@ -66,13 +65,14 @@ p {
 }
 
 .newImg {
-  min-width: 320px;
-  width: 85%;
-  height: 85%;
-  margin-left: 50px;
-  margin-top: 25px;
+  width: 90%;
+  height: 90%;
+  left: 5%;
+  top: 5%;
   font-size: 25px;
   text-align: center;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   border: none;
   mix-blend-mode: normal;
@@ -104,10 +104,11 @@ p {
 
 /* Dropdown Button */
 .dropbtn {
+  position: fixed;
   width: 60px;
   height: 60px;
-  margin-left: 5px;
-  margin-top: 5px;
+  left: 15px;
+  top: 15px;
   padding: 0px;
   background-color: #3498db;
   color: white;
@@ -244,7 +245,7 @@ p {
 
 #helpBtn {
   display: inline-block;
-  position: absolute;
+  position: fixed;
   width: 60px;
   height: 60px;
   right: 15px;

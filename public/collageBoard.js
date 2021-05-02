@@ -36,8 +36,8 @@ closeIcon.onclick = function () {
   modal.style.display = "none";
 };
 
-const WIDTH = 310;
-const HEIGHT = 280;
+const WIDTH = window.innerWidth;
+const HEIGHT = window.innerHeight;
 let curZ = 0;
 
 let modelContainers = {};
@@ -128,7 +128,7 @@ function updateTextLayer(data) {
         socket.emit("TextLayerDelete", txt.id);
       };
 
-      newTextArea.className = "newItem";
+      newTextArea.className = "newItem newTextLayer";
       newText.className = "newText";
       newText.placeholder = "Input Text Content";
 
@@ -138,7 +138,7 @@ function updateTextLayer(data) {
 
       newTextArea.onclick = () => newText.focus();
       newTextArea.ondblclick = () => bringToFront(newTextArea);
-      newText.change = () => updateTextContent(newTextArea);
+      newText.onchange = () => updateTextContent(newTextArea);
 
       body.appendChild(newTextArea);
     } else {
@@ -562,8 +562,10 @@ function dragElement(elmnt) {
     pos3 = e.clientX;
     pos4 = e.clientY;
 
-    elmnt.style.top = (elmnt.offsetTop - pos2).toString() + "px";
-    elmnt.style.left = (elmnt.offsetLeft - pos1).toString() + "px";
+    elmnt.style.top = Math.max(0, elmnt.offsetTop - pos2).toString() + "px";
+    elmnt.style.left = Math.max(0, elmnt.offsetLeft - pos1).toString() + "px";
+    elmnt.style.width = e.rect.width;
+    elmnt.style.height = e.rect.height;
   }
 
   function closeDragElement() {
@@ -575,10 +577,10 @@ function dragElement(elmnt) {
     let itmData = {
       skt: socket.id,
       id: elmnt.id,
-      top: (elmnt.offsetTop - pos2).toString() + "px",
-      left: (elmnt.offsetLeft - pos1).toString() + "px",
+      top: Math.max(0, elmnt.offsetTop - pos2).toString() + "px",
+      left: Math.max(0, elmnt.offsetLeft - pos1).toString() + "px",
       width: elmnt.style.width,
-      height: elmnt.style.top,
+      height: elmnt.style.height,
     };
     if (elmnt.id.slice(0, 5) === "model") {
       socket.emit("mdlDragged", itmData);
@@ -601,8 +603,8 @@ function resizeElement(item) {
     listeners: {
       move(event) {
         let target = event.target;
-        target.style.width = event.rect.width + 'px';
-        target.style.height = event.rect.height + 'px';
+        target.style.width = event.rect.width;
+        target.style.height = event.rect.height;
       },
       end(event) {
         let rszData = {
@@ -610,8 +612,8 @@ function resizeElement(item) {
           id: item.id,
           top: item.style.top,
           left: item.style.left,
-          width: event.rect.width + "px",
-          height: event.rect.height + "px",
+          width: event.rect.width.toString() + "px",
+          height: event.rect.height.toString() + "px",
         };
         socket.emit("itmResized", rszData);
       }
@@ -621,6 +623,7 @@ function resizeElement(item) {
 }
 
 function resetPosition(data) {
+  console.log(data);
   for (let itm of data) {
     document.getElementById(itm["id"]).style.top = itm["top"];
     document.getElementById(itm["id"]).style.left = itm["left"];
