@@ -1,3 +1,5 @@
+import interact from 'interactjs';
+
 let socket;
 // socket = io.connect("http://localhost:5000");
 socket = io.connect(location.origin.replace(/^http/, "ws"));
@@ -621,7 +623,6 @@ function resizeElement(item) {
 }
 
 function resetPosition(data) {
-  console.log(data);
   for (let itm of data) {
     document.getElementById(itm["id"]).style.top = itm["top"];
     document.getElementById(itm["id"]).style.left = itm["left"];
