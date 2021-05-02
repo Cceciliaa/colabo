@@ -564,8 +564,6 @@ function dragElement(elmnt) {
 
     elmnt.style.top = Math.max(0, elmnt.offsetTop - pos2).toString() + "px";
     elmnt.style.left = Math.max(0, elmnt.offsetLeft - pos1).toString() + "px";
-    elmnt.style.width = e.rect.width;
-    elmnt.style.height = e.rect.height;
   }
 
   function closeDragElement() {
