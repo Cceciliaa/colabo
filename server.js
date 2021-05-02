@@ -233,11 +233,7 @@ function sendModel(data) {
 }
 
 function resizeItem(data) {
-  for (let sk in io.sockets) {
-    if (sk.id !== data.skt) {
-      io.sockets.emit("itmResized", [data]);
-    }
-  }
+  io.sockets.emit("itmResized", [data]);
 }
 
 function bringToFront(itmID) {

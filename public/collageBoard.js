@@ -601,8 +601,8 @@ function resizeElement(item) {
     listeners: {
       move(event) {
         let target = event.target;
-        target.style.width = event.rect.width;
-        target.style.height = event.rect.height;
+        target.style.width = event.rect.width.toString() + "px";
+        target.style.height = event.rect.height.toString() + "px";
       },
       end(event) {
         let rszData = {
