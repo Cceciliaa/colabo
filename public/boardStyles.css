@@ -26,6 +26,7 @@ p {
   color: rgba(0, 0, 0, 0.4);
   mix-blend-mode: normal;
   box-sizing: border-box;
+  resize: both;
 }
 .newItem:hover {
   background-color: rgba(185, 184, 184, 0.2);
@@ -34,6 +35,7 @@ p {
 .newModel {
   min-width: 500px;
   min-height: 350px;
+  resize: none;
 }
 
 .modelFrame {
