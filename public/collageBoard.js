@@ -1,6 +1,6 @@
 let socket;
-// socket = io.connect("http://localhost:5000");
-socket = io.connect(location.origin.replace(/^http/, "ws"));
+socket = io.connect("http://localhost:5000");
+// socket = io.connect(location.origin.replace(/^http/, "ws"));
 
 const client = filestack.init("AV9sVjeWPToiHvAgHFopUz");
 
@@ -105,6 +105,8 @@ socket.on("imgUpdated", updateImgLayer);
 socket.on("newModel", updateModelFrame);
 socket.on("resetMdlPos", updateModelFrame);
 
+socket.on("itmResized", resetPosition);
+
 // text
 function updateTextLayer(data) {
   for (let txt of data) {
@@ -139,7 +141,6 @@ function updateTextLayer(data) {
       newText.change = () => updateTextContent(newTextArea);
 
       body.appendChild(newTextArea);
-      dragElement(newTextArea);
     } else {
       let textArea = document.getElementById(txt.id);
       if (txt["content"]) textArea.children[0].value = txt["content"];
@@ -211,7 +212,6 @@ function updateImgLayer(data) {
       newImgArea.ondblclick = () => bringToFront(newImgArea);
 
       body.appendChild(newImgArea);
-      dragElement(newImgArea);
     } else {
       let imgArea = document.getElementById(img["id"]);
       if (img["url"]) {
@@ -291,7 +291,6 @@ function updateModelFrame(data) {
       socket.emit("ModelLayerclicked", model["id"]);
 
       addModel(newDiv);
-      dragElement(newDiv);
     }
   }
   resetPosition(data);
@@ -370,7 +369,6 @@ function updateModelFrame(data) {
 
 //       requestAnimationFrame(animate);
 //       addModel(newDiv);
-//       dragElement(newDiv);
 //     }
 //   }
 //   resetPosition(data);
@@ -397,7 +395,7 @@ function addModel(elmnt) {
 
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function (event) {
-    if (event.target == modal) {
+    if (event.target === modal) {
       modal.style.display = "none";
     }
   };
@@ -518,7 +516,7 @@ function onResults(data) {
   while (results.childNodes.length) {
     results.removeChild(results.firstChild);
   }
-  let assets = data.filter((item) => item.source == "Sketchfab");
+  let assets = data.filter((item) => item.source === "Sketchfab");
 
   if (assets) {
     for (let i = 0; i < assets.length; i++) {
@@ -579,6 +577,8 @@ function dragElement(elmnt) {
       id: elmnt.id,
       top: (elmnt.offsetTop - pos2).toString() + "px",
       left: (elmnt.offsetLeft - pos1).toString() + "px",
+      width: elmnt.style.width,
+      height: elmnt.style.top,
     };
     if (elmnt.id.slice(0, 5) === "model") {
       socket.emit("mdlDragged", itmData);
@@ -592,11 +592,42 @@ function dragElement(elmnt) {
   }
 }
 
+// I used the interact.js api for the resizing feature
+function resizeElement(item) {
+  let curItm = '#' + item.id;
+  interact(curItm).resizable({
+    // resize from bottom and right
+    edges: { left: false, right: true, bottom: true, top: false },
+    listeners: {
+      move(event) {
+        let target = event.target;
+        target.style.width = event.rect.width + 'px';
+        target.style.height = event.rect.height + 'px';
+      },
+      end(event) {
+        let rszData = {
+          skt: socket.id,
+          id: item.id,
+          top: item.style.top,
+          left: item.style.left,
+          width: event.rect.width + "px",
+          height: event.rect.height + "px",
+        };
+        socket.emit("itmResized", rszData);
+      }
+    },
+    inertia: true,
+  });
+}
+
 function resetPosition(data) {
   for (let itm of data) {
     document.getElementById(itm["id"]).style.top = itm["top"];
     document.getElementById(itm["id"]).style.left = itm["left"];
+    document.getElementById(itm["id"]).style.width = itm["width"];
+    document.getElementById(itm["id"]).style.height = itm["height"];
     dragElement(document.getElementById(itm["id"]));
+    if (itm.id.slice(0,5) !== 'model') resizeElement(document.getElementById(itm["id"]));
   }
 }
 

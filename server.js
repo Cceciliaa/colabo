@@ -114,6 +114,7 @@ function newConnection(socket) {
 
   socket.on("bringToFront", bringToFront);
   socket.on("pageReload", reloadServer);
+  socket.on("itmResized", resizeItem);
 
   // text
   function addText() {
@@ -228,6 +229,14 @@ function sendModel(data) {
     io.sockets.emit("modelData", data);
   } else {
     io.sockets.emit("error", "Error with loading selected model");
+  }
+}
+
+function resizeItem(data) {
+  for (let sk in io.sockets) {
+    if (sk.id !== data.skt) {
+      io.sockets.emit("itmResized", [data]);
+    }
   }
 }
 

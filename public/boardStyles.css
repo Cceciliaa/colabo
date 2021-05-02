@@ -20,28 +20,40 @@ p {
 }
 
 .newItem {
-  min-width: 300px;
-  height: auto;
-  max-width: 400px;
-  max-height: 300px;
+  min-width: 360px;
+  min-height: 260px;
+  padding: 0px;
   position: absolute;
   border-width: 5px;
-  border-radius: 8%;
+  border-radius: 6%;
   color: rgba(0, 0, 0, 0.4);
   mix-blend-mode: normal;
+  box-sizing: border-box;
+}
+.newItem:hover {
+  background-color: rgba(185, 184, 184, 0.1);
 }
 
 .newModel {
   min-width: 500px;
-  min-height: 325px;
-  border-radius: 0;
-  padding: 0px;
-  background-color: rgba(185, 184, 184, 0.205);
+  min-height: 350px;
+}
+
+.modelFrame {
+  min-width: 400px;
+  min-height: 300px;
+  width: 85%;
+  height: 85%;
+  position: absolute;
+  margin-left: 50px;
+  margin-top: 25px;
+  border-width: 3px;
 }
 
 .newText {
-  min-width: 220px;
-  min-height: 180px;
+  min-width: 300px;
+  width: 85%;
+  height: 85%;
   margin-left: 30px;
   margin-top: 25px;
   resize: none;
@@ -54,11 +66,10 @@ p {
 }
 
 .newImg {
-  min-width: 280px;
-  height: auto;
-  max-width: 350px;
-  max-height: 280px;
-  margin-left: 60px;
+  min-width: 320px;
+  width: 85%;
+  height: 85%;
+  margin-left: 50px;
   margin-top: 25px;
   font-size: 25px;
   text-align: center;
@@ -192,13 +203,6 @@ p {
   color: black;
   text-decoration: none;
   cursor: pointer;
-}
-
-.modelFrame {
-  min-width: 420px;
-  min-height: 300px;
-  margin-left: 10px;
-  margin-top: 10px;
 }
 
 .demo {
