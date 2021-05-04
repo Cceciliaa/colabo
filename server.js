@@ -57,6 +57,9 @@ const hostname = "0.0.0.0"; //localhost
 const port = process.env.PORT || 5000;
 const server = http.createServer(app);
 
+let globalData = {};
+let serverIdx = 0;
+
 let Texts = [];
 let Imgs = [];
 let Models = [];
@@ -82,7 +85,7 @@ io.sockets.on("connection", newConnection); //callback
 //Function that serves the new connection
 function newConnection(socket) {
   console.log("New connection: " + socket.id);
-
+  io.sockets.emit("serverIdx", serverIdx);
   if (Texts) io.sockets.emit("newText", Texts);
   if (Imgs) io.sockets.emit("newImg", Imgs);
   if (Models) io.sockets.emit("newModel", Models);
@@ -117,9 +120,10 @@ function newConnection(socket) {
   socket.on("itmResized", resizeItem);
 
   // text
-  function addText() {
+  function addText(sktID) {
     txtIdx++;
     let textData = {
+      skt: sktID,
       id: "text" + txtIdx.toString(),
       content: "",
       top: "80px",
@@ -135,6 +139,8 @@ function newConnection(socket) {
         txt["content"] = data["content"];
         txt["top"] = data["top"];
         txt["left"] = data["left"];
+        txt["width"] = data["width"];
+        txt["height"] = data["height"];
       }
     });
     io.sockets.emit("textUpdated", Texts);
@@ -147,9 +153,10 @@ function newConnection(socket) {
   }
 
   // Img
-  function addImg() {
+  function addImg(sktID) {
     imgIdx++;
     let imgData = {
+      skt: sktID,
       id: "img" + imgIdx.toString(),
       url: "",
       top: "80px",
@@ -165,6 +172,8 @@ function newConnection(socket) {
         img["url"] = data["url"];
         img["top"] = data["top"];
         img["left"] = data["left"];
+        img["width"] = data["width"];
+        img["height"] = data["height"];
       }
     });
     io.sockets.emit("imgUpdated", Imgs);
@@ -177,9 +186,10 @@ function newConnection(socket) {
   }
 
   // 3D model
-  function addModel() {
+  function addModel(sktID) {
     mdlIdx++;
     let mdlData = {
+      skt: sktID,
       id: "model" + mdlIdx.toString(),
       top: "80px",
       left: "80px",
@@ -203,8 +213,10 @@ function newConnection(socket) {
 function updateModels(data) {
   Models.forEach((model) => {
     if (model["id"] === data["id"]) {
-      model["top"] = data["top"].toString();
-      model["left"] = data["left"].toString();
+      model["top"] = data["top"];
+      model["left"] = data["left"];
+      model["width"] = data["width"];
+      model["height"] = data["height"];
     }
   });
   io.sockets.emit("resetMdlPos", Models);
@@ -241,17 +253,27 @@ function bringToFront(itmID) {
 }
 
 function reloadServer(data) {
+  globalData[serverIdx] = {
+    Texts,
+    Imgs,
+    Models,
+    txtIdx,
+    imgIdx,
+    mdlIdx,
+    ModelLayers,
+    currentModelLayer
+  }
+  // Texts = [];
+  // Imgs = [];
+  // Models = [];
+  // txtIdx = 0;
+  // imgIdx = 0;
+  // mdlIdx = 0;
+  // ModelLayers = {};
+  // currentModelLayer = "";
   for (let sk in io.sockets) {
     if (sk.id !== data) {
-      Texts = [];
-      Imgs = [];
-      Models = [];
-      txtIdx = 0;
-      imgIdx = 0;
-      mdlIdx = 0;
-      ModelLayers = {};
-      currentModelLayer = "";
-      io.sockets.emit("reloaded");
+      io.sockets.emit("reloaded", data);
     }
   }
 }

@@ -1,6 +1,14 @@
 let socket;
-// socket = io.connect("http://localhost:5000");
-socket = io.connect(location.origin.replace(/^http/, "ws"));
+socket = io.connect("http://localhost:5000");
+// socket = io.connect(location.origin.replace(/^http/, "ws"));
+
+let sktID;
+socket.on('connect', function(){
+  sktID = socket.id;
+});
+
+let serverIdx;
+socket.on('serverIdx', (data) => { serverIdx = data });
 
 const client = filestack.init("AV9sVjeWPToiHvAgHFopUz");
 
@@ -80,17 +88,17 @@ function closeDropdown() {
 
 function requestAddText() {
   closeDropdown();
-  socket.emit("requestAddText");
+  socket.emit("requestAddText", sktID);
 }
 
 function requestAddImg() {
   closeDropdown();
-  socket.emit("requestAddImg");
+  socket.emit("requestAddImg", sktID);
 }
 
 function requestAddModel() {
   closeDropdown();
-  socket.emit("requestAddModel");
+  socket.emit("requestAddModel", sktID);
 }
 
 socket.on("newText", updateTextLayer);
@@ -151,7 +159,7 @@ function updateTextLayer(data) {
 
 function updateTextContent(data) {
   let textData = {
-    skt: socket.id,
+    skt: sktID,
     id: data.id,
     content: data.children[0].value,
     top: data.style.top,
@@ -234,7 +242,7 @@ function addImgUrl(elmnt) {
 
 function sendImgUrl(url, elmnt) {
   let imgData = {
-    skt: socket.id,
+    skt: sktID,
     id: elmnt.id,
     top: elmnt.style.top,
     left: elmnt.style.left,
@@ -445,7 +453,7 @@ function createImage(asset) {
   if (asset !== undefined) {
     image.onclick = function () {
       let modelSelected = {
-        skt: socket.id,
+        skt: sktID,
         ...asset,
       };
       socket.emit("modelSelected", modelSelected);
@@ -573,7 +581,7 @@ function dragElement(elmnt) {
 
     // set the element's new position:
     let itmData = {
-      skt: socket.id,
+      skt: sktID,
       id: elmnt.id,
       top: Math.max(0, elmnt.offsetTop - pos2).toString() + "px",
       left: Math.max(0, elmnt.offsetLeft - pos1).toString() + "px",
@@ -594,40 +602,45 @@ function dragElement(elmnt) {
 
 // I used the interact.js api for the resizing feature
 function resizeElement(item) {
-  let curItm = '#' + item.id;
-  interact(curItm).resizable({
-    // resize from bottom and right
-    edges: { left: false, right: true, bottom: true, top: false },
-    listeners: {
-      move(event) {
-        let target = event.target;
-        target.style.width = event.rect.width.toString() + "px";
-        target.style.height = event.rect.height.toString() + "px";
+  let curItm = "#" + item.id;
+  // the "interact" part is modified from interact.js api
+  interact(curItm)
+    .resizable({
+      // resize from bottom and right
+      edges: { left: false, right: true, bottom: true, top: false },
+      listeners: {
+        move(event) {
+          let target = event.target;
+          target.style.width = event.rect.width.toString() + "px";
+          target.style.height = event.rect.height.toString() + "px";
+        },
+        end(event) {
+          let rszData = {
+            skt: sktID,
+            id: item.id,
+            top: item.style.top,
+            left: item.style.left,
+            width: event.rect.width.toString() + "px",
+            height: event.rect.height.toString() + "px",
+          };
+          socket.emit("itmResized", rszData);
+        },
       },
-      end(event) {
-        let rszData = {
-          skt: socket.id,
-          id: item.id,
-          top: item.style.top,
-          left: item.style.left,
-          width: event.rect.width.toString() + "px",
-          height: event.rect.height.toString() + "px",
-        };
-        socket.emit("itmResized", rszData);
-      }
-    },
-    inertia: true,
-  });
+      inertia: true,
+    })
 }
 
 function resetPosition(data) {
   for (let itm of data) {
-    document.getElementById(itm["id"]).style.top = itm["top"];
-    document.getElementById(itm["id"]).style.left = itm["left"];
-    document.getElementById(itm["id"]).style.width = itm["width"];
-    document.getElementById(itm["id"]).style.height = itm["height"];
+    if (itm.skt !== sktID) {
+      document.getElementById(itm["id"]).style.top = itm["top"];
+      document.getElementById(itm["id"]).style.left = itm["left"];
+      document.getElementById(itm["id"]).style.width = itm["width"];
+      document.getElementById(itm["id"]).style.height = itm["height"];
+    }
     dragElement(document.getElementById(itm["id"]));
-    if (itm.id.slice(0,5) !== 'model') resizeElement(document.getElementById(itm["id"]));
+    if (itm.id.slice(0, 5) !== "model")
+      resizeElement(document.getElementById(itm["id"]));
   }
 }
 
@@ -651,7 +664,7 @@ window.addEventListener("unload", function (e) {
   modelContainers = {};
   resUrl = "";
   curZ = 0;
-  socket.emit("pageReload", socket.id);
+  socket.emit("pageReload", sktID);
 });
 
 function reloadPage() {
