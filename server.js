@@ -366,8 +366,8 @@ function newConnection(socket) {
     io.sockets.emit("itmResized", [data]);
   }
 
-  function bringToFront(itmID) {
-    io.sockets.emit("frontItm", itmID);
+  function bringToFront(itmData) {
+    io.sockets.emit("frontItm", itmData);
   }
 
   async function reloadServer() {

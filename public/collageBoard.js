@@ -727,12 +727,18 @@ function resetPosition(data) {
 }
 
 function bringToFront(itm) {
-  socket.emit("bringToFront", itm.id);
+  let frontItm = {
+    boardID,
+    id: itm.id
+  }
+  socket.emit("bringToFront", frontItm);
 }
 
-function frontItem(itmID) {
-  curZ++;
-  document.getElementById(itmID).style.zIndex = curZ;
+function frontItem(itm) {
+  if (itm.boardID === boardID) {
+    curZ++;
+    document.getElementById(itm.id).style.zIndex = curZ;
+  }
 }
 
 socket.on("frontItm", frontItem);
@@ -763,7 +769,6 @@ function returnHome() {
 }
 
 function reloadPage() {
-  saveBoard();
   location.reload();
 }
 
