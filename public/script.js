@@ -8,7 +8,7 @@ socket.on("connect", function () {
 });
 
 let dashboardCtn = document.getElementById("dashBoardCtn");
-let curBoard = dashboardCtn.childNodes.length;
+let curBoard = 0;
 
 socket.on("existingBds", (data) => initBoard(data));
 
