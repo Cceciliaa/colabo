@@ -56,7 +56,6 @@ function closeInitModal() {
 }
 
 window.addEventListener("load", function () {
-  if (!curBoard || curBoard === 0) openInfo();
   curBoard = 0;
   socket.emit("getBoards");
 });
