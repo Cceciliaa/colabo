@@ -43,13 +43,10 @@ function addBoard() {
 function openBoard(e) {
   let bd = e.target.id.split("/")[1];
   socket.emit("openBoard", bd);
-  document.getElementById("initModal").style.display = 'none';
   window.location.href = "collageBoard.html?boardID=" + bd;
 }
 
 function openInfo() {
-  let zIdx = document.getElementsByTagName("body").childNodes.length;
-  document.getElementById("initModal").style.zIndex = zIdx + 1;
   document.getElementById("initModal").style.display = "block";
 }
 
@@ -61,4 +58,8 @@ function closeInitModal() {
 window.addEventListener("load", function () {
   curBoard = 0;
   socket.emit("getBoards");
+});
+
+window.addEventListener("unload", function () {
+  closeInitModal();
 });

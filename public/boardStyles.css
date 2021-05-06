@@ -294,7 +294,7 @@ p {
   font-size: 16px;
   overflow: auto;
   font-family: sans-serif;
-  z-index: 1;
+  z-index: 1000;
 }
 
 #initModal-content {
