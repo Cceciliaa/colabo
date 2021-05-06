@@ -113,6 +113,7 @@ p {
   border: none;
   border-radius: 50%;
   cursor: pointer;
+  z-index: 999;
 }
 /* Dropdown button on hover & focus */
 .dropbtn:hover,
@@ -299,7 +300,7 @@ p {
 #initModal-content {
   padding: 10px;
   width: 100%;
-  height: 2000px;
+  height: 2600px;
   background-color: rgba(238, 226, 186, 0.253);
   overflow: auto;
 }

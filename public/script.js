@@ -46,6 +46,11 @@ function openBoard(e) {
   window.location.href = "collageBoard.html?boardID=" + bd;
 }
 
+// modal
+function closeInitModal() {
+  document.getElementById("initModal").style.display = "none";
+}
+
 window.addEventListener("load", function () {
   curBoard = 0;
   socket.emit("getBoards");

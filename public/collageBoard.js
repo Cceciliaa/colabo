@@ -44,11 +44,6 @@ let modelContainers = {};
 // const API_KEY = "AIzaSyBWcHRmY5cc3mQJb62eN0JsfioiMvYAGLg";
 const ECHO_KEY = "billowing-paper-1356";
 
-// modal
-function closeInitModal() {
-  document.getElementById("initModal").style.display = "none";
-}
-
 function openInfo() {
   document.getElementById("initModal").style.zIndex = curZ + 1;
   document.getElementById("initModal").style.display = "block";
