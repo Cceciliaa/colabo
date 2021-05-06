@@ -116,13 +116,16 @@ async function getListing(clt) {
 }
 
 async function insertListing(clt, listing) {
-  await clt
+  console.log(listing);
+  if (parseInt(listing._id)) {
+    await clt
     .db("collage-boards")
     .collection("savedCollages")
     .insertOne(listing)
     .catch((err) => {
       console.log(err);
     });
+  }
 }
 
 async function updateListing(clt, listing) {
