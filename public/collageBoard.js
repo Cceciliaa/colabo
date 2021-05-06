@@ -166,6 +166,7 @@ function updateTextContent(data) {
     // skt: sktID,
     boardID,
     id: data.id,
+    zIdx: data.style.zIndex,
     content: data.children[0].value,
     top: data.style.top,
     left: data.style.left,
@@ -255,6 +256,7 @@ function sendImgUrl(url, elmnt) {
     // skt: sktID,
     boardID,
     id: elmnt.id,
+    zIdx: elmnt.style.zIndex,
     top: elmnt.style.top,
     left: elmnt.style.left,
     url: url,
@@ -663,6 +665,7 @@ function dragElement(elmnt) {
       // skt: sktID,
       boardID,
       id: elmnt.id,
+      zIdx: elmnt.style.zIndex,
       top: Math.max(0, elmnt.offsetTop - pos2).toString() + "px",
       left: Math.max(0, elmnt.offsetLeft - pos1).toString() + "px",
       width: elmnt.style.width,
@@ -699,6 +702,7 @@ function resizeElement(item) {
           // skt: sktID,
           boardID,
           id: item.id,
+          zIdx: elmnt.style.zIndex,
           top: item.style.top,
           left: item.style.left,
           width: event.rect.width.toString() + "px",
@@ -716,6 +720,7 @@ function resetPosition(data) {
   let curData = data.filter(obj => obj.boardID === boardID);
   for (let itm of curData) {
     // if (itm.skt !== sktID) {
+    document.getElementById(itm["id"]).style.zIndex = itm["zIdx"];
     document.getElementById(itm["id"]).style.top = itm["top"];
     document.getElementById(itm["id"]).style.left = itm["left"];
     document.getElementById(itm["id"]).style.width = itm["width"];

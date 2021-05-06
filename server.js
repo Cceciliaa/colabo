@@ -260,6 +260,7 @@ function newConnection(socket) {
     };
     globalData[boardID].Texts.push(textData);
     io.sockets.emit("newText", globalData[boardID].Texts);
+    saveBoard(boardID);
   }
 
   function updateText(data) {
@@ -273,6 +274,7 @@ function newConnection(socket) {
       }
     });
     io.sockets.emit("textUpdated", globalData[data.boardID].Texts);
+    saveBoard(data.boardID);
   }
 
   function deleteTextLayer(data) {
@@ -281,6 +283,7 @@ function newConnection(socket) {
     );
     io.sockets.emit("TextLayerDeleted", data.id);
     io.sockets.emit("resetPos", globalData[data.boardID].Texts);
+    saveBoard(data.boardID);
   }
 
   // Img
@@ -295,6 +298,7 @@ function newConnection(socket) {
     };
     globalData[boardID].Imgs.push(imgData);
     io.sockets.emit("newImg", globalData[boardID].Imgs);
+    saveBoard(boardID);
   }
 
   function updateImg(data) {
@@ -308,6 +312,7 @@ function newConnection(socket) {
       }
     });
     io.sockets.emit("imgUpdated", globalData[data.boardID].Imgs);
+    saveBoard(data.boardID);
   }
 
   function deleteImgLayer(data) {
@@ -316,6 +321,7 @@ function newConnection(socket) {
     );
     io.sockets.emit("imgLayerDeleted", data.id);
     io.sockets.emit("resetPos", globalData[data.boardID].Imgs);
+    saveBoard(data.boardID);
   }
 
   // 3D model
@@ -329,10 +335,12 @@ function newConnection(socket) {
     };
     globalData[boardID].Models.push(mdlData);
     io.sockets.emit("newModel", globalData[boardID].Models);
+    saveBoard(boardID);
   }
 
   function recordModelLayer(data) {
     globalData[data.boardID].currentModelLayer = data.id;
+    saveBoard(data.boardID);
   }
 
   function deleteModelLayer(data) {
@@ -343,6 +351,7 @@ function newConnection(socket) {
     );
     io.sockets.emit("modelDeleted", data.id);
     io.sockets.emit("resetPos", globalData[data.boardID].Models);
+    saveBoard(data.boardID);
   }
 
   function updateModels(data) {
@@ -355,6 +364,7 @@ function newConnection(socket) {
       }
     });
     io.sockets.emit("resetMdlPos", globalData[data.boardID].Models);
+    saveBoard(data.boardID);
   }
 
   function sendModel(data) {
