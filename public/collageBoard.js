@@ -212,11 +212,11 @@ function updateImgLayer(data) {
       }
 
       divDelBtn.onclick = function () {
-        let imgData = {
+        let imgD = {
           boardID,
           id: img.id
         }
-        socket.emit("ImgLayerDelete", imgData);
+        socket.emit("ImgLayerDelete", imgD);
       };
 
       newImgArea.className = "newItem";
@@ -238,7 +238,7 @@ function updateImgLayer(data) {
           imgArea.children[3] &&
           imgArea.children[3].className === "Instruction"
         )
-          imgArea.children[3].textContent = "";
+          instruction.textContent = "";
       }
     }
   }
@@ -260,6 +260,7 @@ function sendImgUrl(url, elmnt) {
     url: url,
   };
   socket.emit("updateImg", imgData);
+  console.log(document.getElementById(elmnt.id));
   document.getElementById(elmnt.id).childNodes[3].textContent = "";
 }
 
@@ -748,6 +749,8 @@ window.addEventListener("load", function(e) {
   modelContainers = {};
   resUrl = "";
   curZ = 0;
+  urlParams = new URLSearchParams(window.location.search);
+  boardID = urlParams.get('boardID');
   socket.emit("pageLoaded", boardID);
 });
 
