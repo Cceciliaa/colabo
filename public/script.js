@@ -13,18 +13,20 @@ let curBoard = 0;
 socket.on("existingBds", (data) => initBoard(data));
 
 function initBoard(data) {
-  for (let i = 0; i < data.length; i++) {
-    let checkBoard = document.getElementById("board/" + i);
-    if (!checkBoard) {
-      let newBoard = document.createElement("div");
-      newBoard.className = "dashBoards";
-      newBoard.id = "board/" + i.toString();
-      newBoard.innerHTML = i;
-      newBoard.addEventListener("click", openBoard);
-      dashboardCtn.appendChild(newBoard);
+  if (dashboardCtn) {
+    for (let i = 0; i < data.length; i++) {
+      let checkBoard = document.getElementById("board/" + i);
+      if (!checkBoard) {
+        let newBoard = document.createElement("div");
+        newBoard.className = "dashBoards";
+        newBoard.id = "board/" + i.toString();
+        newBoard.innerHTML = i;
+        newBoard.addEventListener("click", openBoard);
+        dashboardCtn.appendChild(newBoard);
+      }
     }
+    curBoard = dashboardCtn.childNodes.length;
   }
-  curBoard = dashboardCtn.childNodes.length;
 }
 
 function addBoard() {
