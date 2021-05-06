@@ -288,7 +288,7 @@ p {
 }
 
 #initModal {
-  display: block;
+  display: none;
   width: 100%;
   padding: 0px;
   font-size: 16px;
