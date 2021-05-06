@@ -1,20 +1,20 @@
-let socket;
-socket = io.connect("http://localhost:5000");
-// socket = io.connect(location.origin.replace(/^http/, "ws"));
+// let socket;
+// socket = io.connect("http://localhost:5000");
+// // socket = io.connect(location.origin.replace(/^http/, "ws"));
 
-let sktID;
-socket.on('connect', function(){
-  sktID = socket.id;
-});
+// let sktID;
+// socket.on("connect", function () {
+//   sktID = socket.id;
+// });
 
-let serverIdx;
-socket.on('serverIdx', (data) => { serverIdx = data });
-
-const client = filestack.init("AV9sVjeWPToiHvAgHFopUz");
+let urlParams = new URLSearchParams(window.location.search);
+let boardID = urlParams.get('boardID');
 
 let resUrl = "";
 let currImgElm = "";
 let rotateMdl = false;
+
+const client = filestack.init("AV9sVjeWPToiHvAgHFopUz");
 
 const options = {
   onFileSelected: (file) => {
@@ -56,7 +56,6 @@ const ECHO_KEY = "billowing-paper-1356";
 // modal
 function closeInitModal() {
   document.getElementById("initModal").style.display = "none";
-  body.style.overflow = "auto";
 }
 
 function openInfo() {
@@ -88,17 +87,17 @@ function closeDropdown() {
 
 function requestAddText() {
   closeDropdown();
-  socket.emit("requestAddText", sktID);
+  socket.emit("requestAddText", boardID);
 }
 
 function requestAddImg() {
   closeDropdown();
-  socket.emit("requestAddImg", sktID);
+  socket.emit("requestAddImg", boardID);
 }
 
 function requestAddModel() {
   closeDropdown();
-  socket.emit("requestAddModel", sktID);
+  socket.emit("requestAddModel", boardID);
 }
 
 socket.on("newText", updateTextLayer);
@@ -117,8 +116,9 @@ socket.on("itmResized", resetPosition);
 
 // text
 function updateTextLayer(data) {
-  for (let txt of data) {
-    if (!document.getElementById(txt.id)) {
+  let textData = data.filter(txt => txt.boardID === boardID);
+  for (let txt of textData) {
+    if (!document.getElementById(txt["id"])) {
       let newTextArea = document.createElement("div");
       let newText = document.createElement("textarea");
       let divDelBtn = document.createElement("div");
@@ -133,7 +133,11 @@ function updateTextLayer(data) {
       newTextArea.appendChild(divDelBtn);
 
       divDelBtn.onclick = function () {
-        socket.emit("TextLayerDelete", txt.id);
+        let txtData = {
+          boardID,
+          id: txt["id"]
+        }
+        socket.emit("TextLayerDelete", txtData);
       };
 
       newTextArea.className = "newItem newTextLayer";
@@ -159,7 +163,8 @@ function updateTextLayer(data) {
 
 function updateTextContent(data) {
   let textData = {
-    skt: sktID,
+    // skt: sktID,
+    boardID,
     id: data.id,
     content: data.children[0].value,
     top: data.style.top,
@@ -176,7 +181,8 @@ socket.on("TextLayerDeleted", deleteTextLayer);
 
 // img
 function updateImgLayer(data) {
-  for (let img of data) {
+  let imgData = data.filter(img => img.boardID === boardID);
+  for (let img of imgData) {
     if (!document.getElementById(img.id)) {
       let newImgArea = document.createElement("div");
       let newImg = document.createElement("img");
@@ -206,7 +212,11 @@ function updateImgLayer(data) {
       }
 
       divDelBtn.onclick = function () {
-        socket.emit("ImgLayerDelete", img["id"]);
+        let imgData = {
+          boardID,
+          id: img.id
+        }
+        socket.emit("ImgLayerDelete", imgData);
       };
 
       newImgArea.className = "newItem";
@@ -242,7 +252,8 @@ function addImgUrl(elmnt) {
 
 function sendImgUrl(url, elmnt) {
   let imgData = {
-    skt: sktID,
+    // skt: sktID,
+    boardID,
     id: elmnt.id,
     top: elmnt.style.top,
     left: elmnt.style.left,
@@ -260,7 +271,8 @@ socket.on("imgLayerDeleted", deleteImgLayer);
 
 // model
 function updateModelFrame(data) {
-  for (let model of data) {
+  let mdlData = data.filter(mdl => mdl.boardID === boardID);
+  for (let model of mdlData) {
     if (!document.getElementById(model.id)) {
       let newDiv = document.createElement("div");
       newDiv.className = "newItem newModel";
@@ -296,7 +308,12 @@ function updateModelFrame(data) {
       searchEcho("", onResults);
       modal.style.zIndex = curZ + 1;
       modal.style.display = "block";
-      socket.emit("ModelLayerclicked", model["id"]);
+
+      let modelData = {
+        boardID,
+        id: model["id"]
+      }
+      socket.emit("ModelLayerclicked", modelData);
 
       addModel(newDiv);
     }
@@ -393,12 +410,20 @@ function addModel(elmnt) {
     searchEcho("", onResults);
     modal.style.zIndex = curZ + 1;
     modal.style.display = "block";
-    socket.emit("ModelLayerclicked", elmnt.id);
+    let modelData = {
+      boardID,
+      id: elmnt.id
+    }
+    socket.emit("ModelLayerclicked", modelData);
   };
 
   // When the user clicks on the delete button, delete current container
   delIcon.onclick = function () {
-    socket.emit("ModelLayerDelete", elmnt.id);
+    let modelData = {
+      boardID,
+      id: elmnt.id
+    }
+    socket.emit("ModelLayerDelete", modelData);
   };
 
   // When the user clicks anywhere outside of the modal, close it
@@ -428,8 +453,20 @@ function deleteModel(elmnt) {
 //   request.send(null);
 // }
 
+let echoDB;
+
 function searchEcho(keywords, onLoad) {
   let echourl = `https://console.echoar.xyz/search?keywords=${keywords}&key=${ECHO_KEY}`;
+
+  // fetch('https://console.echoar.xyz/query?key=' + ECHO_KEY)
+  // .then((response) => response.json())
+  // .then((json) => {
+  //   // Store database
+  //   echoDB = json; // The JSON response
+  // })
+  // .catch((error) => {
+  //   console.error(error);
+  // });
 
   let request = new XMLHttpRequest();
   request.open("GET", echourl, true);
@@ -453,7 +490,8 @@ function createImage(asset) {
   if (asset !== undefined) {
     image.onclick = function () {
       let modelSelected = {
-        skt: sktID,
+        // skt: sktID,
+        boardID,
         ...asset,
       };
       socket.emit("modelSelected", modelSelected);
@@ -477,11 +515,48 @@ function loadModel(data) {
       api.addEventListener("viewerready", function () {
         console.log("Viewer is ready");
       });
+      // uploadEcho(data);
     },
     error: function onError() {
       console.log("Viewer error");
     },
   });
+
+  function uploadEcho(model) {
+    console.log(model);
+    let uploadUrl = "https://console.echoAR.xyz/upload";
+    let uploadData = {
+      type: "search",
+      key: ECHO_KEY,
+      email: "zc1151@nyu.edu",
+      target_type: 2,
+      hologram_type: 2,
+      source: "Sketchfab",
+      url: data.url,
+      name: data.name,
+    };
+    let uploadParams = {
+      method: "POST",
+      headers: {
+        'ContentType': 'multipart/form-data'
+      },
+      body: JSON.stringify(uploadData)
+    };
+
+    let uploadReq = new Request(uploadUrl, uploadParams);
+
+    fetch(uploadReq)
+      .then((dt) => {
+        console.log(dt.json());
+        // return dt.json();
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   // let modelLayer = modelContainers[data["modelLayer"]];
   // let path = data.url;
@@ -545,6 +620,8 @@ search.addEventListener("submit", function (event) {
   // searchPoly(query.value, onResults);
 });
 
+let onResize = false;
+
 function dragElement(elmnt) {
   let pos1, pos2, pos3, pos4;
 
@@ -569,9 +646,10 @@ function dragElement(elmnt) {
     pos2 = pos4 - e.clientY;
     pos3 = e.clientX;
     pos4 = e.clientY;
-
-    elmnt.style.top = Math.max(0, elmnt.offsetTop - pos2).toString() + "px";
-    elmnt.style.left = Math.max(0, elmnt.offsetLeft - pos1).toString() + "px";
+    if (!onResize) {
+      elmnt.style.top = Math.max(0, elmnt.offsetTop - pos2).toString() + "px";
+      elmnt.style.left = Math.max(0, elmnt.offsetLeft - pos1).toString() + "px";
+    }
   }
 
   function closeDragElement() {
@@ -581,7 +659,8 @@ function dragElement(elmnt) {
 
     // set the element's new position:
     let itmData = {
-      skt: sktID,
+      // skt: sktID,
+      boardID,
       id: elmnt.id,
       top: Math.max(0, elmnt.offsetTop - pos2).toString() + "px",
       left: Math.max(0, elmnt.offsetLeft - pos1).toString() + "px",
@@ -604,40 +683,43 @@ function dragElement(elmnt) {
 function resizeElement(item) {
   let curItm = "#" + item.id;
   // the "interact" part is modified from interact.js api
-  interact(curItm)
-    .resizable({
-      // resize from bottom and right
-      edges: { left: false, right: true, bottom: true, top: false },
-      listeners: {
-        move(event) {
-          let target = event.target;
-          target.style.width = event.rect.width.toString() + "px";
-          target.style.height = event.rect.height.toString() + "px";
-        },
-        end(event) {
-          let rszData = {
-            skt: sktID,
-            id: item.id,
-            top: item.style.top,
-            left: item.style.left,
-            width: event.rect.width.toString() + "px",
-            height: event.rect.height.toString() + "px",
-          };
-          socket.emit("itmResized", rszData);
-        },
+  interact(curItm).resizable({
+    // resize from bottom and right
+    edges: { left: false, right: true, bottom: true, top: false },
+    listeners: {
+      move(event) {
+        onResize = true;
+        let target = event.target;
+        target.style.width = event.rect.width.toString() + "px";
+        target.style.height = event.rect.height.toString() + "px";
       },
-      inertia: true,
-    })
+      end(event) {
+        let rszData = {
+          // skt: sktID,
+          boardID,
+          id: item.id,
+          top: item.style.top,
+          left: item.style.left,
+          width: event.rect.width.toString() + "px",
+          height: event.rect.height.toString() + "px",
+        };
+        socket.emit("itmResized", rszData);
+        onResize = false;
+      },
+    },
+    inertia: true,
+  });
 }
 
 function resetPosition(data) {
-  for (let itm of data) {
-    if (itm.skt !== sktID) {
-      document.getElementById(itm["id"]).style.top = itm["top"];
-      document.getElementById(itm["id"]).style.left = itm["left"];
-      document.getElementById(itm["id"]).style.width = itm["width"];
-      document.getElementById(itm["id"]).style.height = itm["height"];
-    }
+  let curData = data.filter(obj => obj.boardID === boardID);
+  for (let itm of curData) {
+    // if (itm.skt !== sktID) {
+    document.getElementById(itm["id"]).style.top = itm["top"];
+    document.getElementById(itm["id"]).style.left = itm["left"];
+    document.getElementById(itm["id"]).style.width = itm["width"];
+    document.getElementById(itm["id"]).style.height = itm["height"];
+    // }
     dragElement(document.getElementById(itm["id"]));
     if (itm.id.slice(0, 5) !== "model")
       resizeElement(document.getElementById(itm["id"]));
@@ -655,8 +737,12 @@ function frontItem(itmID) {
 
 socket.on("frontItm", frontItem);
 
-window.addEventListener("load", () => {
-  document.getElementById("initModal").style.zIndex = curZ + 1;
+window.addEventListener("load", function(e) {
+  e.preventDefault();
+  modelContainers = {};
+  resUrl = "";
+  curZ = 0;
+  socket.emit("pageLoaded", boardID);
 });
 
 window.addEventListener("unload", function (e) {
@@ -664,14 +750,20 @@ window.addEventListener("unload", function (e) {
   modelContainers = {};
   resUrl = "";
   curZ = 0;
-  socket.emit("pageReload", sktID);
+  saveBoard();
 });
 
+function saveBoard() {
+  socket.emit("saveBoard", boardID);
+}
+
+function returnHome() {
+  saveBoard();
+  window.location.href = 'index.html';
+}
+
 function reloadPage() {
-  modelContainers = {};
-  rotateMdl = false;
-  resUrl = "";
-  curZ = 0;
+  saveBoard();
   location.reload();
 }
 

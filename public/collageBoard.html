@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Collage Board 3D</title>
+    <title>New Board</title>
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -18,10 +18,29 @@
     <script src="lib/three.min.js"></script>
     <script src="lib/OBJLoader.js"></script>
     <script src="lib/MTLLoader.js"></script>
+    <style>
+      body {
+        width: 100%;
+        min-height: 2000px;
+        height: auto;
+        overflow: auto;
+        font-family: Monospace;
+        font-size: 14px;
+        line-height: 24px;
+      }
+    </style>
   </head>
   <body>
+    <div>
+      <button class="tooltip" id="dashBtn" onclick="returnHome()">&#9776;
+        <span class="tooltiptext">Go to Dashboard</span>
+      </button>
+    </div>
+
     <div class="dropdown">
-      <button onclick="myFunction()" class="dropbtn">+</button>
+      <button onclick="myFunction()" class="tooltip dropbtn">+
+        <span class="tooltiptext">Add Element</span>
+      </button>
       <div id="myDropdown" class="dropdown-content">
         <a id="addTextBtn" onclick="requestAddText()">Text</a>
         <a id="addImgBtn" onclick="requestAddImg()">Image</a>
@@ -30,7 +49,9 @@
     </div>
 
     <div>
-      <button id="helpBtn" onclick="openInfo()">?</button>
+      <button class="tooltip" id="helpBtn" onclick="openInfo()">?
+        <span class="tooltiptext">Help</span>
+      </button>
     </div>
 
     <!-- The Model Modal -->
@@ -90,7 +111,7 @@
     </div>
 
     <!-- <canvas id="drawBoard" width="350" height="280"></canvas> -->
-
+    <script src="script.js"></script>
     <script src="collageBoard.js"></script>
   </body>
 </html>
