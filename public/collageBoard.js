@@ -44,11 +44,6 @@ let modelContainers = {};
 // const API_KEY = "AIzaSyBWcHRmY5cc3mQJb62eN0JsfioiMvYAGLg";
 const ECHO_KEY = "billowing-paper-1356";
 
-function openInfo() {
-  document.getElementById("initModal").style.zIndex = curZ + 1;
-  document.getElementById("initModal").style.display = "block";
-}
-
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
 function myFunction() {

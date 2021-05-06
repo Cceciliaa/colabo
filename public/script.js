@@ -46,6 +46,12 @@ function openBoard(e) {
   window.location.href = "collageBoard.html?boardID=" + bd;
 }
 
+function openInfo() {
+  let zIdx = document.getElementsByTagName("body").childNodes.length;
+  document.getElementById("initModal").style.zIndex = zIdx + 1;
+  document.getElementById("initModal").style.display = "block";
+}
+
 // modal
 function closeInitModal() {
   document.getElementById("initModal").style.display = "none";
