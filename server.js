@@ -211,7 +211,7 @@ function newConnection(socket) {
 
     if (!globalData[boardID]) {
       globalData[boardID] = {
-        _id: boardID,
+        _id: parseInt(boardID),
         Texts: [],
         Imgs: [],
         Models: [],

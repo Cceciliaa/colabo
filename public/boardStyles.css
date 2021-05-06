@@ -39,7 +39,7 @@ p {
 }
 
 .newTextLayer {
-  min-width: 220px;
+  min-width: 240px;
   min-height: 150px;
 }
 
@@ -51,7 +51,7 @@ p {
   resize: none;
   overflow: auto;
   position: absolute;
-  font-size: 20px;
+  font-size: 18px;
   padding: 2px;
   border: none;
   mix-blend-mode: normal;
@@ -85,7 +85,7 @@ p {
   opacity: 0.2;
   text-align: center;
   justify-content: center;
-  font-size: 22px;
+  font-size: 25px;
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -349,7 +349,7 @@ p {
   text-align: center;
   align-items: center;
   justify-content: center;
-  font-size: 50px;
+  font-size: 40px;
   opacity: 0.5;
   border: none;
   border-radius: 50%;
