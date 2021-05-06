@@ -701,7 +701,6 @@ window.addEventListener("load", function(e) {
   curZ = 0;
   urlParams = new URLSearchParams(window.location.search);
   boardID = urlParams.get('boardID');
-  document.getElementById("initModal").style.display = 'none';
   socket.emit("pageLoaded", boardID);
 });
 

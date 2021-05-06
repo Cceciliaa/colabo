@@ -43,6 +43,7 @@ function addBoard() {
 function openBoard(e) {
   let bd = e.target.id.split("/")[1];
   socket.emit("openBoard", bd);
+  document.getElementById("initModal").style.display = 'none';
   window.location.href = "collageBoard.html?boardID=" + bd;
 }
 
