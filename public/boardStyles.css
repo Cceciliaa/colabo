@@ -335,7 +335,7 @@ p {
   background-color: #2980b9;
 }
 
-#saveBtn {
+#clearBtn {
   display: inline-block;
   position: fixed;
   width: 65px;
