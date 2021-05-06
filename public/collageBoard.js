@@ -1,12 +1,3 @@
-// let socket;
-// socket = io.connect("http://localhost:5000");
-// // socket = io.connect(location.origin.replace(/^http/, "ws"));
-
-// let sktID;
-// socket.on("connect", function () {
-//   sktID = socket.id;
-// });
-
 let urlParams = new URLSearchParams(window.location.search);
 let boardID = urlParams.get('boardID');
 
@@ -720,6 +711,7 @@ window.addEventListener("load", function(e) {
   curZ = 0;
   urlParams = new URLSearchParams(window.location.search);
   boardID = urlParams.get('boardID');
+  document.getElementById("initModal").style.display = 'none';
   socket.emit("pageLoaded", boardID);
 });
 

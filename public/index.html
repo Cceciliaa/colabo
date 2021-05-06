@@ -42,6 +42,12 @@
       </span>
       <div id="dashBoardCtn"></div>
 
+      <div>
+        <button class="tooltip" id="helpBtn" onclick="openInfo()">?
+          <span class="tooltiptext">Help</span>
+        </button>
+      </div>
+
       <!-- The Model Modal -->
       <div class="modal" id="initModal" onclick="closeInitModal()">
         <!-- Modal content -->
@@ -62,6 +68,25 @@
           <h2>How to use?</h2>
           <div id="info-content">
             <span>
+              <img src="./assets/add-board.gif" alt="add-text" class="demo" />
+              <p class="ins">
+                <strong>Add a new board:</strong> Add a new collage board.
+              </p>
+            </span>
+
+            <span>
+              <img
+                src="./assets/return-to-board.gif"
+                alt="add-text"
+                class="demo"
+              />
+              <p class="ins">
+                <strong>Reopen a board:</strong> Reopen a previous collage board
+                and modify its elements.
+              </p>
+            </span>
+
+            <span>
               <img src="./assets/add-text.gif" alt="add-text" class="demo" />
               <p class="ins">
                 <strong>Add text/annotation:</strong> Add a "text" element and
@@ -72,9 +97,9 @@
             <span>
               <img src="./assets/add-model.gif" alt="add-model" class="demo" />
               <p class="ins">
-                <strong>Add a 3D Model:</strong> Add a "3D Model" element. To
-                refresh your choice for 3D models, click on the small "+"
-                button.
+                <strong>Add a 3D Model:</strong> Add a "3D Model" element. You
+                may play around with the model inside the element window, or
+                enlarge it to full-screen.
               </p>
             </span>
 
@@ -89,12 +114,24 @@
 
             <span>
               <img
+                src="./assets/drag-and-resize.gif"
+                alt="drag-and-resize"
+                class="demo"
+              />
+              <p class="ins">
+                <strong>Move and resize an element:</strong> Drag the element
+                card to move around. Drag from the corner to resize.
+              </p>
+            </span>
+
+            <span>
+              <img
                 src="./assets/bring-to-front.gif"
                 alt="bring-to-front"
                 class="demo"
               />
               <p class="ins">
-                <strong>Bring an element to front:</strong> double click on the
+                <strong>Bring an element to front:</strong> Double click on the
                 element card.
               </p>
             </span>
@@ -106,7 +143,7 @@
                 class="demo"
               />
               <p class="ins">
-                <strong>Delete an element:</strong> click on the "x" icon at the
+                <strong>Delete an element:</strong> Click on the "x" icon at the
                 upper-left corner of the element card.
               </p>
             </span>
