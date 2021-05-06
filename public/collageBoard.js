@@ -756,11 +756,11 @@ window.addEventListener("unload", function (e) {
   modelContainers = {};
   resUrl = "";
   curZ = 0;
-  saveBoard();
 });
 
 function saveBoard() {
   socket.emit("saveBoard", boardID);
+  reloadPage();
 }
 
 function returnHome() {

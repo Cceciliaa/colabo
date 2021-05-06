@@ -45,5 +45,6 @@ function openBoard(e) {
 }
 
 window.addEventListener("load", function () {
+  curBoard = 0;
   socket.emit("getBoards");
 });
