@@ -771,10 +771,6 @@ function saveBoard() {
   reloadPage();
 }
 
-function clearBoard() {
-  socket.emit("clearBoard", boardID);
-}
-
 function returnHome() {
   saveBoard();
   window.location.href = 'index.html';

@@ -172,7 +172,6 @@ function newConnection(socket) {
   socket.on("openBoard", sendBoard);
   socket.on("pageLoaded", sendBoard);
   socket.on("saveBoard", saveBoard);
-  socket.on("clearBoard", clearBoard);
 
   socket.on("requestAddText", addText);
   socket.on("txtDragged", updateText);
@@ -229,22 +228,6 @@ function newConnection(socket) {
 
   async function saveBoard(bID) {
     await updateListing(client, globalData[bID]);
-  }
-
-  async function clearBoard(bID) {
-    globalData[bID] = {
-      _id: parseInt(boardID),
-      Texts: [],
-      Imgs: [],
-      Models: [],
-      txtIdx: 0,
-      imgIdx: 0,
-      mdlIdx: 0,
-      ModelLayers: {},
-      currentModelLayer: "",
-    };
-    await updateListing(client, globalData[bID]);
-    io.sockets.emit("reloaded");
   }
 
   async function sendBoard(boardID) {
