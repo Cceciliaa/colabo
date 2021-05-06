@@ -767,7 +767,7 @@ function saveBoard() {
 }
 
 function returnHome() {
-  saveBoard();
+  // saveBoard();
   window.location.href = 'index.html';
 }
 
