@@ -59,7 +59,3 @@ window.addEventListener("load", function () {
   curBoard = 0;
   socket.emit("getBoards");
 });
-
-window.addEventListener("unload", function () {
-  closeInitModal();
-});
