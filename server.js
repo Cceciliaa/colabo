@@ -86,8 +86,8 @@ async function init() {
     await client.connect();
 
     // Make the appropriate DB calls
-    // await listDatabases(client);
-    await getListing(client);
+    await listDatabases(client);
+    // await getListing(client);
   } catch (e) {
     console.error(e);
   }
@@ -95,12 +95,12 @@ async function init() {
 
 init();
 
-// async function listDatabases(clt) {
-//   let databasesList = await clt.db().admin().listDatabases();
+async function listDatabases(clt) {
+  let databasesList = await clt.db().admin().listDatabases();
 
-//   console.log("Databases:");
-//   databasesList.databases.forEach((db) => console.log(` - ${db.name}`));
-// }
+  console.log("Databases:");
+  databasesList.databases.forEach((db) => console.log(` - ${db.name}`));
+}
 
 async function getListing(clt) {
   clt
@@ -197,12 +197,13 @@ function newConnection(socket) {
   socket.on("itmResized", resizeItem);
 
   async function sendBoardsList() {
-    // await getListing(client);
     await init();
+    await getListing(client);
   }
 
   async function createBoard(boardID) {
     await init();
+    await getListing(client);
     for (let bd of boardsListing) {
       if (boardID == bd._id) {
         globalData[boardID] = bd;
