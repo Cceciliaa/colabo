@@ -525,42 +525,6 @@ function loadModel(data) {
     },
   });
 
-  function uploadEcho(model) {
-    console.log(model);
-    let uploadUrl = "https://console.echoAR.xyz/upload";
-    let uploadData = {
-      type: "search",
-      key: ECHO_KEY,
-      email: "zc1151@nyu.edu",
-      target_type: 2,
-      hologram_type: 2,
-      source: "Sketchfab",
-      url: data.url,
-      name: data.name,
-    };
-    let uploadParams = {
-      method: "POST",
-      headers: {
-        'ContentType': 'multipart/form-data'
-      },
-      body: JSON.stringify(uploadData)
-    };
-
-    let uploadReq = new Request(uploadUrl, uploadParams);
-
-    fetch(uploadReq)
-      .then((dt) => {
-        console.log(dt.json());
-        // return dt.json();
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
   // let modelLayer = modelContainers[data["modelLayer"]];
   // let path = data.url;
 
@@ -702,7 +666,7 @@ function resizeElement(item) {
           // skt: sktID,
           boardID,
           id: item.id,
-          zIdx: elmnt.style.zIndex,
+          zIdx: item.style.zIndex,
           top: item.style.top,
           left: item.style.left,
           width: event.rect.width.toString() + "px",
