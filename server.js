@@ -375,6 +375,7 @@ function newConnection(socket) {
   }
 
   async function reloadServer() {
+    await sendBoardsList();
     io.sockets.emit("reloaded");
   }
 }

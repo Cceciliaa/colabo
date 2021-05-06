@@ -730,7 +730,7 @@ function resetPosition(data) {
 function bringToFront(itm) {
   let frontItm = {
     boardID,
-    id: itm.id
+    id: itm.id,
   }
   socket.emit("bringToFront", frontItm);
 }
