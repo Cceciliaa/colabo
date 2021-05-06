@@ -35,7 +35,7 @@ function addBoard() {
   newBoard.addEventListener("click", openBoard);
   dashboardCtn.appendChild(newBoard);
   socket.emit("newBoard", curBoard);
-  curBoard = dashboardCtn.childNodes.length;
+  curBoard ++;
 }
 
 function openBoard(e) {
