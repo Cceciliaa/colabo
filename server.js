@@ -230,9 +230,7 @@ function newConnection(socket) {
   }
 
   async function sendBoard(boardID) {
-    console.log('sendBoard: before createBoard ' + boardID)
     await createBoard(boardID);
-    console.log('sendBoard: after createBoard ' + boardID + ', globalData is: ' + JSON.stringify(globalData));
 
     if (globalData[boardID].Texts)
       io.sockets.emit("newText", globalData[boardID].Texts);
