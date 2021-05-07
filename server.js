@@ -194,7 +194,6 @@ function newConnection(socket) {
 
   socket.on("bringToFront", bringToFront);
   socket.on("pageReload", reloadServer);
-  socket.on("itmResized", resizeItem);
 
   async function sendBoardsList() {
     await init();
@@ -267,6 +266,7 @@ function newConnection(socket) {
     globalData[data.boardID].Texts.forEach((txt) => {
       if (txt["id"] === data.id) {
         txt["content"] = data["content"];
+        txt["zIndex"] = data["zIdx"];
         txt["top"] = data["top"];
         txt["left"] = data["left"];
         txt["width"] = data["width"];
@@ -305,6 +305,7 @@ function newConnection(socket) {
     globalData[data.boardID].Imgs.forEach((img) => {
       if (img["id"] === data.id) {
         img["url"] = data["url"];
+        img["zIndex"] = data["zIdx"];
         img["top"] = data["top"];
         img["left"] = data["left"];
         img["width"] = data["width"];
@@ -357,6 +358,7 @@ function newConnection(socket) {
   function updateModels(data) {
     globalData[data.boardID].Models.forEach((model) => {
       if (model["id"] === data["id"]) {
+        model["zIndex"] = data["zIdx"];
         model["top"] = data["top"];
         model["left"] = data["left"];
         model["width"] = data["width"];
@@ -377,10 +379,6 @@ function newConnection(socket) {
     } else {
       io.sockets.emit("error", "Error with loading selected model");
     }
-  }
-
-  function resizeItem(data) {
-    io.sockets.emit("itmResized", [data]);
   }
 
   function bringToFront(itmData) {

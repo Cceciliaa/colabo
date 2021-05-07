@@ -93,8 +93,6 @@ socket.on("imgUpdated", updateImgLayer);
 socket.on("newModel", updateModelFrame);
 socket.on("resetMdlPos", updateModelFrame);
 
-socket.on("itmResized", resetPosition);
-
 // text
 function updateTextLayer(data) {
   let textData = data.filter(txt => txt.boardID === boardID);
@@ -611,8 +609,8 @@ function dragElement(elmnt) {
       boardID,
       id: elmnt.id,
       zIdx: elmnt.style.zIndex,
-      top: Math.max(0, elmnt.offsetTop - pos2).toString() + "px",
-      left: Math.max(0, elmnt.offsetLeft - pos1).toString() + "px",
+      top: elmnt.style.top,
+      left: elmnt.style.left,
       width: elmnt.style.width,
       height: elmnt.style.height,
     };
@@ -650,10 +648,18 @@ function resizeElement(item) {
           zIdx: item.style.zIndex,
           top: item.style.top,
           left: item.style.left,
-          width: event.rect.width.toString() + "px",
-          height: event.rect.height.toString() + "px",
+          width: item.style.width,
+          height: item.style.height,
         };
-        socket.emit("itmResized", rszData);
+        if (item.id.slice(0, 5) === "model") {
+          socket.emit("mdlDragged", rszData);
+        } else if (item.id.slice(0, 4) === "text") {
+          rszData["content"] = item.children[0].value;
+          socket.emit("txtDragged", rszData);
+        } else if (item.id.slice(0, 3) === "img") {
+          rszData["url"] = item.children[0].src ? elmnt.children[0].src : "";
+          socket.emit("imgDragged", rszData);
+        }
         onResize = false;
       },
     },
@@ -664,16 +670,13 @@ function resizeElement(item) {
 function resetPosition(data) {
   let curData = data.filter(obj => obj.boardID === boardID);
   for (let itm of curData) {
-    // if (itm.skt !== sktID) {
     document.getElementById(itm["id"]).style.zIndex = itm["zIdx"];
     document.getElementById(itm["id"]).style.top = itm["top"];
     document.getElementById(itm["id"]).style.left = itm["left"];
     document.getElementById(itm["id"]).style.width = itm["width"];
     document.getElementById(itm["id"]).style.height = itm["height"];
-    // }
     dragElement(document.getElementById(itm["id"]));
-    if (itm.id.slice(0, 5) !== "model")
-      resizeElement(document.getElementById(itm["id"]));
+    resizeElement(document.getElementById(itm["id"]));
   }
 }
 
@@ -706,6 +709,7 @@ window.addEventListener("load", function(e) {
 
 window.addEventListener("unload", function (e) {
   e.preventDefault();
+  saveBoard();
   modelContainers = {};
   resUrl = "";
   curZ = 0;
