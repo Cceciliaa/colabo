@@ -149,6 +149,8 @@ function updateTextContent(data) {
     content: data.children[0].value,
     top: data.style.top,
     left: data.style.left,
+    width: data.style.width,
+    height: data.style.height,
   };
   socket.emit("updateText", textData);
 }
@@ -232,12 +234,13 @@ function addImgUrl(elmnt) {
 
 function sendImgUrl(url, elmnt) {
   let imgData = {
-    // skt: sktID,
     boardID,
     id: elmnt.id,
     zIdx: elmnt.style.zIndex,
     top: elmnt.style.top,
     left: elmnt.style.left,
+    width: elmnt.style.width,
+    height: elmnt.style.height,
     url: url,
   };
   socket.emit("updateImg", imgData);
