@@ -163,11 +163,11 @@ let demoData = {
         id: "text10",
         content:
           "If 3D models are not enough for you to present your ideas, you may also add image elements (from local storage, links, or web search) to supply your explanation! ",
-        top: "923px",
-        left: "175px",
+        top: "832px",
+        left: "9px",
         zIndex: "0",
-        width: "1273px",
-        height: "34.2644px",
+        width: "832px",
+        height: "150px",
       },
     ],
     Imgs: [
@@ -176,8 +176,8 @@ let demoData = {
         zIdx: 0,
         id: "img3",
         url: "https://cdn.filestackcontent.com/DAteZBCsReyUrvHamVt8",
-        top: "992px",
-        left: "219px",
+        top: "872px",
+        left: "88px",
         zIndex: "0",
         width: "608.374px",
         height: "687.771px",
@@ -260,6 +260,7 @@ let demoData = {
     },
     currentModelLayer: "model3",
   },
+
   ex2: {
     _id: "ex2",
     Name: "Chemistry Lab",
@@ -532,7 +533,6 @@ function newConnection(socket) {
   }
 
   async function saveBoard(bID) {
-    console.log(globalData[bID]);
     if (parseInt(bID)) {
       await updateListing(client, globalData[bID]);
     }
