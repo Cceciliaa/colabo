@@ -59,17 +59,293 @@ const hostname = "0.0.0.0"; //localhost
 const port = process.env.PORT || 5000;
 const server = http.createServer(app);
 
-let globalData = {};
+let globalData = {
+  ex1: {
+    _id: "ex1",
+    Name: "Use Cases Demo",
+    Texts: [
+      {
+        boardID: "ex1",
+        id: "text1",
+        content:
+          'Click the "?" button on the right to get instructions on how to use this board.',
+        top: "0px",
+        left: "1279px",
+        zIndex: "",
+        width: "312.239px",
+        height: "175px",
+      },
+      {
+        boardID: "ex1",
+        id: "text2",
+        content:
+          'Click the "+" button on the left to add any element -- Text/Image/3D models',
+        top: "0px",
+        left: "210px",
+        zIndex: "",
+        width: "476.134px",
+        height: "166.206px",
+      },
+      {
+        boardID: "ex1",
+        id: "text3",
+        content:
+          'Click the "home" button on the top left to return to the dashboard.',
+        top: "111px",
+        left: "3px",
+        zIndex: "",
+        width: "149.651px",
+        height: "118.423px",
+      },
+      {
+        boardID: "ex1",
+        id: "text4",
+        content: "Example Use Cases of 3D Models in Online Collaborations:",
+        top: "287px",
+        left: "204px",
+        zIndex: "",
+        width: "983.513px",
+        height: "150px",
+      },
+      {
+        boardID: "ex1",
+        id: "text5",
+        content:
+          "1. Interior Design: \nGet a sense of the room structure with 3D models.",
+        top: "382px",
+        left: "223px",
+        zIndex: "",
+        width: "398.815px",
+        height: "150px",
+      },
+      {
+        boardID: "ex1",
+        id: "text7",
+        content:
+          "2. Architecture:\n" +
+          "Display different structures in 3D and examine their features.",
+        top: "387px",
+        left: "755px",
+        zIndex: "",
+        width: "407.404px",
+        height: "150px",
+      },
+      {
+        boardID: "ex1",
+        zIdx: 0,
+        id: "text8",
+        content:
+          "3. History:\n" +
+          "Use Models of cultural heritage sites to display their history.",
+        top: "387px",
+        left: "1279px",
+        zIndex: "0",
+        width: "411.457px",
+        height: "150px",
+      },
+      {
+        boardID: "ex1",
+        zIdx: 0,
+        id: "text9",
+        content:
+          'The elements are added as independent "cards", which can be resized, and moved around freely.\n' +
+          "\n" +
+          "The canvas can be expanded unlimited.",
+        top: "0px",
+        left: "699px",
+        zIndex: "0",
+        width: "557.06px",
+        height: "157.421px",
+      },
+      {
+        boardID: "ex1",
+        zIdx: 0,
+        id: "text10",
+        content:
+          "If 3D models are not enough for you to present your ideas, you may also add image elements (from local storage, links, or web search) to supply your explanation! ",
+        top: "923px",
+        left: "175px",
+        zIndex: "0",
+        width: "1273px",
+        height: "34.2644px",
+      },
+    ],
+    Imgs: [
+      {
+        boardID: "ex1",
+        zIdx: 0,
+        id: "img3",
+        url: "https://cdn.filestackcontent.com/DAteZBCsReyUrvHamVt8",
+        top: "992px",
+        left: "219px",
+        zIndex: "0",
+        width: "608.374px",
+        height: "687.771px",
+      },
+    ],
+    Models: [
+      {
+        boardID: "ex1",
+        id: "model1",
+        top: "483px",
+        left: "191px",
+        zIndex: "",
+        width: "498.623px",
+        height: "350px",
+      },
+      {
+        boardID: "ex1",
+        zIdx: 0,
+        id: "model2",
+        top: "483px",
+        left: "723px",
+        zIndex: "0",
+        width: "",
+        height: "",
+      },
+      {
+        boardID: "ex1",
+        zIdx: 0,
+        id: "model3",
+        top: "483px",
+        left: "1251px",
+        zIndex: "0",
+        width: "",
+        height: "",
+      },
+    ],
+    txtIdx: 10,
+    imgIdx: 4,
+    mdlIdx: 3,
+    ModelLayers: {
+      model1: {
+        boardID: "ex1",
+        source: "Sketchfab",
+        id: "40db661e07f1451b8a3ad0528e079ffc",
+        htmlID: "Entertainment-Center",
+        author: "erickangel99",
+        name: "Entertainment Center",
+        thumbnail:
+          "https://media.sketchfab.com/models/40db661e07f1451b8a3ad0528e079ffc/thumbnails/9d98d1ca251a42848a31e39b953af848/caa5a08a4b2643d48f80647252740104.jpeg",
+        url:
+          "https://api.sketchfab.com/v3/models/40db661e07f1451b8a3ad0528e079ffc/download",
+        modelLayer: "model1",
+      },
+      model2: {
+        boardID: "ex1",
+        source: "Sketchfab",
+        id: "c0cf96bf9aed4a8d84733f820eabaae5",
+        htmlID: "Ishavskatedralen---The-Arctic-Cathedral",
+        author: "Hakvaag",
+        name: "Ishavskatedralen - The Arctic Cathedral",
+        thumbnail:
+          "https://media.sketchfab.com/models/c0cf96bf9aed4a8d84733f820eabaae5/thumbnails/d4a7b0d6f439474c9d4661cfc1f6def2/16410ad466c34752a874173f9be36dff.jpeg",
+        url:
+          "https://api.sketchfab.com/v3/models/c0cf96bf9aed4a8d84733f820eabaae5/download",
+        modelLayer: "model2",
+      },
+      model3: {
+        boardID: "ex1",
+        source: "Sketchfab",
+        id: "8e1e7ae74b4e4a09bd517aefc2981e0b",
+        htmlID: "Belberaud-(31)-France-chapiteaux",
+        author: "DominiqueAllios",
+        name: "Belberaud (31) France chapiteaux",
+        thumbnail:
+          "https://media.sketchfab.com/models/8e1e7ae74b4e4a09bd517aefc2981e0b/thumbnails/0a1e61209ef4431f9358581183670d46/df512dc3e788496ba8c37d984bd96861.jpeg",
+        url:
+          "https://api.sketchfab.com/v3/models/8e1e7ae74b4e4a09bd517aefc2981e0b/download",
+        modelLayer: "model3",
+      },
+    },
+    currentModelLayer: "model3",
+  },
+  ex2: {
+    _id: "ex2",
+    Name: "Chemistry Lab",
+    Texts: [
+      {
+        boardID: "ex2",
+        zIdx: 0,
+        id: "text1",
+        content: "Glimpse into Molecules",
+        top: "19px",
+        left: "254px",
+        zIndex: "0",
+        width: "572.068px",
+        height: "150px",
+      },
+      {
+        boardID: "ex2",
+        zIdx: 0,
+        id: "text2",
+        content:
+          "Molecule structure of H2O. H2O is the fundamental component of water. It is compounded of 2 O elements and 1 H element, and the H element is linked to each of the 2 O elements by an H-O key.",
+        top: "544px",
+        left: "241px",
+        zIndex: "0",
+        width: "449.14px",
+        height: "208.994px",
+      },
+    ],
+    Imgs: [],
+    Models: [
+      {
+        boardID: "ex2",
+        zIdx: 0,
+        id: "model1",
+        top: "172px",
+        left: "220px",
+        zIndex: "0",
+        width: "",
+        height: "",
+      },
+      {
+        boardID: "ex2",
+        zIdx: 0,
+        id: "model2",
+        top: "174px",
+        left: "745px",
+        zIndex: "0",
+        width: "",
+        height: "",
+      },
+    ],
+    txtIdx: 2,
+    imgIdx: 0,
+    mdlIdx: 2,
+    ModelLayers: {
+      model1: {
+        boardID: "ex2",
+        source: "Sketchfab",
+        id: "10c6e35fb6924c5fb4b5a0cbee43addf",
+        htmlID: "Molekul-H2O",
+        author: "hendri.kurniadi",
+        name: "Molekul H2O",
+        thumbnail:
+          "https://media.sketchfab.com/models/10c6e35fb6924c5fb4b5a0cbee43addf/thumbnails/3da237cb43094de280984f02c96ee007/288e1c6eb44347ae81fcf2ebfbacb96a.jpeg",
+        url:
+          "https://api.sketchfab.com/v3/models/10c6e35fb6924c5fb4b5a0cbee43addf/download",
+        modelLayer: "model1",
+      },
+      model2: {
+        boardID: "ex2",
+        source: "Sketchfab",
+        id: "3bb85e05987a474896e768fec99ef7ac",
+        htmlID: "R-and-S-config-4th-molecule-w/-label",
+        author: "stereoaisier",
+        name: "R and S config 4th molecule w/ label",
+        thumbnail:
+          "https://media.sketchfab.com/models/3bb85e05987a474896e768fec99ef7ac/thumbnails/e9cd45d98ac24b9bbf97ce070ab65645/eeb9084538ec4104989a043cb6384ac4.jpeg",
+        url:
+          "https://api.sketchfab.com/v3/models/3bb85e05987a474896e768fec99ef7ac/download",
+        modelLayer: "model2",
+      },
+    },
+    currentModelLayer: "model2",
+  },
+};
 let boardsListing;
-
-// let Texts = [];
-// let Imgs = [];
-// let Models = [];
-// let txtIdx = 0;
-// let imgIdx = 0;
-// let mdlIdx = 0;
-// let currentModelLayer;
-// let ModelLayers = {};
 
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -109,34 +385,39 @@ async function getListing(clt) {
     .find({}, {})
     .toArray(function (err, result) {
       if (err) throw err;
-      boardsListing = result;
-      io.sockets.emit('existingBds', boardsListing);
+      boardsListing = result || [];
+      io.sockets.emit("existingBds", boardsListing);
       return result;
     });
 }
 
 async function insertListing(clt, listing) {
-  console.log(listing);
   if (parseInt(listing._id)) {
+    console.log('start insert');
     await clt
-    .db("collage-boards")
-    .collection("savedCollages")
-    .insertOne(listing)
-    .catch((err) => {
-      console.log(err);
-    });
+      .db("collage-boards")
+      .collection("savedCollages")
+      .insertOne(listing)
+      .then(() => console.log('inserted'))
+      .catch((err) => {
+        console.log('insertion error: ', err);
+      });
   }
 }
 
 async function updateListing(clt, listing) {
   let clone = (({ _id, ...o }) => o)(listing);
-  await clt
-    .db("collage-boards")
-    .collection("savedCollages")
-    .update({ _id: listing._id }, { ...clone })
-    .catch((err) => {
-      console.log(err);
-    });
+  if (parseInt(listing._id)) {
+    console.log('start update');
+    await clt
+      .db("collage-boards")
+      .collection("savedCollages")
+      .update({ _id: listing._id }, { ...clone })
+      .then(() => {console.log('updated')})
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 }
 
 //--------------------------------------------------------------
@@ -172,6 +453,7 @@ function newConnection(socket) {
   socket.on("openBoard", sendBoard);
   socket.on("pageLoaded", sendBoard);
   socket.on("saveBoard", saveBoard);
+  socket.on("boardTtlChanged", changeName);
 
   socket.on("requestAddText", addText);
   socket.on("txtDragged", updateText);
@@ -196,42 +478,54 @@ function newConnection(socket) {
   socket.on("pageReload", reloadServer);
 
   async function sendBoardsList() {
-    await init();
+    // await init();
     await getListing(client);
   }
 
   async function createBoard(boardID) {
-    await init();
-    await getListing(client);
-    for (let bd of boardsListing) {
-      if (boardID == bd._id) {
-        globalData[boardID] = bd;
+    let exist = false;
+
+    globalData[boardID] = {
+      _id: parseInt(boardID),
+      Name: 'Untitle' + boardID,
+      Texts: [],
+      Imgs: [],
+      Models: [],
+      txtIdx: 0,
+      imgIdx: 0,
+      mdlIdx: 0,
+      ModelLayers: {},
+      currentModelLayer: "",
+    };
+
+    // await init();
+    if (!boardsListing) await getListing(client);
+    if (boardsListing) {
+      for (let i = 0; i < boardsListing.length; i++) {
+        if (boardsListing[i] && (boardID === boardsListing[i]._id)) {
+          globalData[boardID] = boardsListing[i];
+          exist = true;
+        }
       }
     }
 
-    if (!globalData[boardID]) {
-      globalData[boardID] = {
-        _id: parseInt(boardID),
-        Texts: [],
-        Imgs: [],
-        Models: [],
-        txtIdx: 0,
-        imgIdx: 0,
-        mdlIdx: 0,
-        ModelLayers: {},
-        currentModelLayer: "",
-      };
+    if (!exist) {
       insertListing(client, globalData[boardID]);
     }
   }
 
+  function changeName(data) {
+    globalData[data.boardID].Name = data.name;
+    saveBoard(data.boardID);
+  }
+
   async function saveBoard(bID) {
-    await updateListing(client, globalData[bID]);
+    if (parseInt(bID)) { 
+      await updateListing(client, globalData[bID]);
+    }
   }
 
   async function sendBoard(boardID) {
-    await createBoard(boardID);
-
     if (globalData[boardID].Texts)
       io.sockets.emit("newText", globalData[boardID].Texts);
     if (globalData[boardID].Imgs)
@@ -246,18 +540,19 @@ function newConnection(socket) {
   }
 
   // text
-  function addText(boardID) {
-    globalData[boardID].txtIdx++;
+  function addText(data) {
+    globalData[data.boardID].txtIdx++;
     let textData = {
-      boardID,
-      id: "text" + globalData[boardID].txtIdx.toString(),
+      boardID: data.boardID,
+      zIdx: data.zIdx,
+      id: "text" + globalData[data.boardID].txtIdx.toString(),
       content: "",
-      top: "80px",
-      left: "80px",
+      top: data.top + "100px",
+      left: data.left + "80px",
     };
-    globalData[boardID].Texts.push(textData);
-    io.sockets.emit("newText", globalData[boardID].Texts);
-    saveBoard(boardID);
+    globalData[data.boardID].Texts.push(textData);
+    io.sockets.emit("newText", globalData[data.boardID].Texts);
+    saveBoard(data.boardID);
   }
 
   function updateText(data) {
@@ -285,18 +580,19 @@ function newConnection(socket) {
   }
 
   // Img
-  function addImg(boardID) {
-    globalData[boardID].imgIdx++;
+  function addImg(data) {
+    globalData[data.boardID].imgIdx ++;
     let imgData = {
-      boardID,
-      id: "img" + globalData[boardID].imgIdx.toString(),
+      boardID: data.boardID,
+      zIdx: data.zIdx,
+      id: "img" + globalData[data.boardID].imgIdx.toString(),
       url: "",
-      top: "80px",
-      left: "80px",
+      top: data.top + "100px",
+      left: data.left + "80px",
     };
-    globalData[boardID].Imgs.push(imgData);
-    io.sockets.emit("newImg", globalData[boardID].Imgs);
-    saveBoard(boardID);
+    globalData[data.boardID].Imgs.push(imgData);
+    io.sockets.emit("newImg", globalData[data.boardID].Imgs);
+    saveBoard(data.boardID);
   }
 
   function updateImg(data) {
@@ -324,17 +620,18 @@ function newConnection(socket) {
   }
 
   // 3D model
-  function addModel(boardID) {
-    globalData[boardID].mdlIdx++;
+  function addModel(data) {
+    globalData[data.boardID].mdlIdx++;
     let mdlData = {
-      boardID,
-      id: "model" + globalData[boardID].mdlIdx.toString(),
-      top: "80px",
-      left: "80px",
+      boardID: data.boardID,
+      zIdx: data.zIdx,
+      id: "model" + globalData[data.boardID].mdlIdx.toString(),
+      top: data.top + "100px",
+      left: data.left + "80px",
     };
-    globalData[boardID].Models.push(mdlData);
-    io.sockets.emit("newModel", globalData[boardID].Models);
-    saveBoard(boardID);
+    globalData[data.boardID].Models.push(mdlData);
+    io.sockets.emit("newModel", globalData[data.boardID].Models);
+    saveBoard(data.boardID);
   }
 
   function recordModelLayer(data) {

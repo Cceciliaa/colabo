@@ -5,7 +5,10 @@ let resUrl = "";
 let currImgElm = "";
 let rotateMdl = false;
 
+// I use the filestack API for image upload and preview. However, since this is a free account, the upload limitation is only 50.
 const client = filestack.init("AV9sVjeWPToiHvAgHFopUz");
+// I create an alternative api for image upload
+// const client = filestack.init("AKBtROQNyQAyQAZ9ThAHIz");
 
 const options = {
   onFileSelected: (file) => {
@@ -30,10 +33,6 @@ const addModelBtn = document.getElementById("addModelBtn");
 const modal = document.getElementById("myModal");
 const closeIcon = document.getElementsByClassName("close")[0];
 const myLoader = document.getElementById("myLoader");
-
-closeIcon.onclick = function () {
-  modal.style.display = "none";
-};
 
 const WIDTH = window.innerWidth;
 const HEIGHT = window.innerHeight;
@@ -66,19 +65,41 @@ function closeDropdown() {
   }
 }
 
+function closeMdl(itm) {
+  itm.parentNode.parentNode.style.display = "none";
+}
+
 function requestAddText() {
   closeDropdown();
-  socket.emit("requestAddText", boardID);
+  let reqData = {
+    boardID,
+    zIdx: curZ,
+    top: window.scrollY,
+    left: window.scrollX,
+  }
+  socket.emit("requestAddText", reqData);
 }
 
 function requestAddImg() {
   closeDropdown();
-  socket.emit("requestAddImg", boardID);
+  let reqData = {
+    boardID,
+    zIdx: curZ,
+    top: window.scrollY,
+    left: window.scrollX,
+  }
+  socket.emit("requestAddImg", reqData);
 }
 
 function requestAddModel() {
   closeDropdown();
-  socket.emit("requestAddModel", boardID);
+  let reqData = {
+    boardID,
+    zIdx: curZ,
+    top: window.scrollY,
+    left: window.scrollX,
+  }
+  socket.emit("requestAddModel", reqData);
 }
 
 socket.on("newText", updateTextLayer);
@@ -660,7 +681,7 @@ function resizeElement(item) {
           rszData["content"] = item.children[0].value;
           socket.emit("txtDragged", rszData);
         } else if (item.id.slice(0, 3) === "img") {
-          rszData["url"] = item.children[0].src ? elmnt.children[0].src : "";
+          rszData["url"] = item.children[0].src ? item.children[0].src : "";
           socket.emit("imgDragged", rszData);
         }
         onResize = false;

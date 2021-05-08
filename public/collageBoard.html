@@ -24,15 +24,18 @@
         min-height: 2000px;
         height: auto;
         overflow: auto;
-        font-family: Monospace;
+        font-family: "Gill Sans", sans-serif;
         font-size: 14px;
         line-height: 24px;
+        margin: 0px;
+        padding: 0px;
       }
     </style>
   </head>
   <body>
     <div>
-      <button class="tooltip" id="dashBtn" onclick="returnHome()">&#9776;
+      <button class="tooltip" id="dashBtn" onclick="returnHome()">
+        <img src="assets/home.ico" alt="Home" />
         <span class="tooltiptext">Go to Dashboard</span>
       </button>
     </div>
@@ -58,23 +61,11 @@
     <div class="modal" id="initModal" onclick="closeInitModal()">
       <!-- Modal content -->
       <div id="initModal-content">
-        <h1>Welcome to CollageBoard-3D!</h1>
-        <p>This is a group brainstorming place for online collaboration. Add texts, images, and 3D models to construct your group's shared ideas.</p>
-        <p>All elements are added to the board as "element cards", and all elements on the board are shared among the group members in real time.</p>
-        
-        <br/>
-        <h2>How to use?</h2>
+        <span class="close">&times;</span>
+        <h1>Get Started with Collage Board 3D!</h1>
+        <p>All contents are shared instantly and saved automatically.</p>
+        </br>
         <div id="info-content">
-          <span>
-            <img src="./assets/add-board.gif" alt="add-text" class="demo">
-            <p class="ins"><strong>Add a new board:</strong> Add a new collage board.</p>
-          </span>
-
-          <span>
-            <img src="./assets/return-to-board.gif" alt="add-text" class="demo">
-            <p class="ins"><strong>Reopen a board:</strong> Reopen a previous collage board and modify its elements.</p>
-          </span>
-
           <span>
             <img src="./assets/add-text.gif" alt="add-text" class="demo">
             <p class="ins"><strong>Add text/annotation:</strong> Add a "text" element and type in the textarea.</p>
@@ -105,9 +96,6 @@
             <p class="ins"><strong>Delete an element:</strong> Click on the "x" icon at the upper-left corner of the element card.</p>
           </span>
         </div>
-
-        <br/>
-        <h2>Click anywhere to get to your work!</h2>
       </div>
     </div>
 
@@ -115,13 +103,13 @@
     <div id="myModal" class="modal">
       <!-- Modal content -->
       <div class="modal-content">
+        <span class="close" onclick="closeMdl(this)">&times;</span>
         <form id="search">
 			<input id="query" placeholder="Search Models"></input>
 			<button id="button">search</button>
 		</form>
         <div id="myLoader"></div>
         <span id="results"></span>
-        <span class="close">&times;</span>
       </div>
     </div>
 

@@ -25,132 +25,89 @@
       body {
         width: 100%;
         height: 100%;
+        margin: 0px;
+        padding: 0px;
         overflow: auto;
         overflow-x: hidden;
-        font-family: Monospace;
+        font-family: "Gill Sans", sans-serif;
       }
     </style>
   </head>
   <body>
-    <div id="indexPage">
-      <button class="tooltip dropbtn" onclick="addBoard()">
-        +
-        <span class="tooltiptext">Add Board</span>
+    <div id="topDiv"></div>
+    <div id="sidebar">
+      <p id="iconfont">Collage Board 3D</p>
+    </div>
+
+    <div id="catchphrase">
+      <h3>Create unlimited shared experience online</h3>
+      <p>Collage Board 3D is an <strong>online collaborative collage board</strong> where ideas meet and display.</p>
+      <p>Orientate your group discussion by piecing together your ideas in <strong>texts, images, and 3D models</strong>.</p>
+    </div>
+
+    <div>
+      <button class="tooltip" id="helpBtn" onclick="openInfo()">
+        ?
+        <span class="tooltiptext">Help</span>
       </button>
-      <span id="title">
-        <h1>Choose a Board to Start!</h1>
-      </span>
-      <div id="dashBoardCtn"></div>
+    </div>
 
-      <div>
-        <button class="tooltip" id="helpBtn" onclick="openInfo()">
-          ?
-          <span class="tooltiptext">Help</span>
-        </button>
+    <div id="expDiv"></div>
+    <p class="subttl">Glimpse An Example</p>
+    <div id="templateCtn">
+      <div class="dashBoards" id="board/ex1" style="background-color: #7bbbda" onclick="openBoard()">
+        <textarea class="dashBoardTtl" disabled>Use Cases Demo</textarea>
       </div>
+      <div class="dashBoards" id="board/ex2" style="background-color: #FFD700" onclick="openBoard()">
+        <textarea class="dashBoardTtl" disabled>Chemistry Lab</textarea>
+      </div>
+    </div>
 
-      <!-- The Model Modal -->
-      <div class="modal" id="initModal" onclick="closeInitModal()">
-        <!-- Modal content -->
-        <div id="initModal-content">
-          <h1>Welcome to CollageBoard-3D!</h1>
-          <p>
-            This is a group brainstorming place for online collaboration. Add
-            texts, images, and 3D models to construct your group's shared ideas.
-          </p>
-          <p>
-            All elements are added to the board as "element cards", and all
-            elements on the board are shared among the group members in real
-            time.
-          </p>
+    <p class="subttl" id="subttl2">My Boards</p>
+    <button class="tooltip" id="addbtn" onclick="addBoard()">
+      +ADD NEW
+    </button>
+    <div id="dashBoardCtn"></div>
+    <div id='placeholder'>Start Your First Collage Board Now!</div>
 
-          <br />
-          <h2>How to use?</h2>
-          <div id="info-content">
-            <span>
-              <img src="./assets/add-board.gif" alt="add-text" class="demo" />
-              <p class="ins">
-                <strong>Add a new board:</strong> Add a new collage board.
-              </p>
-            </span>
+     <!-- The Model Modal -->
+     <div class="modal" id="initModal" onclick="closeInitModal()">
+      <!-- Modal content -->
+      <div id="initModal-content">
+        <span class="close">&times;</span>
+        <h1>Get Started with Collage Board 3D!</h1>
+        <p>All contents are shared instantly and saved automatically.</p>
+        </br>
+        <div id="info-content">
+          <span>
+            <img src="./assets/add-text.gif" alt="add-text" class="demo">
+            <p class="ins"><strong>Add text/annotation:</strong> Add a "text" element and type in the textarea.</p>
+          </span>
 
-            <span>
-              <img
-                src="./assets/return-to-board.gif"
-                alt="add-text"
-                class="demo"
-              />
-              <p class="ins">
-                <strong>Reopen a board:</strong> Reopen a previous collage board
-                and modify its elements.
-              </p>
-            </span>
+          <span>
+            <img src="./assets/add-model.gif" alt="add-model" class="demo">
+            <p class="ins"><strong>Add a 3D Model:</strong> Add a "3D Model" element. You may play around with the model inside the element window, or enlarge it to full-screen.</p>
+          </span>
 
-            <span>
-              <img src="./assets/add-text.gif" alt="add-text" class="demo" />
-              <p class="ins">
-                <strong>Add text/annotation:</strong> Add a "text" element and
-                type in the textarea.
-              </p>
-            </span>
+          <span>
+            <img src="./assets/add-photo.gif" alt="add-photo" class="demo">
+            <p class="ins"><strong>Add an image:</strong> Add an "image" element, then clicking on the small "+" button at the upper-left corner of the card to open the interface for file upload.</p>
+          </span>
 
-            <span>
-              <img src="./assets/add-model.gif" alt="add-model" class="demo" />
-              <p class="ins">
-                <strong>Add a 3D Model:</strong> Add a "3D Model" element. You
-                may play around with the model inside the element window, or
-                enlarge it to full-screen.
-              </p>
-            </span>
+          <span>
+            <img src="./assets/drag-and-resize.gif" alt="drag-and-resize" class="demo">
+            <p class="ins"><strong>Move and resize an element:</strong> Drag the element card to move around. Drag from the corner to resize.</p>
+          </span>
 
-            <span>
-              <img src="./assets/add-photo.gif" alt="add-photo" class="demo" />
-              <p class="ins">
-                <strong>Add an image:</strong> Add an "image" element, then
-                clicking on the small "+" button at the upper-left corner of the
-                card to open the interface for file upload.
-              </p>
-            </span>
+          <span>
+            <img src="./assets/bring-to-front.gif" alt="bring-to-front" class="demo">
+            <p class="ins"><strong>Bring an element to front:</strong> Double click on the element card.</p>
+          </span>
 
-            <span>
-              <img
-                src="./assets/drag-and-resize.gif"
-                alt="drag-and-resize"
-                class="demo"
-              />
-              <p class="ins">
-                <strong>Move and resize an element:</strong> Drag the element
-                card to move around. Drag from the corner to resize.
-              </p>
-            </span>
-
-            <span>
-              <img
-                src="./assets/bring-to-front.gif"
-                alt="bring-to-front"
-                class="demo"
-              />
-              <p class="ins">
-                <strong>Bring an element to front:</strong> Double click on the
-                element card.
-              </p>
-            </span>
-
-            <span>
-              <img
-                src="./assets/delete-content.gif"
-                alt="delete-content"
-                class="demo"
-              />
-              <p class="ins">
-                <strong>Delete an element:</strong> Click on the "x" icon at the
-                upper-left corner of the element card.
-              </p>
-            </span>
-          </div>
-
-          <br />
-          <h2>Click anywhere to get to your work!</h2>
+          <span>
+            <img src="./assets/delete-content.gif" alt="delete-content" class="demo">
+            <p class="ins"><strong>Delete an element:</strong> Click on the "x" icon at the upper-left corner of the element card.</p>
+          </span>
         </div>
       </div>
     </div>
