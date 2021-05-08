@@ -367,7 +367,7 @@ p {
   height: 280px;
   justify-content: center;
   text-align: center;
-  line-height: 15px;
+  line-height: 30px;
 }
 #catchphrase h3 {
   font-size: 48px;
@@ -375,7 +375,7 @@ p {
   color: rgb(59, 86, 121);
 }
 #catchphrase p {
-  font-size: 25px;
+  font-size: 22px;
   line-height: 10px;
   font-weight: 300;
 }

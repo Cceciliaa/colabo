@@ -59,7 +59,7 @@ const hostname = "0.0.0.0"; //localhost
 const port = process.env.PORT || 5000;
 const server = http.createServer(app);
 
-let globalData = {
+let demoData = {
   ex1: {
     _id: "ex1",
     Name: "Use Cases Demo",
@@ -345,6 +345,8 @@ let globalData = {
     currentModelLayer: "model2",
   },
 };
+
+let globalData = JSON.parse(JSON.stringify(demoData));
 let boardsListing;
 
 app.use(express.static(path.join(__dirname, "public")));
@@ -470,15 +472,12 @@ function newConnection(socket) {
   socket.on("ModelLayerclicked", recordModelLayer);
   socket.on("ModelLayerDelete", deleteModelLayer);
 
-  // socket.on("imgURLFromClient", urlEventMessage);
-  // socket.on("imgPathFromClient", pathEventMessage);
   socket.on("modelSelected", sendModel);
 
   socket.on("bringToFront", bringToFront);
   socket.on("pageReload", reloadServer);
 
   async function sendBoardsList() {
-    // await init();
     await getListing(client);
   }
 
@@ -498,7 +497,6 @@ function newConnection(socket) {
       currentModelLayer: "",
     };
 
-    // await init();
     if (!boardsListing) await getListing(client);
     if (boardsListing) {
       for (let i = 0; i < boardsListing.length; i++) {
@@ -526,6 +524,7 @@ function newConnection(socket) {
   }
 
   async function sendBoard(boardID) {
+    if (!parseInt(bID)) globalData = JSON.parse(JSON.stringify(demoData));
     if (globalData[boardID].Texts)
       io.sockets.emit("newText", globalData[boardID].Texts);
     if (globalData[boardID].Imgs)
@@ -682,6 +681,7 @@ function newConnection(socket) {
 
   async function reloadServer() {
     await sendBoardsList();
+    globalData = JSON.parse(JSON.stringify(demoData));
     io.sockets.emit("reloaded");
   }
 }

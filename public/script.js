@@ -9,7 +9,7 @@ socket.on("connect", function () {
 
 let dashboardCtn = document.getElementById("dashBoardCtn");
 let curBoard = 1;
-let bdColors = ['#f5f5dc', '#8a2be2', '#8fbc8f', '#e9967a', '#ff69b4'];
+let bdColors = ['#f5f5dc', '#E6E6FA', '#8fbc8f', '#e9967a', '#ff69b4'];
 let editting = false;
 
 socket.on("existingBds", (data) => initBoard(data));
