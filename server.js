@@ -69,9 +69,9 @@ let demoData = {
         id: "text1",
         content:
           'Click the "?" button on the right to get instructions on how to use this board.',
-        top: "0px",
-        left: "1279px",
-        zIndex: "",
+        top: "115px",
+        left: "1199px",
+        zIndex: "3",
         width: "312.239px",
         height: "175px",
       },
@@ -80,9 +80,9 @@ let demoData = {
         id: "text2",
         content:
           'Click the "+" button on the left to add any element -- Text/Image/3D models',
-        top: "0px",
-        left: "210px",
-        zIndex: "",
+        top: "114px",
+        left: "235px",
+        zIndex: "1",
         width: "476.134px",
         height: "166.206px",
       },
@@ -91,8 +91,8 @@ let demoData = {
         id: "text3",
         content:
           'Click the "home" button on the top left to return to the dashboard.',
-        top: "111px",
-        left: "3px",
+        top: "112px",
+        left: "15px",
         zIndex: "",
         width: "149.651px",
         height: "118.423px",
@@ -101,8 +101,8 @@ let demoData = {
         boardID: "ex1",
         id: "text4",
         content: "Example Use Cases of 3D Models in Online Collaborations:",
-        top: "287px",
-        left: "204px",
+        top: "280px",
+        left: "2px",
         zIndex: "",
         width: "983.513px",
         height: "150px",
@@ -112,8 +112,8 @@ let demoData = {
         id: "text5",
         content:
           "1. Interior Design: \nGet a sense of the room structure with 3D models.",
-        top: "382px",
-        left: "223px",
+        top: "343px",
+        left: "53px",
         zIndex: "",
         width: "398.815px",
         height: "150px",
@@ -124,8 +124,8 @@ let demoData = {
         content:
           "2. Architecture:\n" +
           "Display different structures in 3D and examine their features.",
-        top: "387px",
-        left: "755px",
+        top: "323px",
+        left: "594px",
         zIndex: "",
         width: "407.404px",
         height: "150px",
@@ -137,8 +137,8 @@ let demoData = {
         content:
           "3. History:\n" +
           "Use Models of cultural heritage sites to display their history.",
-        top: "387px",
-        left: "1279px",
+        top: "321px",
+        left: "1105px",
         zIndex: "0",
         width: "411.457px",
         height: "150px",
@@ -151,9 +151,9 @@ let demoData = {
           'The elements are added as independent "cards", which can be resized, and moved around freely.\n' +
           "\n" +
           "The canvas can be expanded unlimited.",
-        top: "0px",
-        left: "699px",
-        zIndex: "0",
+        top: "116px",
+        left: "675px",
+        zIndex: "2",
         width: "557.06px",
         height: "157.421px",
       },
@@ -187,8 +187,8 @@ let demoData = {
       {
         boardID: "ex1",
         id: "model1",
-        top: "483px",
-        left: "191px",
+        top: "421px",
+        left: "11px",
         zIndex: "",
         width: "498.623px",
         height: "350px",
@@ -197,8 +197,8 @@ let demoData = {
         boardID: "ex1",
         zIdx: 0,
         id: "model2",
-        top: "483px",
-        left: "723px",
+        top: "418px",
+        left: "559px",
         zIndex: "0",
         width: "",
         height: "",
@@ -207,8 +207,8 @@ let demoData = {
         boardID: "ex1",
         zIdx: 0,
         id: "model3",
-        top: "483px",
-        left: "1251px",
+        top: "417px",
+        left: "1079px",
         zIndex: "0",
         width: "",
         height: "",
@@ -269,8 +269,8 @@ let demoData = {
         zIdx: 0,
         id: "text1",
         content: "Glimpse into Molecules",
-        top: "19px",
-        left: "254px",
+        top: "101px",
+        left: "247px",
         zIndex: "0",
         width: "572.068px",
         height: "150px",
@@ -286,6 +286,18 @@ let demoData = {
         zIndex: "0",
         width: "449.14px",
         height: "208.994px",
+      },
+      {
+        boardID: "ex2",
+        zIdx: 0,
+        id: "text3",
+        content:
+          "This seems like an interesting structure. But I don't actually recognize this molecule. Does anyone have any ideas?",
+        top: "547px",
+        left: "774px",
+        zIndex: "0",
+        width: "446.421px",
+        height: "215.098px",
       },
     ],
     Imgs: [],
@@ -311,7 +323,7 @@ let demoData = {
         height: "",
       },
     ],
-    txtIdx: 2,
+    txtIdx: 3,
     imgIdx: 0,
     mdlIdx: 2,
     ModelLayers: {
@@ -395,14 +407,14 @@ async function getListing(clt) {
 
 async function insertListing(clt, listing) {
   if (parseInt(listing._id)) {
-    console.log('start insert');
+    console.log("start insert");
     await clt
       .db("collage-boards")
       .collection("savedCollages")
       .insertOne(listing)
-      .then(() => console.log('inserted'))
+      .then(() => console.log("inserted"))
       .catch((err) => {
-        console.log('insertion error: ', err);
+        console.log("insertion error: ", err);
       });
   }
 }
@@ -410,12 +422,14 @@ async function insertListing(clt, listing) {
 async function updateListing(clt, listing) {
   let clone = (({ _id, ...o }) => o)(listing);
   if (parseInt(listing._id)) {
-    console.log('start update');
+    console.log("start update");
     await clt
       .db("collage-boards")
       .collection("savedCollages")
       .update({ _id: listing._id }, { ...clone })
-      .then(() => {console.log('updated')})
+      .then(() => {
+        console.log("updated");
+      })
       .catch((err) => {
         console.log(err);
       });
@@ -486,7 +500,7 @@ function newConnection(socket) {
 
     globalData[boardID] = {
       _id: parseInt(boardID),
-      Name: 'Untitle' + boardID,
+      Name: "Untitle" + boardID,
       Texts: [],
       Imgs: [],
       Models: [],
@@ -500,7 +514,7 @@ function newConnection(socket) {
     if (!boardsListing) await getListing(client);
     if (boardsListing) {
       for (let i = 0; i < boardsListing.length; i++) {
-        if (boardsListing[i] && (boardID === boardsListing[i]._id)) {
+        if (boardsListing[i] && boardID === boardsListing[i]._id) {
           globalData[boardID] = boardsListing[i];
           exist = true;
         }
@@ -518,13 +532,15 @@ function newConnection(socket) {
   }
 
   async function saveBoard(bID) {
-    if (parseInt(bID)) { 
+    console.log(globalData[bID]);
+    if (parseInt(bID)) {
       await updateListing(client, globalData[bID]);
     }
   }
 
   async function sendBoard(boardID) {
-    if (!parseInt(boardID)) globalData[boardID] = JSON.parse(JSON.stringify(demoData[boardID]));
+    if (!parseInt(boardID))
+      globalData[boardID] = JSON.parse(JSON.stringify(demoData[boardID]));
     if (globalData[boardID].Texts)
       io.sockets.emit("newText", globalData[boardID].Texts);
     if (globalData[boardID].Imgs)
@@ -580,7 +596,7 @@ function newConnection(socket) {
 
   // Img
   function addImg(data) {
-    globalData[data.boardID].imgIdx ++;
+    globalData[data.boardID].imgIdx++;
     let imgData = {
       boardID: data.boardID,
       zIdx: data.zIdx,
