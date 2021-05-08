@@ -524,7 +524,7 @@ function newConnection(socket) {
   }
 
   async function sendBoard(boardID) {
-    if (!parseInt(bID)) globalData = JSON.parse(JSON.stringify(demoData));
+    if (!parseInt(boardID)) globalData[boardID] = JSON.parse(JSON.stringify(demoData[boardID]));
     if (globalData[boardID].Texts)
       io.sockets.emit("newText", globalData[boardID].Texts);
     if (globalData[boardID].Imgs)
