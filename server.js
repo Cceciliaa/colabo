@@ -562,8 +562,8 @@ function newConnection(socket) {
       zIdx: data.zIdx,
       id: "text" + globalData[data.boardID].txtIdx.toString(),
       content: "",
-      top: data.top + "100px",
-      left: data.left + "80px",
+      top: data.top + 100 + "px",
+      left: data.left + 80 + "px",
     };
     globalData[data.boardID].Texts.push(textData);
     io.sockets.emit("newText", globalData[data.boardID].Texts);
@@ -602,8 +602,8 @@ function newConnection(socket) {
       zIdx: data.zIdx,
       id: "img" + globalData[data.boardID].imgIdx.toString(),
       url: "",
-      top: data.top + "100px",
-      left: data.left + "80px",
+      top: data.top + 100 + "px",
+      left: data.left + 80 + "px",
     };
     globalData[data.boardID].Imgs.push(imgData);
     io.sockets.emit("newImg", globalData[data.boardID].Imgs);
@@ -641,8 +641,8 @@ function newConnection(socket) {
       boardID: data.boardID,
       zIdx: data.zIdx,
       id: "model" + globalData[data.boardID].mdlIdx.toString(),
-      top: data.top + "100px",
-      left: data.left + "80px",
+      top: data.top + 100 + "px",
+      left: data.left + 80 + "px",
     };
     globalData[data.boardID].Models.push(mdlData);
     io.sockets.emit("newModel", globalData[data.boardID].Models);
