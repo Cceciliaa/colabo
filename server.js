@@ -66,43 +66,10 @@ let demoData = {
     Texts: [
       {
         boardID: "ex1",
-        id: "text1",
-        content:
-          'Click the "?" button on the right to get instructions on how to use this board.',
-        top: "115px",
-        left: "1199px",
-        zIndex: "3",
-        width: "312.239px",
-        height: "175px",
-      },
-      {
-        boardID: "ex1",
-        id: "text2",
-        content:
-          'Click the "+" button on the left to add any element -- Text/Image/3D models',
-        top: "114px",
-        left: "235px",
-        zIndex: "1",
-        width: "476.134px",
-        height: "166.206px",
-      },
-      {
-        boardID: "ex1",
-        id: "text3",
-        content:
-          'Click the "home" button on the top left to return to the dashboard.',
-        top: "112px",
-        left: "15px",
-        zIndex: "",
-        width: "149.651px",
-        height: "118.423px",
-      },
-      {
-        boardID: "ex1",
         id: "text4",
         content: "Example Use Cases of 3D Models in Online Collaborations:",
-        top: "280px",
-        left: "2px",
+        top: "53px",
+        left: "256px",
         zIndex: "",
         width: "983.513px",
         height: "150px",
@@ -112,8 +79,8 @@ let demoData = {
         id: "text5",
         content:
           "1. Interior Design: \nGet a sense of the room structure with 3D models.",
-        top: "343px",
-        left: "53px",
+        top: "134px",
+        left: "24px",
         zIndex: "",
         width: "398.815px",
         height: "150px",
@@ -124,8 +91,8 @@ let demoData = {
         content:
           "2. Architecture:\n" +
           "Display different structures in 3D and examine their features.",
-        top: "323px",
-        left: "594px",
+        top: "137px",
+        left: "554px",
         zIndex: "",
         width: "407.404px",
         height: "150px",
@@ -137,8 +104,8 @@ let demoData = {
         content:
           "3. History:\n" +
           "Use Models of cultural heritage sites to display their history.",
-        top: "321px",
-        left: "1105px",
+        top: "136px",
+        left: "1080px",
         zIndex: "0",
         width: "411.457px",
         height: "150px",
@@ -146,25 +113,11 @@ let demoData = {
       {
         boardID: "ex1",
         zIdx: 0,
-        id: "text9",
-        content:
-          'The elements are added as independent "cards", which can be resized, and moved around freely.\n' +
-          "\n" +
-          "The canvas can be expanded unlimited.",
-        top: "116px",
-        left: "675px",
-        zIndex: "2",
-        width: "557.06px",
-        height: "157.421px",
-      },
-      {
-        boardID: "ex1",
-        zIdx: 0,
         id: "text10",
         content:
           "If 3D models are not enough for you to present your ideas, you may also add image elements (from local storage, links, or web search) to supply your explanation! ",
-        top: "832px",
-        left: "9px",
+        top: "588px",
+        left: "33px",
         zIndex: "0",
         width: "832px",
         height: "150px",
@@ -176,8 +129,8 @@ let demoData = {
         zIdx: 0,
         id: "img3",
         url: "https://cdn.filestackcontent.com/DAteZBCsReyUrvHamVt8",
-        top: "872px",
-        left: "88px",
+        top: "627px",
+        left: "85px",
         zIndex: "0",
         width: "608.374px",
         height: "687.771px",
@@ -187,8 +140,8 @@ let demoData = {
       {
         boardID: "ex1",
         id: "model1",
-        top: "421px",
-        left: "11px",
+        top: "204px",
+        left: "0px",
         zIndex: "",
         width: "498.623px",
         height: "350px",
@@ -197,8 +150,8 @@ let demoData = {
         boardID: "ex1",
         zIdx: 0,
         id: "model2",
-        top: "418px",
-        left: "559px",
+        top: "206px",
+        left: "532px",
         zIndex: "0",
         width: "",
         height: "",
@@ -207,15 +160,15 @@ let demoData = {
         boardID: "ex1",
         zIdx: 0,
         id: "model3",
-        top: "417px",
-        left: "1079px",
+        top: "204px",
+        left: "1057px",
         zIndex: "0",
         width: "",
         height: "",
       },
     ],
-    txtIdx: 10,
-    imgIdx: 4,
+    txtIdx: 5,
+    imgIdx: 1,
     mdlIdx: 3,
     ModelLayers: {
       model1: {
@@ -589,7 +542,7 @@ function newConnection(socket) {
     globalData[data.boardID].Texts = globalData[data.boardID].Texts.filter(
       (i) => i["id"] !== data.id
     );
-    globalData[data.boardID].txtIdx --;
+    globalData[data.boardID].txtIdx--;
     io.sockets.emit("TextLayerDeleted", data.id);
     io.sockets.emit("resetPos", globalData[data.boardID].Texts);
     saveBoard(data.boardID);
@@ -630,7 +583,7 @@ function newConnection(socket) {
     globalData[data.boardID].Imgs = globalData[data.boardID].Imgs.filter(
       (i) => i["id"] !== data.id
     );
-    globalData[data.boardID].imgIdx --;
+    globalData[data.boardID].imgIdx--;
     io.sockets.emit("imgLayerDeleted", data.id);
     io.sockets.emit("resetPos", globalData[data.boardID].Imgs);
     saveBoard(data.boardID);
@@ -662,7 +615,7 @@ function newConnection(socket) {
     globalData[data.boardID].Models = globalData[data.boardID].Models.filter(
       (i) => i["id"] !== data.id
     );
-    globalData[data.boardID].mdlIdx --;
+    globalData[data.boardID].mdlIdx--;
     io.sockets.emit("modelDeleted", data.id);
     io.sockets.emit("resetPos", globalData[data.boardID].Models);
     saveBoard(data.boardID);
