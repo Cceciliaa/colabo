@@ -589,6 +589,7 @@ function newConnection(socket) {
     globalData[data.boardID].Texts = globalData[data.boardID].Texts.filter(
       (i) => i["id"] !== data.id
     );
+    globalData[data.boardID].txtIdx --;
     io.sockets.emit("TextLayerDeleted", data.id);
     io.sockets.emit("resetPos", globalData[data.boardID].Texts);
     saveBoard(data.boardID);
@@ -629,6 +630,7 @@ function newConnection(socket) {
     globalData[data.boardID].Imgs = globalData[data.boardID].Imgs.filter(
       (i) => i["id"] !== data.id
     );
+    globalData[data.boardID].imgIdx --;
     io.sockets.emit("imgLayerDeleted", data.id);
     io.sockets.emit("resetPos", globalData[data.boardID].Imgs);
     saveBoard(data.boardID);
@@ -660,6 +662,7 @@ function newConnection(socket) {
     globalData[data.boardID].Models = globalData[data.boardID].Models.filter(
       (i) => i["id"] !== data.id
     );
+    globalData[data.boardID].mdlIdx --;
     io.sockets.emit("modelDeleted", data.id);
     io.sockets.emit("resetPos", globalData[data.boardID].Models);
     saveBoard(data.boardID);
