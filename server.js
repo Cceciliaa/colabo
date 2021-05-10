@@ -115,7 +115,7 @@ let demoData = {
         zIdx: 0,
         id: "text10",
         content:
-          "If 3D models are not enough for you to present your ideas, you may also add image elements (from local storage, links, or web search) to supply your explanation! ",
+          "If 3D models are not enough for you to present your ideas, you may also add image elements (from local storage, links, or web search) to support your explanation! ",
         top: "588px",
         left: "33px",
         zIndex: "0",
@@ -129,7 +129,7 @@ let demoData = {
         zIdx: 0,
         id: "img3",
         url: "https://cdn.filestackcontent.com/DAteZBCsReyUrvHamVt8",
-        top: "627px",
+        top: "632px",
         left: "85px",
         zIndex: "0",
         width: "608.374px",
