@@ -1,6 +1,6 @@
 let socket;
-// socket = io.connect("http://localhost:5000");
-socket = io.connect(location.origin.replace(/^http/, "ws"));
+socket = io.connect("http://localhost:5000");
+// socket = io.connect(location.origin.replace(/^http/, "ws"));
 
 let sktID;
 socket.on("connect", function () {

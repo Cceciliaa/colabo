@@ -220,12 +220,12 @@ p {
   display: grid;
   justify-self: center;
   align-self: center;
-  width: 85%;
-  height: 85%;
+  width: 80%;
+  height: 60%;
   background-color: lightgray;
   justify-content: center;
   align-items: end;
-  border-radius: 10%;
+  border-radius: 15%;
 }
 
 .dashBoardTtl {
@@ -278,14 +278,14 @@ p {
 .subttl {
   position: absolute;
   left: 5%;
-  top: 190px;
+  top: 250px;
   font-size: 30px;
   font-weight: 600;
   color: rgb(59, 86, 121);
 }
 
 #subttl2 {
-  top: 450px;
+  top: 440px;
 }
 
 #placeholder {
@@ -302,7 +302,7 @@ p {
   width: 200px;
   height: 45px;
   margin-left: 210px;
-  margin-top: 25px;
+  margin-top: 10px;
   padding: 0px;
   color: #3498db;
   background-color: white;
@@ -315,6 +315,7 @@ p {
   cursor: pointer;
   z-index: 999;
   text-decoration: none;
+  text-shadow: 2px 2px rgba(204, 237, 240, 0.8);
 }
 #addbtn:hover,
 #addbtn:focus {
@@ -352,17 +353,17 @@ p {
   display: inline-block;
   position: absolute;
   left: 12%;
-  top: 0px;
+  top: 10px;
   width: 76%;
   height: 280px;
   justify-content: center;
   text-align: center;
-  line-height: 30px;
+  line-height: 45px;
 }
 #catchphrase h3 {
-  font-size: 48px;
+  font-size: 50px;
   font-weight: 700; 
-  color: rgb(59, 86, 121);
+  color: rgb(44, 52, 61);
 }
 #catchphrase p {
   font-size: 22px;
@@ -372,7 +373,7 @@ p {
 
 #templateCtn {
   position: absolute;
-  top: 250px;
+  top: 290px;
   width: 90%;
   left: 5%;
   display: grid;
@@ -384,20 +385,22 @@ p {
 
 #topDiv {
   width: 100%;
-  min-height: 200px;
-  background-color: rgba(171, 171, 245, 0.384);
+  min-height: 250px;
+  background-image: linear-gradient(315deg, #5de6de 0%, #d8eef0 64%, white 100%);
+  border: none;
+  box-shadow: 15px 15px 10px #dce7e9;
 }
 
 #expDiv {
   width: 90%;
   margin-left: 5%;
-  height: 250px;
-  border-bottom: 1px solid lightgray;
+  height: 205px;
+  border-bottom: 3px dashed lightblue;
 }
 
 #dashBoardCtn {
   position: absolute;
-  top: 510px;
+  top: 480px;
   width: 90%;
   left: 5%;
   display: grid;
