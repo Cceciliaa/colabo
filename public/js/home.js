@@ -53,7 +53,3 @@ function gotoExp() {
 function gotoDash() {
   window.location.href = "landing.html";
 }
-
-function backup() {
-  wholeP.scrollTop = 0;
-}
