@@ -108,9 +108,6 @@ socket.on("textUpdated", updateTextLayer);
 socket.on("newImg", updateImgLayer);
 socket.on("imgUpdated", updateImgLayer);
 
-// socket.on("newModel", updateModelLayer);
-// socket.on("resetMdlPos", updateModelLayer);
-
 socket.on("newModel", updateModelFrame);
 socket.on("resetMdlPos", updateModelFrame);
 
@@ -327,92 +324,12 @@ function updateModelFrame(data) {
   resetPosition(data);
 }
 
-// function updateModelLayer(data) {
-//   for (let model of data) {
-//     if (!document.getElementById(model.id)) {
-//       let newDiv = document.createElement("div");
-//       newDiv.className = "newItem";
-//       newDiv.id = model["id"];
-//       newDiv.style.top = model["top"];
-//       newDiv.style.left = model["left"];
-
-//       let divModelBtn = document.createElement("div");
-//       divModelBtn.textContent = "+";
-//       divModelBtn.className = "divBtn";
-//       divModelBtn.id = "add" + model["id"];
-
-//       let divDelBtn = document.createElement("div");
-//       divDelBtn.textContent = "x";
-//       divDelBtn.className = "divBtn";
-//       divDelBtn.id = "del" + model["id"];
-
-//       newDiv.ondblclick = () => bringToFront(newDiv);
-//       body.appendChild(newDiv);
-
-//       let camera = new THREE.PerspectiveCamera(60, WIDTH / HEIGHT, 0.01, 100);
-//       camera.position.set(5, 3, 5);
-//       camera.lookAt(0, 1.5, 0);
-
-//       let scene = new THREE.Scene();
-//       scene.background = new THREE.Color(0xffffff);
-
-//       scene.add(new THREE.GridHelper(10, 10));
-
-//       let ambient = new THREE.HemisphereLight(0xbbbbff, 0x886666, 0.75);
-//       ambient.position.set(-0.5, 0.75, -1);
-//       scene.add(ambient);
-
-//       let light = new THREE.DirectionalLight(0xffffff, 0.75);
-//       light.position.set(1, 0.75, 0.5);
-//       scene.add(light);
-
-//       let container = new THREE.Group();
-//       scene.add(container);
-//       modelContainers[newDiv.id] = container;
-
-//       let renderer = new THREE.WebGLRenderer();
-//       renderer.setPixelRatio(window.devicePixelRatio);
-//       renderer.setSize(WIDTH, HEIGHT);
-
-//       renderer.domElement.style.position = "absolute";
-//       renderer.domElement.style.marginLeft = "60px";
-//       renderer.domElement.style.marginTop = "25px";
-
-//       newDiv.appendChild(renderer.domElement);
-//       newDiv.appendChild(divDelBtn);
-//       newDiv.appendChild(divModelBtn);
-
-//       newDiv.addEventListener("click", () => (rotateMdl = !rotateMdl));
-
-//       function animate() {
-//         let time = performance.now() / 5000;
-
-//         if (rotateMdl) {
-//           camera.position.x = Math.sin(time) * 5;
-//           camera.position.z = Math.cos(time) * 5;
-//         }
-
-//         camera.lookAt(0, 1.5, 0);
-
-//         renderer.render(scene, camera);
-//         requestAnimationFrame(animate);
-//       }
-
-//       requestAnimationFrame(animate);
-//       addModel(newDiv);
-//     }
-//   }
-//   resetPosition(data);
-// }
-
 function addModel(elmnt) {
   let addIcon = document.getElementById("add" + elmnt.id);
   let delIcon = document.getElementById("del" + elmnt.id);
-  //   let moveIcon = document.getElementById("move" + elmnt.id);
 
   // When the user clicks on the add button, open the modal
   addIcon.onclick = function () {
-    // searchPoly("", onResults);
     searchEcho("", onResults);
     modal.style.zIndex = curZ + 1;
     modal.style.display = "block";
@@ -447,32 +364,10 @@ function deleteModel(elmnt) {
   if (document.getElementById(elmnt)) document.getElementById(elmnt).remove();
 }
 
-// function searchPoly(keywords, onLoad) {
-//   if (keywords) myLoader.style.display = "block";
-//   let url = `https://poly.googleapis.com/v1/assets?keywords=${keywords}&format=OBJ&key=${API_KEY}`;
-
-//   let request = new XMLHttpRequest();
-//   request.open("GET", url, true);
-//   request.addEventListener("load", function (event) {
-//     onLoad(JSON.parse(event.target.response));
-//   });
-//   request.send(null);
-// }
-
 let echoDB;
 
 function searchEcho(keywords, onLoad) {
   let echourl = `https://console.echoar.xyz/search?keywords=${keywords}&key=${ECHO_KEY}`;
-
-  // fetch('https://console.echoar.xyz/query?key=' + ECHO_KEY)
-  // .then((response) => response.json())
-  // .then((json) => {
-  //   // Store database
-  //   echoDB = json; // The JSON response
-  // })
-  // .catch((error) => {
-  //   console.error(error);
-  // });
 
   let request = new XMLHttpRequest();
   request.open("GET", echourl, true);
@@ -488,11 +383,6 @@ function createImage(asset) {
   image.src = asset.thumbnail;
   image.style.width = "100px";
   image.style.height = "75px";
-
-  // let format = asset.formats.find((fmt) => {
-  //   return fmt.formatType === "OBJ";
-  // });
-
   if (asset !== undefined) {
     image.onclick = function () {
       let modelSelected = {
@@ -527,41 +417,6 @@ function loadModel(data) {
       console.log("Viewer error");
     },
   });
-
-  // let modelLayer = modelContainers[data["modelLayer"]];
-  // let path = data.url;
-
-  // // let obj = data.root;
-  // // let mtl = data.resources.find((resource) => {
-  // //   return resource.url.endsWith("mtl");
-  // // });
-  // // let path = obj.url.slice(0, obj.url.indexOf(obj.relativePath));
-
-  // let loader = new THREE.MTLLoader();
-  // loader.setCrossOrigin(true);
-  // loader.setMaterialOptions({ ignoreZeroRGBs: true });
-  // loader.setTexturePath(path);
-  // loader.load(data.url, function (materials) {
-  //   loader = new THREE.OBJLoader();
-  //   loader.setMaterials(materials);
-  //   loader.load(data.url, function (object) {
-  //     let box = new THREE.Box3();
-  //     box.setFromObject(object);
-
-  //     // re-center
-
-  //     let center = box.getCenter();
-  //     center.y = box.min.y;
-  //     object.position.sub(center);
-
-  //     // scale
-
-  //     let scaler = new THREE.Group();
-  //     scaler.add(object);
-  //     scaler.scale.setScalar(6 / box.getSize().length());
-  //     if (modelLayer) modelLayer.add(scaler);
-  //   });
-  // });
   modal.style.display = "none";
 }
 
@@ -629,7 +484,6 @@ function dragElement(elmnt) {
 
     // set the element's new position:
     let itmData = {
-      // skt: sktID,
       boardID,
       id: elmnt.id,
       zIdx: elmnt.style.zIndex,
@@ -666,7 +520,6 @@ function resizeElement(item) {
       },
       end(event) {
         let rszData = {
-          // skt: sktID,
           boardID,
           id: item.id,
           zIdx: item.style.zIndex,
@@ -754,65 +607,3 @@ function reloadPage() {
 }
 
 socket.on("reloaded", reloadPage);
-
-// draw board
-// let isDrawing = false;
-// let paths = [];
-// let x = 0;
-// let y = 0;
-
-// const myPics = document.getElementById('drawBoard');
-// const context = myPics.getContext('2d');
-
-// initialize();
-
-// function initialize() {
-//     window.addEventListener('resize', resizeCanvas, false);
-//     resizeCanvas();
-//  }
-
-// // event.offsetX, event.offsetY gives the (x,y) offset from the edge of the canvas
-// // Add the event listeners for mousedown, mousemove, and mouseup
-// myPics.addEventListener('mousedown', e => {
-//   x = e.offsetX;
-//   y = e.offsetY;
-//   isDrawing = true;
-// });
-
-// myPics.addEventListener('mousemove', e => {
-//   if (isDrawing === true) {
-//     drawLine(context, x, y, e.offsetX, e.offsetY);
-//     x = e.offsetX;
-//     y = e.offsetY;
-//   }
-// });
-
-// window.addEventListener('mouseup', e => {
-//   if (isDrawing === true) {
-//     drawLine(context, x, y, e.offsetX, e.offsetY);
-//     x = 0;
-//     y = 0;
-//     isDrawing = false;
-//   }
-// });
-
-// function drawLine(ctx, x1, y1, x2, y2) {
-//   ctx.beginPath();
-//   ctx.strokeStyle = 'black';
-//   ctx.lineWidth = 1;
-//   ctx.moveTo(x1, y1);
-//   ctx.lineTo(x2, y2);
-//   ctx.stroke();
-//   ctx.closePath();
-//   paths.push([x1, y1, x2, y2]);
-// }
-
-// function resizeCanvas() {
-//   console.log(paths)
-//   myPics.width = window.innerWidth;
-//   myPics.height = window.innerHeight;
-//   // for (let line of paths) {
-//   //   console.log(...line)
-//   //   drawLine(context, ...line);
-//   // }
-// }

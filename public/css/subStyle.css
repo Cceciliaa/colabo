@@ -178,7 +178,7 @@ body {
 
 #iconfont {
   display: inline-block;
-  position: absolute;
+  position: fixed;
   width: 130px;
   height: 45px;
   left: 30px;
