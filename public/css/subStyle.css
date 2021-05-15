@@ -179,6 +179,7 @@ body {
 #iconfont {
   display: inline-block;
   position: fixed;
+  z-index: 999;
   width: 130px;
   height: 45px;
   left: 30px;
