@@ -101,15 +101,15 @@ p {
   position: fixed;
   width: 65px;
   height: 65px;
-  left: 110px;
-  top: 25px;
+  left: 255px;
+  top: 30px;
   padding: 0px;
   background-color: #3498db;
   color: white;
   text-align: center;
   align-items: center;
   justify-content: center;
-  font-size: 50px;
+  font-size: 55px;
   border: none;
   border-radius: 50%;
   z-index: 999;
@@ -131,8 +131,8 @@ p {
 .dropdown-content {
   display: none;
   position: fixed;
-  left: 110px;
-  top: 95px;
+  left: 250px;
+  top: 100px;
   background-color: #f1f1f1;
   font-size: 20px;
   min-width: 160px;
@@ -254,18 +254,22 @@ p {
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 110px;
-  font-size: 13px;
+  min-width: 120px;
+  height: 25px !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
   background-color: #555;
   color: #fff;
   text-align: center;
+  justify-content: center;
+  font-family: "Gill Sans", sans-serif;
   border-radius: 6px;
-  padding: 5px 0;
+  padding: 2px !important;
   position: absolute;
   z-index: 1;
   bottom: -60%;
-  left: 60%;
-  margin-left: -60px;
+  left: 65%;
+  margin-left: -76px;
   opacity: 0;
   transition: opacity 0.3s;
 }
@@ -289,12 +293,11 @@ p {
 }
 
 #placeholder {
-  width: 800px;
+  width: 100%;
   height: 100px;
-  margin-left: 100px;
-  margin-top: 20px;
-  color: palevioletred;
-  font-size: 50px;
+  margin-top: 50px;
+  text-align: center;
+  justify-content: center;
   display: none;
 }
 
@@ -325,11 +328,11 @@ p {
 #iconfont {
   display: inline-block;
   position: absolute;
-  padding: 0px;
   width: 130px;
-  height: 65px;
+  height: 45px;
   left: 30px;
-  font-size: 25px;
+  top: 30px;
+  font-size: 30px;
   color: #3498db;
   text-align: center;
   font-weight: bold;
@@ -443,13 +446,12 @@ p {
   position: fixed;
   width: 65px;
   height: 65px;
-  left: 25px;
-  top: 25px;
-  padding: 0px;
+  left: 175px;
+  top: 30px;
   background-color: #3498db;
   color: white;
+  fill: white;
   text-align: center;
-  align-items: center;
   justify-content: center;
   font-size: 40px;
   border: none;
@@ -469,7 +471,6 @@ p {
   height: 65px;
   right: 30px;
   top: 30px;
-  padding: 0px;
   background-color: grey;
   color: white;
   text-align: center;
@@ -540,4 +541,9 @@ p {
   position: absolute;
   left: 0px;
   top: 0px;
+}
+
+#jumpText {
+  color: palevioletred;
+  font-size: 50px;
 }

@@ -94,6 +94,14 @@ function openInfo() {
   document.getElementById("initModal").style.display = "block";
 }
 
+function goHome() {
+  window.location.href = "index.html";
+}
+
+function goDash() {
+  window.location.href = "landing.html";
+}
+
 // modal
 function closeInitModal() {
   document.getElementById("initModal").style.display = "none";

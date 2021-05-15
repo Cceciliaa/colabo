@@ -68,8 +68,8 @@ let demoData = {
         boardID: "ex1",
         id: "text4",
         content: "Example Use Cases of 3D Models in Online Collaborations:",
-        top: "53px",
-        left: "256px",
+        top: "55px",
+        left: "381px",
         zIndex: "",
         width: "983.513px",
         height: "150px",
@@ -91,8 +91,8 @@ let demoData = {
         content:
           "2. Architecture:\n" +
           "Display different structures in 3D and examine their features.",
-        top: "137px",
-        left: "554px",
+        top: "123px",
+        left: "556px",
         zIndex: "",
         width: "407.404px",
         height: "150px",
@@ -104,8 +104,8 @@ let demoData = {
         content:
           "3. History:\n" +
           "Use Models of cultural heritage sites to display their history.",
-        top: "136px",
-        left: "1080px",
+        top: "576px",
+        left: "26px",
         zIndex: "0",
         width: "411.457px",
         height: "150px",
@@ -116,10 +116,23 @@ let demoData = {
         id: "text10",
         content:
           "If 3D models are not enough for you to present your ideas, you may also add image elements (from local storage, links, or web search) to support your explanation! ",
-        top: "588px",
-        left: "33px",
+        top: "211px",
+        left: "1163px",
         zIndex: "0",
-        width: "832px",
+        width: "655.105px",
+        height: "150px",
+      },
+      {
+        boardID: "ex1",
+        zIdx: 0,
+        id: "text6",
+        content:
+          "4. Science:\n" +
+          "Study the inner structure of materials (especially biological or chemical elements) with 3D models. ",
+        top: "576px",
+        left: "554px",
+        zIndex: "0",
+        width: "486.571px",
         height: "150px",
       },
     ],
@@ -129,8 +142,8 @@ let demoData = {
         zIdx: 0,
         id: "img3",
         url: "https://cdn.filestackcontent.com/DAteZBCsReyUrvHamVt8",
-        top: "632px",
-        left: "85px",
+        top: "311px",
+        left: "1186px",
         zIndex: "0",
         width: "608.374px",
         height: "687.771px",
@@ -160,16 +173,26 @@ let demoData = {
         boardID: "ex1",
         zIdx: 0,
         id: "model3",
-        top: "204px",
-        left: "1057px",
+        top: "663px",
+        left: "0px",
+        zIndex: "0",
+        width: "",
+        height: "",
+      },
+      {
+        boardID: "ex1",
+        zIdx: 0,
+        id: "model4",
+        top: "661px",
+        left: "532px",
         zIndex: "0",
         width: "",
         height: "",
       },
     ],
-    txtIdx: 5,
+    txtIdx: 6,
     imgIdx: 1,
-    mdlIdx: 3,
+    mdlIdx: 4,
     ModelLayers: {
       model1: {
         boardID: "ex1",
@@ -180,8 +203,7 @@ let demoData = {
         name: "Entertainment Center",
         thumbnail:
           "https://media.sketchfab.com/models/40db661e07f1451b8a3ad0528e079ffc/thumbnails/9d98d1ca251a42848a31e39b953af848/caa5a08a4b2643d48f80647252740104.jpeg",
-        url:
-          "https://api.sketchfab.com/v3/models/40db661e07f1451b8a3ad0528e079ffc/download",
+        url: "https://api.sketchfab.com/v3/models/40db661e07f1451b8a3ad0528e079ffc/download",
         modelLayer: "model1",
       },
       model2: {
@@ -193,8 +215,7 @@ let demoData = {
         name: "Ishavskatedralen - The Arctic Cathedral",
         thumbnail:
           "https://media.sketchfab.com/models/c0cf96bf9aed4a8d84733f820eabaae5/thumbnails/d4a7b0d6f439474c9d4661cfc1f6def2/16410ad466c34752a874173f9be36dff.jpeg",
-        url:
-          "https://api.sketchfab.com/v3/models/c0cf96bf9aed4a8d84733f820eabaae5/download",
+        url: "https://api.sketchfab.com/v3/models/c0cf96bf9aed4a8d84733f820eabaae5/download",
         modelLayer: "model2",
       },
       model3: {
@@ -206,14 +227,24 @@ let demoData = {
         name: "Belberaud (31) France chapiteaux",
         thumbnail:
           "https://media.sketchfab.com/models/8e1e7ae74b4e4a09bd517aefc2981e0b/thumbnails/0a1e61209ef4431f9358581183670d46/df512dc3e788496ba8c37d984bd96861.jpeg",
-        url:
-          "https://api.sketchfab.com/v3/models/8e1e7ae74b4e4a09bd517aefc2981e0b/download",
+        url: "https://api.sketchfab.com/v3/models/8e1e7ae74b4e4a09bd517aefc2981e0b/download",
         modelLayer: "model3",
       },
+      model4: {
+        boardID: "ex1",
+        source: "Sketchfab",
+        id: "d5d3b4e21c9040f8b004c2102913a5d2",
+        htmlID: "Excretory-System",
+        author: "Vikrama Raghuraman",
+        name: "Excretory System",
+        thumbnail:
+          "https://media.sketchfab.com/models/d5d3b4e21c9040f8b004c2102913a5d2/thumbnails/61acb6d8f73144c3bb0ea774aed27fb5/a4423084049848de8254cbc0ce7c1236.jpeg",
+        url: "https://api.sketchfab.com/v3/models/d5d3b4e21c9040f8b004c2102913a5d2/download",
+        modelLayer: "model4",
+      },
     },
-    currentModelLayer: "model3",
+    currentModelLayer: "model4",
   },
-
   ex2: {
     _id: "ex2",
     Name: "Chemistry Lab",
@@ -290,8 +321,7 @@ let demoData = {
         name: "Molekul H2O",
         thumbnail:
           "https://media.sketchfab.com/models/10c6e35fb6924c5fb4b5a0cbee43addf/thumbnails/3da237cb43094de280984f02c96ee007/288e1c6eb44347ae81fcf2ebfbacb96a.jpeg",
-        url:
-          "https://api.sketchfab.com/v3/models/10c6e35fb6924c5fb4b5a0cbee43addf/download",
+        url: "https://api.sketchfab.com/v3/models/10c6e35fb6924c5fb4b5a0cbee43addf/download",
         modelLayer: "model1",
       },
       model2: {
@@ -303,8 +333,7 @@ let demoData = {
         name: "R and S config 4th molecule w/ label",
         thumbnail:
           "https://media.sketchfab.com/models/3bb85e05987a474896e768fec99ef7ac/thumbnails/e9cd45d98ac24b9bbf97ce070ab65645/eeb9084538ec4104989a043cb6384ac4.jpeg",
-        url:
-          "https://api.sketchfab.com/v3/models/3bb85e05987a474896e768fec99ef7ac/download",
+        url: "https://api.sketchfab.com/v3/models/3bb85e05987a474896e768fec99ef7ac/download",
         modelLayer: "model2",
       },
     },
@@ -515,8 +544,8 @@ function newConnection(socket) {
       zIdx: data.zIdx,
       id: "text" + globalData[data.boardID].txtIdx.toString(),
       content: "",
-      top: data.top + 100 + "px",
-      left: data.left + 80 + "px",
+      top: data.top + 120 + "px",
+      left: data.left + 100 + "px",
     };
     globalData[data.boardID].Texts.push(textData);
     io.sockets.emit("newText", globalData[data.boardID].Texts);
@@ -556,8 +585,8 @@ function newConnection(socket) {
       zIdx: data.zIdx,
       id: "img" + globalData[data.boardID].imgIdx.toString(),
       url: "",
-      top: data.top + 100 + "px",
-      left: data.left + 80 + "px",
+      top: data.top + 120 + "px",
+      left: data.left + 100 + "px",
     };
     globalData[data.boardID].Imgs.push(imgData);
     io.sockets.emit("newImg", globalData[data.boardID].Imgs);
@@ -596,8 +625,8 @@ function newConnection(socket) {
       boardID: data.boardID,
       zIdx: data.zIdx,
       id: "model" + globalData[data.boardID].mdlIdx.toString(),
-      top: data.top + 100 + "px",
-      left: data.left + 80 + "px",
+      top: data.top + 120 + "px",
+      left: data.left + 100 + "px",
     };
     globalData[data.boardID].Models.push(mdlData);
     io.sockets.emit("newModel", globalData[data.boardID].Models);

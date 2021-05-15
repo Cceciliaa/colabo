@@ -1,121 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
   <head>
-    <title>Collage Board 3D</title>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    <link rel="stylesheet" href="css/subStyle.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato&display=swap"
+      rel="stylesheet"
     />
-    <link rel="stylesheet" type="text/css" href="boardStyles.css" />
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"
-      type="text/javascript"
-    ></script>
-    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
-    <script
-      type="text/javascript"
-      src="https://static.sketchfab.com/api/sketchfab-viewer-1.10.0.js"
-    ></script>
-    <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
-    <script src="lib/three.min.js"></script>
-    <script src="lib/OBJLoader.js"></script>
-    <script src="lib/MTLLoader.js"></script>
-    <style>
-      body {
-        width: 100%;
-        height: 100%;
-        margin: 0px;
-        padding: 0px;
-        overflow: auto;
-        overflow-x: hidden;
-        font-family: "Gill Sans", sans-serif;
-      }
-    </style>
+    <link
+      href="https://fonts.googleapis.com/css?family=Oswald&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <meta charset="utf-8" />
+    <title>Colabo</title>
   </head>
   <body>
-    <div id="topDiv"></div>
-    <div id="sidebar">
-      <p id="iconfont">Collage Board 3D</p>
-    </div>
+    <div class="wholeP" onscroll="supressAB()">
+      <div class="navB">
+        <div id="aicon">
+          <p id="iconfont" onclick="backup()">Colabo</p>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-light" id="topbar">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" onclick="gotoUcs()"
+                  >Use Cases<span class="sr-only">(current)</span></a
+                >
+              </li>
 
-    <div id="catchphrase">
-      <h3>A Space for Better Collaboration</h3>
-      <p>Collage Board 3D is an online collaborative collage board where ideas meet and display.</p>
-      <p>Orientate your group discussion by piecing together your ideas in texts, images, and 3D models.</p>
-    </div>
+              <li class="nav-item active">
+                <a class="nav-link" onclick="gotoExp()"
+                  >Example<span class="sr-only">(current)</span></a
+                >
+              </li>
 
-    <div>
-      <button class="tooltip" id="helpBtn" onclick="openInfo()">
-        ?
-        <span class="tooltiptext">Help</span>
-      </button>
-    </div>
-
-    <div id="expDiv"></div>
-    <p class="subttl">Glimpse An Example</p>
-    <div id="templateCtn">
-      <div class="dashBoards" id="board/ex1" style="background-color: #7bbbda" onclick="openBoard()">
-        <textarea class="dashBoardTtl" disabled>Use Cases Demo</textarea>
+              <li class="nav-item active">
+                <a class="nav-link" onclick="gotoFtr()"
+                  >Upcoming<span class="sr-only">(current)</span></a
+                >
+              </li>
+            </ul>
+            <div id="startBtn" onclick="gotoDash()">START NOW</div>
+          </div>
+        </nav>
       </div>
-      <div class="dashBoards" id="board/ex2" style="background-color: #FFD700" onclick="openBoard()">
-        <textarea class="dashBoardTtl" disabled>Chemistry Lab</textarea>
-      </div>
-    </div>
 
-    <p class="subttl" id="subttl2">My Boards</p>
-    <button class="tooltip" id="addbtn" onclick="addBoard()">
-      +ADD NEW
-    </button>
-    <div id="dashBoardCtn"></div>
-    <div id="wrapper">
-      <div id="placeholder">
-          <h1 id="jumpText">Start Your First Collage Board Now!</h1>
-      </div>
-  </div>
-    <!-- <div id='placeholder'>Start Your First Collage Board Now!</div> -->
+      <p id="upBtn" onclick="backup()">⇈</p>
 
-     <!-- The Model Modal -->
-     <div class="modal" id="initModal" onclick="closeInitModal()">
-      <!-- Modal content -->
-      <div id="initModal-content">
-        <span class="close">&times;</span>
-        <h1>Get Started with Collage Board 3D!</h1>
-        <p>All contents are shared instantly and saved automatically.</p>
-        </br>
-        <div id="info-content">
+      <div class="pageContent" id="infocontent">
+        <p class="infotitle">Why Colabo?</p>
+        <div id="asloc">
+          <div id="abIntrotext">
+            <p>• Unlimited canvas and multiple elements.<br /></p>
+            <p>• Easy access to abundant open-source 3D models.<br /></p>
+            <p id="t3">• Cloud saving and instant sharing.<br /></p>
+            <p id="t4">• More engaging online collaboration!<br /></p>
+          </div>
           <span>
-            <img src="./assets/add-text.gif" alt="add-text" class="demo">
-            <p class="ins"><strong>Add text/annotation:</strong> Add a "text" element and type in the textarea.</p>
+            <iframe
+              class="video"
+              id="ctxVideo"
+              src="https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=1&mute=1"
+            ></iframe>
           </span>
+        </div>
 
-          <span>
-            <img src="./assets/add-model.gif" alt="add-model" class="demo">
-            <p class="ins"><strong>Add a 3D Model:</strong> Add a "3D Model" element. You may play around with the model inside the element window, or enlarge it to full-screen.</p>
-          </span>
+        <div id="orgstr">
+          <p class="infotitle">How to Use?</p>
+          <div id="initModal-content">
+            <div id="info-content">
+              <span>
+                <img src="./assets/add-text.gif" alt="add-text" class="demo">
+                <p class="ins"><strong>Add text/annotation:</strong> Add a "text" element and type in the textarea.</p>
+              </span>
+    
+              <span>
+                <img src="./assets/add-model.gif" alt="add-model" class="demo">
+                <p class="ins"><strong>Add a 3D Model:</strong> Add a "3D Model" element. You may play around with the model inside the element window, or enlarge it to full-screen.</p>
+              </span>
+    
+              <span>
+                <img src="./assets/add-photo.gif" alt="add-photo" class="demo">
+                <p class="ins"><strong>Add an image:</strong> Add an "image" element, then clicking on the small "+" button at the upper-left corner of the card to open the interface for file upload.</p>
+              </span>
+    
+              <span>
+                <img src="./assets/drag-and-resize.gif" alt="drag-and-resize" class="demo">
+                <p class="ins"><strong>Move and resize an element:</strong> Drag the element card to move around. Drag from the corner to resize.</p>
+              </span>
+    
+              <span>
+                <img src="./assets/bring-to-front.gif" alt="bring-to-front" class="demo">
+                <p class="ins"><strong>Bring an element to front:</strong> Double click on the element card.</p>
+              </span>
+    
+              <span>
+                <img src="./assets/delete-content.gif" alt="delete-content" class="demo">
+                <p class="ins"><strong>Delete an element:</strong> Click on the "x" icon at the upper-left corner of the element card.</p>
+              </span>
+            </div>
+          </div>
+        </div>
 
-          <span>
-            <img src="./assets/add-photo.gif" alt="add-photo" class="demo">
-            <p class="ins"><strong>Add an image:</strong> Add an "image" element, then clicking on the small "+" button at the upper-left corner of the card to open the interface for file upload.</p>
-          </span>
-
-          <span>
-            <img src="./assets/drag-and-resize.gif" alt="drag-and-resize" class="demo">
-            <p class="ins"><strong>Move and resize an element:</strong> Drag the element card to move around. Drag from the corner to resize.</p>
-          </span>
-
-          <span>
-            <img src="./assets/bring-to-front.gif" alt="bring-to-front" class="demo">
-            <p class="ins"><strong>Bring an element to front:</strong> Double click on the element card.</p>
-          </span>
-
-          <span>
-            <img src="./assets/delete-content.gif" alt="delete-content" class="demo">
-            <p class="ins"><strong>Delete an element:</strong> Click on the "x" icon at the upper-left corner of the element card.</p>
-          </span>
+        <div id="ecosys">
+          <p class="infotitle" id="ecoTtl">What's Next?</p>
+          <iframe
+          class="video"
+          id="ftrDemo"
+          src="https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=1&mute=1"
+        ></iframe>
         </div>
       </div>
     </div>
-    <script src="script.js"></script>
+    <script src="js/home.js"></script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

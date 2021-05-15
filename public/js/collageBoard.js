@@ -746,7 +746,7 @@ function saveBoard() {
 
 function returnHome() {
   saveBoard();
-  window.location.href = 'index.html';
+  window.location.href = 'landing.html';
 }
 
 function reloadPage() {

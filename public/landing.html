@@ -1,73 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>New Board</title>
+    <title>Dashboard</title>
     <meta charset="utf-8" />
     <meta
       name="viewport"
       content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
     <link rel="stylesheet" type="text/css" href="css/boardStyles.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"
       type="text/javascript"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
-    <script type="text/javascript" src="https://static.sketchfab.com/api/sketchfab-viewer-1.10.0.js"></script>
+    <script
+      type="text/javascript"
+      src="https://static.sketchfab.com/api/sketchfab-viewer-1.10.0.js"
+    ></script>
     <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
-    <script src="lib/three.min.js"></script>
+    <!-- <script src="lib/three.min.js"></script>
     <script src="lib/OBJLoader.js"></script>
-    <script src="lib/MTLLoader.js"></script>
+    <script src="lib/MTLLoader.js"></script> -->
     <style>
       body {
         width: 100%;
-        min-height: 2000px;
-        height: auto;
-        overflow: auto;
-        font-family: "Gill Sans", sans-serif;
-        font-size: 14px;
-        line-height: 24px;
+        height: 100%;
         margin: 0px;
         padding: 0px;
+        overflow: auto;
+        overflow-x: hidden;
+        font-family: "Gill Sans", sans-serif;
       }
     </style>
   </head>
   <body>
-    <div>
+    <div id="topDiv"></div>
+    <div id="sidebar">
       <p class="tooltip" id="iconfont" onclick="goHome()">Colabo
         <span class="tooltiptext" id="homeTooltip">Go to Homepage</span>
       </p>
-      <div class="tooltip" id="dashBtn" onclick="goDash()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="45" viewBox="0 0 25 12"><path d="M24 7v15h-24v-20h6.938c1.812 3.188 2.281 5 6 5h11.062zm-10.891-2h10.891v-3h-14.604c1.39 2.574 1.63 3 3.713 3z"/>
-        </svg>
-        <span class="tooltiptext">Go to Workspace</span>
-      </div>
     </div>
 
-    <div class="dropdown">
-      <button onclick="myFunction()" class="tooltip dropbtn">+
-        <span class="tooltiptext">Add Element</span>
-      </button>
-      <div id="myDropdown" class="dropdown-content">
-        <a id="addTextBtn" onclick="requestAddText()">Text</a>
-        <a id="addImgBtn" onclick="requestAddImg()">Image</a>
-        <a id="addModelBtn" onclick="requestAddModel()">3D Model</a>
-      </div>
+    <div id="catchphrase">
+      <h3>A Space for Better Collaboration</h3>
+      <p>Colabo is an online collaborative collage board where ideas meet and display.</p>
+      <p>Organize your group discussion by piecing together your ideas in texts, images, and 3D models.</p>
     </div>
 
     <div>
-      <button class="tooltip" id="helpBtn" onclick="openInfo()">?
+      <button class="tooltip" id="helpBtn" onclick="openInfo()">
+        ?
         <span class="tooltiptext">Help</span>
       </button>
     </div>
 
-    <!-- The Model Modal -->
-    <div class="modal" id="initModal" onclick="closeInitModal()">
+    <div id="expDiv"></div>
+    <p class="subttl">Glimpse An Example</p>
+    <div id="templateCtn">
+      <div class="dashBoards" id="board/ex1" style="background-color: #7bbbda" onclick="openBoard()">
+        <textarea class="dashBoardTtl" disabled>Use Cases Demo</textarea>
+      </div>
+      <div class="dashBoards" id="board/ex2" style="background-color: #FFD700" onclick="openBoard()">
+        <textarea class="dashBoardTtl" disabled>Chemistry Lab</textarea>
+      </div>
+    </div>
+
+    <p class="subttl" id="subttl2">My Boards</p>
+    <button class="tooltip" id="addbtn" onclick="addBoard()">
+      +ADD NEW
+    </button>
+    <div id="dashBoardCtn"></div>
+    <div id="wrapper">
+      <div id="placeholder">
+          <h1 id="jumpText">Start Your First Collage Board Now!</h1>
+      </div>
+  </div>
+    <!-- <div id='placeholder'>Start Your First Collage Board Now!</div> -->
+
+     <!-- The Model Modal -->
+     <div class="modal" id="initModal" onclick="closeInitModal()">
       <!-- Modal content -->
       <div id="initModal-content">
         <span class="close">&times;</span>
-        <h1>Get Started with Colabo!</h1>
+        <h3>Get Started with Colabo!</h3>
         <p>All contents are shared instantly and saved automatically.</p>
         </br>
         <div id="info-content">
@@ -103,23 +118,6 @@
         </div>
       </div>
     </div>
-
-    <!-- The Model Modal -->
-    <div id="myModal" class="modal">
-      <!-- Modal content -->
-      <div class="modal-content">
-        <span class="close" onclick="closeMdl(this)">&times;</span>
-        <form id="search">
-			<input id="query" placeholder="Search Models"></input>
-			<button id="button">search</button>
-		</form>
-        <div id="myLoader"></div>
-        <span id="results"></span>
-      </div>
-    </div>
-
-    <!-- <canvas id="drawBoard" width="350" height="280"></canvas> -->
     <script src="js/script.js"></script>
-    <script src="js/collageBoard.js"></script>
   </body>
 </html>
