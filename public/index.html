@@ -51,69 +51,58 @@
         </nav>
       </div>
 
-      <div class="pageContent" id="infocontent">
-        <p class="infotitle">Why Colabo?</p>
-        <div id="asloc">
-          <div id="abIntrotext">
-            <p>• Unlimited canvas and multiple elements.<br /></p>
-            <p>• Easy access to abundant open-source 3D models.<br /></p>
-            <p id="t3">• Cloud saving and instant sharing.<br /></p>
-            <p id="t4">• More engaging online collaboration!<br /></p>
+      <div id="pageContent">
+        <div id="infoContent">
+          <p class="infotitle">Why Colabo?</p>
+          <div id="ctx">
+            <div id="abIntrotext">
+              <p>• Unlimited canvas and multiple elements.<br /></p>
+              <p>• Easy access to abundant open-source 3D models.<br /></p>
+              <p>• Cloud saving and instant sharing.<br /></p>
+              <p>• More engaging online collaboration!<br /></p>
+            </div>
+            <span>
+              <iframe
+                class="video"
+                id="ctxVideo"
+                src="https://www.youtube.com/embed/c8UhHROhTp8"
+              ></iframe>
+            </span>
           </div>
-          <span>
-            <iframe
-              class="video"
-              id="ctxVideo"
-              src="https://www.youtube.com/embed/c8UhHROhTp8"
-            ></iframe>
-          </span>
         </div>
 
-        <div id="orgstr">
+        <div id="demoContent">
           <p class="infotitle">How to Use?</p>
-          <div id="initModal-content">
-            <div id="info-content">
-              <span>
-                <img src="./assets/add-text.gif" alt="add-text" class="demo">
-                <p class="ins"><strong>Add text/annotation:</strong> Add a "text" element and type in the textarea.</p>
-              </span>
-    
-              <span>
-                <img src="./assets/add-model.gif" alt="add-model" class="demo">
-                <p class="ins"><strong>Add a 3D Model:</strong> Add a "3D Model" element. You may play around with the model inside the element window, or enlarge it to full-screen.</p>
-              </span>
-    
-              <span>
-                <img src="./assets/add-photo.gif" alt="add-photo" class="demo">
-                <p class="ins"><strong>Add an image:</strong> Add an "image" element, then clicking on the small "+" button at the upper-left corner of the card to open the interface for file upload.</p>
-              </span>
-    
-              <span>
-                <img src="./assets/drag-and-resize.gif" alt="drag-and-resize" class="demo">
-                <p class="ins"><strong>Move and resize an element:</strong> Drag the element card to move around. Drag from the corner to resize.</p>
-              </span>
-    
-              <span>
-                <img src="./assets/bring-to-front.gif" alt="bring-to-front" class="demo">
-                <p class="ins"><strong>Bring an element to front:</strong> Double click on the element card.</p>
-              </span>
-    
-              <span>
-                <img src="./assets/delete-content.gif" alt="delete-content" class="demo">
-                <p class="ins"><strong>Delete an element:</strong> Click on the "x" icon at the upper-left corner of the element card.</p>
-              </span>
+          <div id="demo">
+            <span>
+              <iframe
+                class="video"
+                id="demoVideo"
+                src="https://www.youtube.com/embed/w2dHwQdJVro"
+              ></iframe>
+            </span>
+            <div id="demoText">
+              <p>• Open a board or create a new one.<br /></p>
+              <p>• Decide a title for the board.<br /></p>
+              <p>
+                • Create your collage with texts, images, and 3D models.<br />
+              </p>
+              <p>
+                • Response and add to the collage made by your team-mates.<br />
+              </p>
             </div>
           </div>
         </div>
 
-        <div id="ecosys">
-          <p class="infotitle" id="ecoTtl">What's Next?</p>
+        <div id="ftrContent">
+          <p class="infotitle">What's Next?</p>
           <iframe
-          class="video"
-          id="ftrDemo"
-          src="https://www.youtube.com/embed/W97svFVCwoA"
-        ></iframe>
+            class="video"
+            id="ftrDemo"
+            src="https://www.youtube.com/embed/W97svFVCwoA"
+          ></iframe>
         </div>
+        <p id="startBtm" onclick="gotoDash()">Start Now</p>
       </div>
     </div>
     <script src="js/home.js"></script>

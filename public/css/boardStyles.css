@@ -390,7 +390,7 @@ p {
 #topDiv {
   width: 100%;
   min-height: 240px;
-  background-image: linear-gradient(200deg, #77c5c0 0%, #d8eef0 65%, white 100%);
+  background-image: linear-gradient(200deg, #43a0dfc9 0%, #acdae7c5 65%, white 100%);
   border: none;
   box-shadow: 15px 15px 10px #dce7e9;
 }

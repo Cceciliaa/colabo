@@ -5,43 +5,22 @@ body {
   border: 0;
   width: 100%;
   height: 100%;
-  background-color: #e0e8f0;
-  position: relative;
-  overflow: auto;
-  overflow-x: hidden;
 }
 
 .wholeP {
-  overflow: scroll;
   align-items: center;
   justify-content: center;
   margin: 0;
+  padding: 0;
   width: 100%;
   height: 100%;
   display: flex;
   flex-wrap: wrap;
   position: relative;
   opacity: 1;
+  overflow: auto;
+  overflow-x: hidden;
   background-color: #e0e8f0;
-}
-
-.pageContent {
-  position: absolute;
-  top: 120px !important;
-  margin: 0;
-  padding: 2%;
-  border: 0;
-  width: 84%;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-  background-color: #e0e8f0;
-}
-
-.pageContent::after {
-  content: "";
-  display: block;
-  clear: both;
 }
 
 .nav-link {
@@ -82,7 +61,7 @@ body {
   font-size: 20px;
   font-family: 'Lato', sans-serif;
   letter-spacing: 2px;
-  width: 50%;
+  width: 55%;
 }
 
 .infotitle {
@@ -95,7 +74,6 @@ body {
   opacity: 1;
   width: 80%;
   left: 10%;
-  margin-top: 80px;
   letter-spacing: 3px;
   z-index: 99;
 }
@@ -117,11 +95,12 @@ body {
 }
 
 .video {
-  width: 600px;
-  height: 400px;
+  min-width: 550px;
+  min-height: 380px;
+  width: 100%;
+  margin-top: 12% !important;
   border: none;
   border-radius: 5%;
-  box-sizing: border-box;
   box-shadow: 0px 20px 16px 0px rgba(131, 136, 194, 0.6);
 }
 
@@ -137,23 +116,44 @@ body {
   align-self: center;
 }
 
+#pageContent {
+  position: absolute;
+  display: inline-flex;
+  flex-direction: column;
+  flex-flow: column;
+  --gap: 80px;
+  top: 160px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  width: 100%;
+  height: calc(2200 + var(--gap));
+  align-items: space-between;
+  justify-content: center;
+}
+#pageContent > * {
+  margin-top: var(--gap);
+}
+
 #abIntrotext {
-  width: 36%;
+  align-self: center;
+  margin-left: 0px;
+  margin-right: 5%;
   font-size: 25px;
   font-weight: 300;
   text-align: left;
-  margin-left: -5%;
-  margin-right: 2%;
+  max-width: 450px;
   font-family: "Gill Sans", sans-serif;
 }
 
-#initModal-content {
-  margin-top: 15%;
-  margin-left: -1%;
-  padding: 2%;
-  width: 96%;
-  text-align: center;
-  justify-content: center;
+#demoText {
+  align-self: center;
+  font-size: 25px;
+  font-weight: 300;
+  text-align: left;
+  max-width: 450px;
+  margin-left: 5%;
+  font-family: "Gill Sans", sans-serif;
 }
 
 #info-content {
@@ -166,14 +166,21 @@ body {
 }
 
 #ctxVideo {
-  margin-left: 2%;
+  display: flex;
+  align-self: center;
+}
+
+#demoVideo {
+  display: flex;
+  align-self: center;
+  margin-left: -10%;
+  margin-right: 10%;
 }
 
 #ftrDemo {
-  margin-top: 15%;
+  margin-top: 18%;
   width: 800px;
   height: 600px;
-  margin-bottom: 10%;
 }
 
 #iconfont {
@@ -251,65 +258,84 @@ body {
   margin-left: 36%;
 }
 
-#infocontent {
-  position: absolute;
-  top: 0px;
-  width: 100%;
-  height: 900px;
+#infoContent {
+  display: flex;
+  order: 1;
+  flex-grow: 1;
+  width: 90%;
+  margin-left: 5%;
+  padding: 1%;
+  align-self: center;
   transition-timing-function: ease;
   transition: 0.3s;
 }
 
-#ecosys {
-  position: absolute;
-  text-align: center;
-  width: 100%;
-  margin-top: 2250px;
+#demoContent {
+  display: flex;
+  order: 2;
+  flex-grow: 1;
+  width: 90%;
+  margin-left: 5%;
+  padding: 1%;
+  align-self: center;
+  transition-timing-function: ease;
   transition: 0.3s;
 }
 
-#ecoImg {
-  margin-left: -420px;
-  width: 800px;
-  height: 420px;
-}
-
-#ecoImgcns {
-  margin-left: -430px;
-  width: 840px;
-  height: 420px;
-}
-
-#asloc {
+#ftrContent {
   display: flex;
-  position: absolute;
+  order: 3;
+  flex-grow: 1;
+  text-align: center;
+  align-self: center;
+  justify-content: center;
+  width: 90%;
+  margin-left: 5%;
+  padding: 1%;
+  transition-timing-function: ease;
+  transition: 0.3s;
+}
+
+#ctx {
+  display: flex;
+  flex-direction: row;
   width: 100%;
-  top: 30%;
+  margin-top: 5%;
   text-align: center;
   opacity: 1;
   transition: 0.3s;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
 }
 
-#orgstr {
-  position: absolute;
+#demo {
+  display: flex;
+  flex-direction: row;
   width: 100%;
-  margin-top: 650px;
-  opacity: 0.3;
+  margin-top: 5%;
+  text-align: center;
+  opacity: 1;
   transition: 0.3s;
+  align-items: center;
+  justify-content: center;
 }
 
-#ecoImgcns {
-  position: absolute;
-  height: 400px;
-  width: 800px;
-  margin-top: 220px;
-  left: 45%;
-  margin-left: -350px;
+#startBtm {
+  display: flex;
+  order: 4;
+  align-self: center;
+  justify-content: center;
+  width: 100%;
+  height: 200px;
+  opacity: 1;
+  color: #3498db;
+  font-size: 60px;
+  font-weight: 400;
+  cursor: pointer;
+  text-decoration: none;
+  text-shadow: 2px 2px rgba(61, 77, 95, 0.6);
 }
-
-#btmChi {
-  margin-left: 40%;
+#startBtm:hover,
+#startBtm:focus {
+  text-decoration: underline;
 }

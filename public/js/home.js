@@ -1,45 +1,41 @@
-let asloc = document.getElementById("asloc");
-let orgstr = document.getElementById("orgstr");
-let ecosys = document.getElementById("ecosys");
+let infoContent = document.getElementById("infoContent");
+let demoContent = document.getElementById("demoContent");
+let ftrContent = document.getElementById("ftrContent");
 
 let wholeP = document.getElementsByClassName("wholeP")[0];
 
 let drap = window.location.hash.split("#")[1];
 
-wholeP.addEventListener("scroll", () => {
-  console.log('scroll', wholeP.scrollTop);
-});
+// wholeP.addEventListener("scroll", () => {
+//   console.log('scroll', wholeP.scrollTop);
+// });
 
 if (drap != null) {
   wholeP.scrollTo(0, drap);
 }
 
-ecosys.style.opacity = 0.3;
-
-document.getElementById("infocontent").style.top = 380 + "px";
-
 function supressAB() {
-  if (wholeP.scrollTop < 420) {
-    asloc.style.opacity = 1;
+  if (wholeP.scrollTop < 400) {
+    infoContent.style.opacity = 1;
   } else {
-    asloc.style.opacity = 0.3;
+    infoContent.style.opacity = 0.3;
   }
 
-  if (wholeP.scrollTop >= 420 && wholeP.scrollTop < 1880) {
-    orgstr.style.opacity = 1;
-  } else if (wholeP.scrollTop >= 1880 || wholeP.scrollTop < 480) {
-    orgstr.style.opacity = 0.3;
+  if (wholeP.scrollTop >= 400 && wholeP.scrollTop < 1100) {
+    demoContent.style.opacity = 1;
+  } else if (wholeP.scrollTop >= 1000 || wholeP.scrollTop < 400) {
+    demoContent.style.opacity = 0.3;
   }
 
-  if (wholeP.scrollTop >= 1880) {
-    ecosys.style.opacity = 1;
+  if (wholeP.scrollTop >= 1100) {
+    ftrContent.style.opacity = 1;
   } else {
-    ecosys.style.opacity = 0.3;
+    ftrContent.style.opacity = 0.3;
   }
 }
 
 function gotoFtr() {
-  wholeP.scrollTo(0, 2300);
+  wholeP.scrollTo(0, 1320);
 }
 
 function gotoUcs() {

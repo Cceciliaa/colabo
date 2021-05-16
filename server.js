@@ -6,52 +6,6 @@ const express = require("express");
 const mySocket = require("socket.io");
 const { MongoClient } = require("mongodb");
 
-// // code for image recognition -- archived --
-// const apiKey = "acc_86db40cf7be025d";
-// const apiSecret = "3183b0d5f9997cd8cee89b969c340b4d";
-
-// const formData = new FormData();
-// const baseUrl = "https://api.imagga.com/v2/categories/personal_photos";
-
-// function recognizePic(imageUrl, method) {
-//   if (method == "url") {
-//     let url = baseUrl + "?image_url=" + encodeURIComponent(imageUrl);
-
-//     (async () => {
-//       try {
-//         const response = await got(url, {
-//           username: apiKey,
-//           password: apiSecret,
-//         });
-//         console.log(JSON.parse(response.body).result.categories);
-//         const result = JSON.parse(response.body).result.categories[0].name.en;
-//         console.log(result);
-//         io.sockets.emit("imgResult", result);
-//       } catch (error) {
-//         const err = JSON.parse(error.response.body).status.text;
-//         console.log(err);
-//         io.sockets.emit("error", err);
-//       }
-//     })();
-//   } else if (method == "path") {
-//     formData.append("image", fs.createReadStream(imageUrl));
-//     console.log(formData);
-
-//     (async () => {
-//       try {
-//         const response = await got.post(baseUrl, {
-//           body: formData,
-//           username: apiKey,
-//           password: apiSecret,
-//         });
-//         console.log(response.body);
-//       } catch (error) {
-//         console.log(error.response.body);
-//       }
-//     })();
-//   }
-// }
-
 //Setup the server ---------------------------------------------
 const app = express();
 const http = require("http");
@@ -434,16 +388,6 @@ io.sockets.on("connection", newConnection); //callback
 //Function that serves the new connection
 function newConnection(socket) {
   console.log("New connection: " + socket.id);
-
-  // if (Texts) io.sockets.emit("newText", Texts);
-  // if (Imgs) io.sockets.emit("newImg", Imgs);
-  // if (Models) io.sockets.emit("newModel", Models);
-  // if (ModelLayers) {
-  //   for (let key of Object.keys(ModelLayers)) {
-  //     io.sockets.emit("modelData", ModelLayers[key]);
-  //   }
-  // }
-  //--------------------------------------------------------------
 
   //When a message arrives from the client, run the corresponding function
   socket.on("getBoards", sendBoardsList);
