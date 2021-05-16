@@ -35,7 +35,7 @@ function supressAB() {
 }
 
 function gotoFtr() {
-  wholeP.scrollTo(0, 1320);
+  wholeP.scrollTo(0, 1160);
 }
 
 function gotoUcs() {

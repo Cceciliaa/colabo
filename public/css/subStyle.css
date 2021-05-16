@@ -102,8 +102,8 @@ body {
 }
 
 .video {
-  min-width: 550px;
-  min-height: 380px;
+  min-width: 500px;
+  min-height: 300px;
   width: 100%;
   margin-top: 12% !important;
   border: none;
@@ -187,7 +187,11 @@ body {
 #ftrDemo {
   margin-top: 18%;
   width: 800px;
-  height: 600px;
+  height: 500px;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
 }
 
 #iconfont {
