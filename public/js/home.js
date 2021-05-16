@@ -51,5 +51,5 @@ function gotoDash() {
 }
 
 function gotoDoc() {
-  window.location.href = "https://www.notion.so/Colabo-35609b3a657e495d9fa1638b082e09be";
+  window.location.href = "https://www.notion.so/Colabo-Documentation-35609b3a657e495d9fa1638b082e09be";
 }
