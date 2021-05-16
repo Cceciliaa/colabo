@@ -338,6 +338,7 @@ p {
   text-align: center;
   font-weight: bold;
   font-family: Chalkduster, fantasy;
+  cursor: pointer;
 }
 
 #sidebar {
