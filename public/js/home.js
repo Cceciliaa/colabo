@@ -49,3 +49,7 @@ function gotoExp() {
 function gotoDash() {
   window.location.href = "landing.html";
 }
+
+function gotoDoc() {
+  window.location.href = "https://www.notion.so/Colabo-35609b3a657e495d9fa1638b082e09be";
+}
