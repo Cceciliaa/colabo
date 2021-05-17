@@ -177,21 +177,37 @@ body {
 #ctxVideo {
   display: flex;
   align-self: center;
+  margin-left: 5%;
 }
 
 #demoVideo {
   display: flex;
   align-self: center;
-  margin-left: -10%;
+  margin-left: -5%;
   margin-right: 10%;
 }
 
+#ftrText {
+  position: absolute;
+  align-self: start;
+  justify-content: center;
+  top: 20%;
+  font-size: 30px;
+  font-weight: 300;
+  color: #3498db;
+  text-align: center;
+  width: 100%;
+  font-family: "Gill Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
 #ftrDemo {
-  margin-top: 18%;
   width: 800px;
   height: 500px;
   align-items: center;
   justify-content: center;
+  align-self: center;
   margin: 0;
   padding: 0;
 }
@@ -281,7 +297,6 @@ body {
   order: 1;
   flex-grow: 1;
   width: 90%;
-  margin-left: 5%;
   padding: 1%;
   align-self: center;
   transition-timing-function: ease;
@@ -293,7 +308,6 @@ body {
   order: 2;
   flex-grow: 1;
   width: 90%;
-  margin-left: 5%;
   padding: 1%;
   align-self: center;
   transition-timing-function: ease;
@@ -301,6 +315,7 @@ body {
 }
 
 #ftrContent {
+  position: relative;
   display: flex;
   order: 3;
   flex-grow: 1;
@@ -308,7 +323,6 @@ body {
   align-self: center;
   justify-content: center;
   width: 90%;
-  margin-left: 5%;
   padding: 1%;
   transition-timing-function: ease;
   transition: 0.3s;
