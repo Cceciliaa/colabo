@@ -7,7 +7,7 @@ let rotateMdl = false;
 
 // I use the filestack API for image upload and preview. However, since this is a free account, the upload limitation is only 50.
 const client = filestack.init("AV9sVjeWPToiHvAgHFopUz");
-// I create an alternative api for image upload
+// Here is an alternative api I created for image upload in case the limit of 50 uploads have been used up.
 // const client = filestack.init("AKBtROQNyQAyQAZ9ThAHIz");
 
 const options = {
@@ -40,7 +40,7 @@ let curZ = 0;
 
 let modelContainers = {};
 
-// const API_KEY = "AIzaSyBWcHRmY5cc3mQJb62eN0JsfioiMvYAGLg";
+// API Key for EchoAR platform where I used for accessing 3D models.
 const ECHO_KEY = "billowing-paper-1356";
 
 /* When the user clicks on the button, 
@@ -386,7 +386,6 @@ function createImage(asset) {
   if (asset !== undefined) {
     image.onclick = function () {
       let modelSelected = {
-        // skt: sktID,
         boardID,
         ...asset,
       };
@@ -411,7 +410,6 @@ function loadModel(data) {
       api.addEventListener("viewerready", function () {
         console.log("Viewer is ready");
       });
-      // uploadEcho(data);
     },
     error: function onError() {
       console.log("Viewer error");
@@ -442,11 +440,11 @@ function onResults(data) {
 search.addEventListener("submit", function (event) {
   event.preventDefault();
   searchEcho(query.value, onResults);
-  // searchPoly(query.value, onResults);
 });
 
 let onResize = false;
 
+// the code for drag element is modified from W3School Tutorial: https://www.w3schools.com/howto/howto_js_draggable.asp
 function dragElement(elmnt) {
   let pos1, pos2, pos3, pos4;
 

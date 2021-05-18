@@ -6,10 +6,6 @@ let wholeP = document.getElementsByClassName("wholeP")[0];
 
 let drap = window.location.hash.split("#")[1];
 
-// wholeP.addEventListener("scroll", () => {
-//   console.log('scroll', wholeP.scrollTop);
-// });
-
 if (drap != null) {
   wholeP.scrollTo(0, drap);
 }
