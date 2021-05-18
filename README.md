@@ -1,5 +1,5 @@
-# colabo
-Colabo is an online collaborative collage board where ideas meet and display.
+# Colabo
+Colabo is an online collaborative collage board where ideas meet and can be displayed.
 
 It provides an unlimited canvas where students can add texts, images, and 3D models to explain their ideas and facilitate group discussions. 
 The app is linked to the Sketchfab API, which provides easy access to abundant open-source 3D models online. 
