@@ -1,6 +1,7 @@
 let socket;
 // set up socket connection for running on local host
 // socket = io.connect("http://localhost:5000");
+
 // set up socket connection for deployment on Heroku
 socket = io.connect(location.origin.replace(/^http/, "ws"));
 
